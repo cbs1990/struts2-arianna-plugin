@@ -6,7 +6,7 @@ It keep track of the executed action (storing them into session) to allow render
 
 == Features ==
  * configurable breadcrumb behaviour
- * An @BreadCrumb annotation to mark actions or methods that needs to be tracked
+ * An `@BreadCrumb` annotation to mark actions or methods that needs to be tracked
  * a simple breadcrumb tag to iterate over stored crumbs
 
 == Requirements ==
