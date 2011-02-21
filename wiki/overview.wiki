@@ -1,0 +1,35 @@
+#summary overview
+= Overview =
+
+The strus arianna plugin is a simple but quite flexible plugin to render and manage a breadcrumb navigationa bar.
+It keep track of the executed action (storing them into session) to allow rendering of the breadcrumb.
+
+== Features ==
+ * configurable breadcrumb behaviour
+ * An @BreadCrumb annotation to mark actions or methods that needs to be tracked
+ * a simple breadcrumb tag to iterate over stored crumbs
+
+== Requirements ==
+ * Struts 2.x
+ * Java 1.5+
+
+The plugin make use of Java5 annotation to select which action should be tracked, so you need java 5;
+
+== Installation ==
+Just download the plugin from [http://code.google.com/p/struts2-arianna-plugin/downloads/list here] and put the jar into your application's `/WEB-INF/lib` directory.
+
+== Usage ==
+The breadcrumb functionality is provided by an interceptor which needs to be added to the action's interceptor stack.
+
+{{{
+<interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
+  <param name="maxCrumbs">4</param>
+  <param name="rewindMode">never</param>
+</interceptor>
+}}}
+
+You can configure the interceptor with the maximum crumbs to track and how it should handle duplicated crumbs (`rewindMode` parameter).
+
+== Examples ==
+
+_[TBD]_
