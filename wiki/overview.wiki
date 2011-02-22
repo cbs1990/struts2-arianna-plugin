@@ -39,12 +39,14 @@ public class ActionClass {
 
   @BreadCrumb("Action 1")
   public String action1() {
-    _your action code_
+    // action's code
+    ...
   }
 	
   @BreadCrumb("Action 2")
   public String action2() {
-    _your action code_    		
+    // action's code
+    ...
   }
 
 }}}
