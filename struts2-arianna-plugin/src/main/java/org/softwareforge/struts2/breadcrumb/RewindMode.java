@@ -16,11 +16,14 @@
 package org.softwareforge.struts2.breadcrumb;
 
 /**
+ * Supported bread crumbs rewind behaviors
  * 
  * @author GiovanniTosto
  */
 public enum RewindMode {
-	never,
-	onCrumbOnly,
-	auto;
+	DEFAULT,
+	NEVER,	
+	AUTO,
+//	pop,
+//	first;
 }
