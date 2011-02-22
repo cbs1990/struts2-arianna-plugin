@@ -1,7 +1,7 @@
 #summary overview
 = Overview =
 
-The *strust^2^-arianna-plugin* is a simple but quite flexible plugin to render and manage a simple breadcrumb navigational bar.
+The *struts^2^-arianna-plugin* is a simple but quite flexible plugin to render and manage a simple breadcrumb navigational bar.
 It keep track of the executed action (storing them into session) to allow rendering of the breadcrumb.
 
 == Features ==
@@ -29,8 +29,9 @@ The breadcrumb functionality is provided by an interceptor which needs to be add
 }}}
 
 You can configure the interceptor with the maximum crumbs to track and how it should handle duplicated crumbs (`rewindMode` parameter).
-
 Once the breadCrumbs interceptor is part of your interceptor's stack, just annotate with `@BreadCrumb` the actions and/or methods that you need to track.
+
+For a complete description of parameters and advanced usage see [here]
 
 == Examples ==
 
