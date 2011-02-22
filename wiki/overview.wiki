@@ -30,23 +30,50 @@ The breadcrumb functionality is provided by an interceptor which needs to be add
 
 You can configure the interceptor with the maximum crumbs to track and how it should handle duplicated crumbs (`rewindMode` parameter).
 
-Once the breadCrumbs interceptor is part of your interceptor's stack, just annotate with `@BreadCrumb` the actions and/or methods that you want to track.
+Once the breadCrumbs interceptor is part of your interceptor's stack, just annotate with `@BreadCrumb` the actions and/or methods that you need to track.
 
 == Examples ==
 
 {{{
+@BreadCrumb("My Action")
+public class MyAction {
+
+  public String execute() {
+    // action's code
+    ...
+  }
+}}}
+
+when struts executes `MyAction` a _crumb_ with name "My Action" will be added to the application's breadcrumb.
+
+To render the breadcrumb in you JSP you can use the breadcrumb tag
+{{{
+<%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
+  ...
+<bc:breadcrumbs var='c' status='s'>
+  <s:url id='url' action="%{action}" namespace="%{namespace}" method="%{method}" />
+  <s:a href='%{url}'><s:property value='name'/></s:a>
+</bc:breadcrumbs>
+  ...
+}}}
+
+
+You can also annotate single methods of a class as in the following example:
+{{{
 public class ActionClass {
 
-  @BreadCrumb("Action 1")
-  public String action1() {
+  @BreadCrumb("Action A")
+  public String aMethodA() {
     // action's code
     ...
   }
 	
-  @BreadCrumb("Action 2")
-  public String action2() {
+  @BreadCrumb("Action B")
+  public String aMethodB() {
     // action's code
     ...
   }
 
 }}}
+
+when the actions mapped to `aMethod1` or `aMethod2` are called a _crumb_ with name "Action A" or "Action B" (respectively) will be added to the breadcrumb.
