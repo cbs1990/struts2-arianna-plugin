@@ -18,6 +18,7 @@ package org.softwareforge.struts2.breadcrumb;
 
  */
 import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.Stack;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
+import com.opensymphony.xwork2.util.ValueStack;
 import com.opensymphony.xwork2.util.profiling.UtilTimerStack;
 
 
@@ -41,7 +43,7 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 
 	private static final Log LOG = LogFactory.getLog(BreadCrumbInterceptor.class);
 
-	private static final String timerKey = "BreadCrumbInterceptor::doIntercept";
+	private static final String TIMER_KEY = "BreadCrumbInterceptor::doIntercept";
 	
 	public static final String CRUMB_KEY = BreadCrumbInterceptor.class.getName() + ":CRUMBS";
 	
@@ -49,7 +51,11 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 	
 	private boolean uniqueCrumbs = false;
 
-	private RewindMode rewind = RewindMode.never;
+	private boolean storeParams = false;
+	
+	private RewindMode rewind = RewindMode.NEVER;
+	
+	private boolean	catchInternalException = true;
 	
 	public RewindMode getRewind() {
 		return rewind;
@@ -57,6 +63,9 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 
 
 	public void setRewind(RewindMode rewindMode) {
+		if ( rewindMode == RewindMode.DEFAULT ) {
+			throw new IllegalArgumentException("rewindMode DEFAULT can not be set as rewindMode of the interceptor.");
+		}
 		this.rewind = rewindMode;
 	}
 
@@ -64,23 +73,26 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 	@Override
 	protected String doIntercept(ActionInvocation invocation) throws Exception 
 	{
+		UtilTimerStack.push(TIMER_KEY);			
 		try 
 		{
-			UtilTimerStack.push(timerKey);
-			processInvocation(invocation);
-			String result = invocation.invoke();
-			return result;
+			beforeInvocation(invocation);
 		} 
 		catch (RuntimeException e) 
 		{
-			String msg = (new StringBuilder()).append("Exception in BreadCrumbInterceptor: ")
-					.append(e.getMessage()).toString();
+			String msg = (new StringBuilder())
+					.append("Exception in BreadCrumbInterceptor.beforeInvocation ")
+					.append(e.getMessage())
+					.toString();
 			LOG.error(msg, e);
-			throw new Exception(msg, e);
+			if ( !catchInternalException) 
+				throw e;
 		} 
-		finally 
-		{
-			UtilTimerStack.pop(timerKey);
+		
+		try {
+			return invocation.invoke();			
+		} finally {
+			UtilTimerStack.pop(TIMER_KEY);			
 		}
 	}
 	
@@ -97,7 +109,7 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 		return crumbs;
 	}
 	
-	private	void processInvocation(ActionInvocation invocation) 
+	private	void beforeInvocation(ActionInvocation invocation) 
 	{
 		
 		// recupera le briciole 
@@ -115,7 +127,7 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 //				boolean isNew = uniqueCrumbs && dupIdx > 0;
 
 				// rewind breadcrumb
-				if ( rewind == RewindMode.auto && dupIdx != -1) {
+				if ( rewind == RewindMode.AUTO && dupIdx != -1) {
 					// riavvolge la breadcrumb alla prima briciola uguale a quella corrente
 					for (int i=dupIdx+1, size=crumbs.size(); i<size; i++) {
 						crumbs.remove(dupIdx+1);
@@ -138,6 +150,7 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 	
 	private Crumb	processAnnotation(ActionInvocation invocation)
 	{
+//		Map params = null;
 		Class aclass = invocation.getAction().getClass();
 		
 		String methodName = invocation.getProxy().getMethod();
@@ -147,21 +160,26 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 		
 		Method method = ReflectionUtils.findMethod(aclass, methodName);
 		BreadCrumb crumb = null;
+		/*
+		 * Check if it is an annotated method 
+		 */
 		if ( method != null ) {
 			crumb = method.getAnnotation(BreadCrumb.class);
-		} else {
-			// prova a cercare nella classe
-			crumb = (BreadCrumb) aclass.getAnnotation(BreadCrumb.class);
+		}
+		/*
+		 * Check if we have an annotated class
+		 */
+		if (crumb == null) {
+			crumb = (BreadCrumb) aclass.getAnnotation(BreadCrumb.class);			
 		}
 		
-		if (crumb != null && !"".equals(crumb.value()) ) {
-			return makeCrumb(invocation,crumb.value());
-		}
-		
-		return null;
+		/*
+		 * returns crumb or null 		
+		 */		
+		return crumb == null ? null : makeCrumb(invocation,crumb.value(),storeParams);
 	}
 	
-	private Crumb	makeCrumb(ActionInvocation invocation, String name)
+	private Crumb	makeCrumb(ActionInvocation invocation, String name, boolean storeParams)
 	{
 		ActionProxy proxy = invocation.getProxy();
 		
@@ -174,19 +192,21 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 		if (name == null) {
 			name = c.getFullyQualifiedId();
 		}
+		
+		// evaluate name 
+		if ( name.startsWith("%{") && name.endsWith("}") ) {
+			ValueStack vstack = invocation.getStack();
+			Object value = vstack.findValue(name.substring(2, name.length()-1));
+			name = "" + value;		// avoid NPE
+		}
 		c.name = name;
 		
+		if (storeParams) {			
+			Map<String, Object> parameters = invocation.getInvocationContext().getParameters();
+			c.params = parameters;
+		}
 		return c;
 	}
-	
-//	private String	getActionId(ActionInvocation invocation) {
-//		ActionProxy proxy = invocation.getProxy();
-//		String namespace = proxy.getNamespace();
-//		String action = proxy.getActionName();
-//		String method = proxy.getMethod();
-//		
-//		return namespace + "." + action + ":" + method;
-//	}
 	
 	// --------------------- getter && setter ------------------------
 	public int getMaxCrumbs() {
