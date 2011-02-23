@@ -3,13 +3,13 @@
 	<groupId>org.forgedmind.struts2</groupId>
 	<artifactId>struts2-arianna-plugin</artifactId>
 	<name>Struts2 breadcrumbs (arianna) plugin</name>
-	<version>0.2</version>
+	<version>0.3-SNAPSHOT</version>
 	<inceptionYear>2011</inceptionYear>
 	<properties>
 		<version.struts2>2.2.1.1</version.struts2>
 	</properties>
 	<scm>
-		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-plugin-0.2</developerConnection>
+		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk</developerConnection>
 	</scm>
 	
 	<build>
