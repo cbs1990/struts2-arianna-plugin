@@ -19,7 +19,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * @author Giovanni Tosto
+ *  @author Giovanni Tosto
+ *  @version $Id$
  */
 
 public class Crumb implements Serializable

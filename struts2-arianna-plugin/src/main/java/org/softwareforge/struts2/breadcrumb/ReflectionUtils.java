@@ -21,7 +21,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 /**
  * 
- * @author Giovanni Tosto
+ *	@author Giovanni Tosto
+ *	@version $Id$
  */
 public class ReflectionUtils 
 {
