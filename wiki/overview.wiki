@@ -94,7 +94,7 @@ when the actions mapped to `aMethod1` or `aMethod2` are called a _crumb_ with na
 public class ActionClass {
 
   public String getCrumbName() {
-    return "MyName";
+    return "Hello";
   }
 
   @BreadCrumb("%{crumbName}")
@@ -104,4 +104,4 @@ public class ActionClass {
   }
 }}}
 
-when using the `%{ ... }` syntax the plugin will evaluate the OGNL expression against the action's value stack to get the `crumb` name's, thus, in this case, a crumb with name 'MyName' will be pushed onto the application's breadcrumb.
+when using the `%{ ... }` syntax the plugin will evaluate the OGNL expression against the action's value stack to get the _crumb_ names, thus, in this case, a crumb with name _Hello_ will be added to the application's breadcrumb.
