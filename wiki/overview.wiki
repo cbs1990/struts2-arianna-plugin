@@ -1,4 +1,4 @@
-#summary overview
+#summary Getting Started
 = Overview =
 
 The *struts^2^-arianna-plugin* is a simple but quite flexible plugin to render and manage a simple breadcrumb navigational bar.
@@ -31,23 +31,7 @@ The breadcrumb functionality is provided by an interceptor which needs to be add
 You can configure the interceptor with the maximum crumbs to track and how it should handle duplicated crumbs (`rewindMode` parameter).
 Once the breadCrumbs interceptor is part of your interceptor's stack, just annotate with `@BreadCrumb` the actions and/or methods that you need to track.
 
-For a complete description of parameters and advanced usage see [here]
-
-== Examples ==
-
-{{{
-@BreadCrumb("My Action")
-public class MyAction {
-
-  public String execute() {
-    // action's code
-    ...
-  }
-}}}
-
-when struts executes `MyAction` a _crumb_ with name "My Action" will be added to the application's breadcrumb.
-
-To render the breadcrumb in you JSP you can use the breadcrumb tag
+To render the breadcrumb in your page you can use the breadcrumb tag
 {{{
 <%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
   ...
@@ -58,10 +42,36 @@ To render the breadcrumb in you JSP you can use the breadcrumb tag
   ...
 }}}
 
+For a complete description of parameters and advanced usage see [here]
+
+== Examples ==
+
+== Annotating Actions classes ==
+
+{{{
+@BreadCrumb("My Action")
+public class MyAction {
+
+  public String execute() {
+    // action's code
+    ...
+  }
+  
+}}}
+
+when struts executes `MyAction` a _crumb_ with name "My Action" will be added to the application's breadcrumb.
+
+
+== Annotating Class' methods ==
 
 You can also annotate single methods of a class as in the following example:
 {{{
 public class ActionClass {
+
+  public String notTrackedMethod() {
+    // action's code
+    ...
+  }
 
   @BreadCrumb("Action A")
   public String aMethodA() {
@@ -78,3 +88,18 @@ public class ActionClass {
 }}}
 
 when the actions mapped to `aMethod1` or `aMethod2` are called a _crumb_ with name "Action A" or "Action B" (respectively) will be added to the breadcrumb.
+
+== BreadCrumbs' name as OGNL expression ==
+{{{
+public class ActionClass {
+
+  public String getCrumbName() {
+    return "MyName";
+  }
+
+  @BreadCrumb("%{crumbName}")
+  public String aMethodA() {
+    // action's code
+    ...
+  }
+}}}
