@@ -120,7 +120,6 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 			if ( !current.equals(last) ) {
 				
 				int	dupIdx = crumbs.indexOf(current);
-//				boolean isNew = uniqueCrumbs && dupIdx > 0;
 
 				// rewind breadcrumb
 				if ( rewind == RewindMode.AUTO && dupIdx != -1 ) {

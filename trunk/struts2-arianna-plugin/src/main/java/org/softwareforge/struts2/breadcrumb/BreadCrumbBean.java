@@ -17,8 +17,12 @@ package org.softwareforge.struts2.breadcrumb;
 
 import java.util.Stack;
 
-public class BreadCrumbBean 
-{
+/**
+ * @author Giovanni Tosto 
+ * @version $Id$
+ */
+public class BreadCrumbBean {
+	
 	public static final String SESSION_KEY = BreadCrumbBean.class.getName() + ":BEAN";
 	
 	Stack<Crumb>	crumbs;
