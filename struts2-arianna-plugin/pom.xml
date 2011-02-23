@@ -1,14 +1,29 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.forgedmind.struts2</groupId>
 	<artifactId>struts2-arianna-plugin</artifactId>
 	<name>Struts2 breadcrumbs (arianna) plugin</name>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.2-SNAPSHOT</version>
 	<inceptionYear>2011</inceptionYear>
 	<properties>
 		<version.struts2>2.2.1.1</version.struts2>
 	</properties>
+	<scm>
+		<url>http://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-plugin</url>
+		<connection>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-plugin</connection>
+		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-plugin</developerConnection>
+	</scm>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+ 					<artifactId>maven-release-plugin</artifactId>
+        			<version>2.1</version>				
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>	
 	<dependencies>
 	
 		<dependency>
@@ -38,12 +53,18 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.2</version>
 			<scope>test</scope>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -51,14 +72,9 @@
 			<version>${version.struts2}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.0</version>
-			<scope>test</scope>
-		</dependency>
+		
 		
 	</dependencies>
 
-
+	
 </project>
