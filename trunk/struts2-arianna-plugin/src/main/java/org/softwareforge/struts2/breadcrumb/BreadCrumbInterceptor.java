@@ -36,6 +36,7 @@ import com.opensymphony.xwork2.util.profiling.UtilTimerStack;
 
 /**
  *	@author Giovanni Tosto
+ *  @version $Id$
  */
 public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 
@@ -46,30 +47,25 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 	private static final String TIMER_KEY = "BreadCrumbInterceptor::doIntercept";
 	
 	public static final String CRUMB_KEY = BreadCrumbInterceptor.class.getName() + ":CRUMBS";
-	
+
+	/**
+	 * The maximum crumbs to keep in memory 
+	 */
 	private int maxCrumbs = 4;
 	
-	private boolean uniqueCrumbs = false;
-
 	private boolean storeParams = false;
 	
+	/**
+	 *	The <code>default</code> <em>rewind mode</em> to use for actions that not explicitly set <em>rewind mode</em>    
+	 */
 	private RewindMode rewind = RewindMode.NEVER;
 	
+	/**
+	 * 	if set to true (the default) the interceptor will catch any RuntimeException raised by its internal methods.
+	 * 
+	 */
 	private boolean	catchInternalException = true;
 	
-	public RewindMode getRewind() {
-		return rewind;
-	}
-
-
-	public void setRewind(RewindMode rewindMode) {
-		if ( rewindMode == RewindMode.DEFAULT ) {
-			throw new IllegalArgumentException("rewindMode DEFAULT can not be set as rewindMode of the interceptor.");
-		}
-		this.rewind = rewindMode;
-	}
-
-
 	@Override
 	protected String doIntercept(ActionInvocation invocation) throws Exception 
 	{
@@ -81,7 +77,7 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 		catch (RuntimeException e) 
 		{
 			String msg = (new StringBuilder())
-					.append("Exception in BreadCrumbInterceptor.beforeInvocation ")
+					.append("Exception in BreadCrumbInterceptor.beforeInvocation : ")
 					.append(e.getMessage())
 					.toString();
 			LOG.error(msg, e);
@@ -127,7 +123,7 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 //				boolean isNew = uniqueCrumbs && dupIdx > 0;
 
 				// rewind breadcrumb
-				if ( rewind == RewindMode.AUTO && dupIdx != -1) {
+				if ( rewind == RewindMode.AUTO && dupIdx != -1 ) {
 					// riavvolge la breadcrumb alla prima briciola uguale a quella corrente
 					for (int i=dupIdx+1, size=crumbs.size(); i<size; i++) {
 						crumbs.remove(dupIdx+1);
@@ -142,10 +138,6 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 			}			
 		}
 				
-	}
-	
-	private void	rewind() {
-		
 	}
 	
 	private Crumb	processAnnotation(ActionInvocation invocation)
@@ -208,7 +200,9 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 		return c;
 	}
 	
-	// --------------------- getter && setter ------------------------
+	// Getters and Setters
+	//////////////////////////////////////////////////////////////////
+	
 	public int getMaxCrumbs() {
 		return maxCrumbs;
 	}
@@ -219,16 +213,19 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 		}
 //			LOG.warn("can not set maxCrumbs to "+ maxCrumbs +" it should be a positive number, using default value");
 		this.maxCrumbs = maxCrumbs;
+	}	
+	
+	public RewindMode getRewind() {
+		return rewind;
 	}
 
-
-	public boolean isUniqueCrumbs() {
-		return uniqueCrumbs;
-	}
-
-
-	public void setUniqueCrumbs(boolean allowDuplicates) {
-		this.uniqueCrumbs = allowDuplicates;
+	public void setRewind(RewindMode rewindMode) {
+		if ( rewindMode == RewindMode.DEFAULT ) {
+//			throw new IllegalArgumentException("rewind mode DEFAULT can not be used as a rewind mode for the BreadCrumbInterceptor. Using default value " + rewind.name() + "instead");
+			String msg = "rewind mode DEFAULT can not be used as a rewind mode for the BreadCrumbInterceptor. Using default value " + rewind.name() + "instead";
+			LOG.warn(msg);
+		}
+		this.rewind = rewindMode;
 	}
 
 	

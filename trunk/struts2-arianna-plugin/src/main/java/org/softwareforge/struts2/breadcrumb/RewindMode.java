@@ -18,7 +18,8 @@ package org.softwareforge.struts2.breadcrumb;
 /**
  * Supported bread crumbs rewind behaviors
  * 
- * @author GiovanniTosto
+ *	@author GiovanniTosto
+ *  @version $Id$
  */
 public enum RewindMode {
 	DEFAULT,

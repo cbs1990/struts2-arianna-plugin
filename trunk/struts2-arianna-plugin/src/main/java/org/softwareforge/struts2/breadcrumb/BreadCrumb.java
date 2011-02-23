@@ -25,6 +25,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author Giovanni Tosto
+ * @version $Id$
  */
 
 @Documented
