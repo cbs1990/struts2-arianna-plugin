@@ -1,14 +1,49 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+    	<groupId>org.sonatype.oss</groupId>
+    	<artifactId>oss-parent</artifactId>
+    	<version>6</version>
+  	</parent>
+	
 	<groupId>org.softwareforge</groupId>
 	<artifactId>struts2-arianna-plugin</artifactId>
-	<name>Struts2 bread crumbs (arianna) plugin</name>
 	<version>0.2-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
+	<name>struts2-arianna-plugin</name>
+	<description>A simple bread crumbs plugin for Struts2</description>
+	<url>http://code.google.com/p/struts2-arianna-plugin/</url>	
 	<inceptionYear>2011</inceptionYear>
+	
+	<licenses>
+		<license>
+			<name>Apache License 2.0</name>
+			<url>http://www.apache.org/licenses/</url>
+		</license>
+	</licenses>
+	
+	<developers>
+		<developer>
+			<id>gtosto</id>
+			<name>Giovanni Tosto</name>
+			<timezone>+1</timezone>
+			<email>giovanni.tosto@gmail.com</email>
+			<roles>
+				<role>lead</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+	
 	<properties>
 		<struts2.version>2.2.1.1</struts2.version>
+		<sources.url>https://struts2-arianna-plugin.googlecode.com/svn</sources.url>
 	</properties>
+	
 	<scm>
+		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/trunk</url>
+		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk</connection>
 		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk</developerConnection>
 	</scm>
 	
@@ -21,7 +56,8 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-	</build>	
+	</build>
+		
 	<dependencies>
 		
 		<dependency>
