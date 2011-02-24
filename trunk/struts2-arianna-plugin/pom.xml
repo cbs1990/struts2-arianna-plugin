@@ -32,16 +32,17 @@
 	</developers>
 	
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
 		<struts2.version>2.2.1.1</struts2.version>
 	</properties>
 	
 	<scm>
-		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/trunk</url>
-		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk</connection>
-		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk</developerConnection>
+		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/trunk/strus2-arianna-plugin</url>
+		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/strus2-arianna-plugin</connection>
+		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/strus2-arianna-plugin</developerConnection>
 	</scm>
 	
-	<build>
+	<build>		
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -51,7 +52,8 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-		
+	
+	
 	<dependencies>
 		
 		<dependency>
@@ -107,6 +109,5 @@
 		
 		
 	</dependencies>
-
-	
+  	
 </project>
