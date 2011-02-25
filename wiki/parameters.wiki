@@ -1,0 +1,27 @@
+#summary parameters explanation
+
+== Interceptor's parameters ==
+
+|| *Parameter* || *Description* || *default* ||
+|| _`maxCrumbs`_ || The maximum number of crumbs to keep stored. || `4` ||
+|| _`rewind`_ || the default rewind mode. Valid values are `NEVER` and `AUTO` || `NEVER` ||
+
+==== Rewind mode ===
+
+The `rewind` parameter deals with duplicated crumbs.
+
+==== NEVER ====
+When the rewind mode is `NEVER` the plugin will _never_ rewind the breadcrumbs and it will allow the breadcrumbs' trail  to have duplicated crumbs.
+
+==== AUTO ====
+When the rewind mode is `AUTO` duplicated crumbs are not allowed.
+If you invoke an action that would create a crumb already existing the plugin will _rewind_ the breadcrumb's trail to _that_ crumb.
+
+For example if the current breadcrumb is 
+{{{
+Action1 > Action2 > Action3 > Action4
+}}} 
+and the invoked action creates the crumb `Action2` the trail will be rewound to 
+{{{
+Action1 > Action2
+}}}
