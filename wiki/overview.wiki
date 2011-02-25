@@ -28,7 +28,7 @@ The breadcrumb functionality is provided by an interceptor which needs to be add
 </interceptor>
 }}}
 
-You can configure the interceptor with the maximum crumbs to track and how it should handle duplicated crumbs (`rewind` parameter).
+You can configure the interceptor with the maximum number of crumbs to track and how it should handle duplicated crumbs (`rewind` parameter).
 Once the breadCrumbs interceptor is part of your interceptor's stack, just annotate with `@BreadCrumb` the actions and/or methods that you need to track.
 
 To render the breadcrumb in your page you can use the breadcrumb tag
@@ -42,7 +42,8 @@ To render the breadcrumb in your page you can use the breadcrumb tag
   ...
 }}}
 
-For a complete description of parameters and advanced usage see [here]
+For a complte description of parameters see [parameters]
+
 
 == Examples ==
 
