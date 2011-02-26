@@ -98,8 +98,13 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 		// recupera le briciole dalla sessione
 		Stack<Crumb> crumbs = (Stack<Crumb>) context.getSession().get(CRUMB_KEY);
 		if ( crumbs == null) {
-			crumbs = new Stack<Crumb>();
-			context.getSession().put(CRUMB_KEY, crumbs);
+			/*
+			 * make sure to initialize one single breadcrumb trail 
+			 */
+			synchronized (this) {
+				crumbs = new Stack<Crumb>();
+				context.getSession().put(CRUMB_KEY, crumbs);				
+			}
 		}
 		
 		return crumbs;
@@ -114,27 +119,36 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 		Crumb current = processAnnotation(invocation);
 		
 		if ( current != null ) {
-			Crumb last = (crumbs.size() > 0) ? crumbs.lastElement() : null;
-			
-			// confronta la richiesta corrente con l'ultima briciola
-			if ( !current.equals(last) ) {
+			/*
+			 * synchronized region is needed to prevent ConcurrentModificationException(s)
+			 * for concurrent request (operating on the same session) that would modify 
+			 * the bread crumbs trail.
+			 */
+			synchronized (crumbs) {
+				LOG.debug("aquired lock on crumbs trail");
 				
-				int	dupIdx = crumbs.indexOf(current);
-
-				// rewind breadcrumb
-				if ( rewind == RewindMode.AUTO && dupIdx != -1 ) {
-					// riavvolge la breadcrumb alla prima briciola uguale a quella corrente
-					for (int i=dupIdx+1, size=crumbs.size(); i<size; i++) {
-						crumbs.remove(dupIdx+1);
+				Crumb last = (crumbs.size() > 0) ? crumbs.lastElement() : null;
+				// confronta la richiesta corrente con l'ultima briciola
+				if ( !current.equals(last) ) {
+					
+					int	dupIdx = crumbs.indexOf(current);
+	
+					// rewind breadcrumb
+					if ( rewind == RewindMode.AUTO && dupIdx != -1 ) {
+						// riavvolge la breadcrumb alla prima briciola uguale a quella corrente
+						for (int i=dupIdx+1, size=crumbs.size(); i<size; i++) {
+							crumbs.remove(dupIdx+1);
+						}
+					} else {
+						crumbs.push(current);					
 					}
-				} else {
-					crumbs.push(current);					
+						
+					if ( crumbs.size() > maxCrumbs )
+						crumbs.remove(0);
+						
 				}
-					
-				if ( crumbs.size() > maxCrumbs )
-					crumbs.remove(0);
-					
-			}			
+				LOG.debug("releasing lock on crumbs trail");
+			} // synchronized
 		}
 				
 	}
