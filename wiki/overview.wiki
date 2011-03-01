@@ -11,7 +11,7 @@ It keep track of the executed action (storing them into session) to allow render
  * configurable breadcrumb behaviour
 
 == Requirements ==
- * Struts 2.x
+ * Struts 2.1.2+
  * Java 1.5+
 
 The plugin make use of Java5 annotation to select which action should be tracked, so you need java 5;
