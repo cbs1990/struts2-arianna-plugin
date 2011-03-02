@@ -21,7 +21,7 @@ import javax.servlet.jsp.JspException;
 
 import org.apache.struts2.components.Component;
 import org.apache.struts2.components.IteratorComponent;
-import org.apache.struts2.views.jsp.ContextBeanTag;
+import org.apache.struts2.views.jsp.ComponentTagSupport;
 import org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor;
 
 import com.opensymphony.xwork2.util.ValueStack;
@@ -30,10 +30,21 @@ import com.opensymphony.xwork2.util.ValueStack;
  * @author Giovanni Tosto
  * @version $Id$
  */
-public class BreadCrumbTag extends ContextBeanTag {
+public class BreadCrumbTag extends ComponentTagSupport {
 	
 	private static final long serialVersionUID = 1L;
 	
+	// var attribute
+    private String var;
+    
+    public void setVar(String var) {
+        this.var = var;
+    }
+    
+    public void setId(String id) {
+        setVar(id);
+    }
+    
 	// Status attribute
 	private String	status;
 	
@@ -54,7 +65,9 @@ public class BreadCrumbTag extends ContextBeanTag {
     @Override
 	protected void populateParams() {
 		super.populateParams();
-        IteratorComponent c = (IteratorComponent) getComponent();
+		
+        IteratorComponent c = (IteratorComponent) getComponent();        
+        c.setId(var);
 		c.setValue("#session['" + BreadCrumbInterceptor.CRUMB_KEY + "']");
 		c.setStatus(status);
 	}
