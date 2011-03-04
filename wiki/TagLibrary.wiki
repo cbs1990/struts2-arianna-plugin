@@ -1,0 +1,46 @@
+#summary Arianna Tag Library Documentation
+
+The library is actually composed by a tag only.
+To use it just add the following declaration to your JSP.
+{{{
+<%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
+}}}
+
+= Tag: `breadcrumbs` =
+
+The <bc:breadcrumbs> tag acts as in  <s:iterator> tag iterating over the breadcrumbs trail.
+
+|| *Attribute* || *Required* || *Description* ||
+|| `var` || no || the name used to reference the _crumb_ pushed into the Value Stack ||
+|| `status` || no || If specified, an instanceof `IteratorStatus` will be pushed into stack upon each iteration ||
+
+At each iteration it push into the Value Stack _the crumb_ (a bean of type `Crumb`) which has the following properties:
+
+
+|| *Property* || *Type* || *Description* ||
+|| name || String || the name of the crumb ||
+|| action || String ||the name of the action invoked ||
+|| method || String ||the name of the method invoked ||
+|| namespace || String || the namespace to which the invoked action belongs to ||
+|| parameters || Map || a map with request's parameters of the original invokation.  || `*` ||
+
+`*` _Not actually used at this moment_
+
+== Examples ==
+
+  * build url(s) and render as as HTML anchors
+  {{{
+  <%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
+    ...
+  <bc:breadcrumbs var='c' status='s'>
+    <s:url id='url' action="%{action}" namespace="%{namespace}" method="%{method}" />
+    <s:a href='%{url}'><s:property value='name'/></s:a>
+  </bc:breadcrumbs>
+    ...
+  }}}
+
+  * render request parameters
+There is a well known limit when you need to build urls with arbitrary parameters (see [http://stackoverflow.com/questions/872375/struts2-adding-parameters-from-a-map-to-a-url-tag adding-parameters-from-a-map-to-a-url-tag] for a discussion)
+<wiki:comment>
+thus you can resort to JSTL or use a tag library available [http://www.objectify.be/wordpress/?p=64 here]
+</wiki:comment>
