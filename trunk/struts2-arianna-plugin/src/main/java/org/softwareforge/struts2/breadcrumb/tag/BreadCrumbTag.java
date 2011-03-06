@@ -68,7 +68,7 @@ public class BreadCrumbTag extends ComponentTagSupport {
 		
         IteratorComponent c = (IteratorComponent) getComponent();        
         c.setId(var);
-		c.setValue("#session['" + BreadCrumbInterceptor.CRUMB_KEY + "']");
+		c.setValue("#session['" + BreadCrumbInterceptor.CRUMB_KEY + "'].crumbs");
 		c.setStatus(status);
 	}
 

@@ -16,7 +16,7 @@
 package org.softwareforge.struts2.breadcrumb;
 
 /**
- * Supported bread crumbs rewind behaviors
+ * Bread crumbs trail rewind behavior
  * 
  *	@author GiovanniTosto
  *  @version $Id$
@@ -24,7 +24,5 @@ package org.softwareforge.struts2.breadcrumb;
 public enum RewindMode {
 	DEFAULT,
 	NEVER,	
-	AUTO,
-//	pop,
-//	first;
+	AUTO
 }

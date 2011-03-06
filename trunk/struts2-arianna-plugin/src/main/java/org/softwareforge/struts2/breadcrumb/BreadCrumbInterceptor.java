@@ -18,18 +18,17 @@ package org.softwareforge.struts2.breadcrumb;
 
  */
 import java.lang.reflect.Method;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.Map;
 import java.util.Stack;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionProxy;
-import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
+import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.opensymphony.xwork2.util.ValueStack;
 import com.opensymphony.xwork2.util.profiling.UtilTimerStack;
 
@@ -38,36 +37,42 @@ import com.opensymphony.xwork2.util.profiling.UtilTimerStack;
  *	@author Giovanni Tosto
  *  @version $Id$
  */
-public class BreadCrumbInterceptor extends MethodFilterInterceptor {
+public class BreadCrumbInterceptor extends AbstractInterceptor {
 
 	private static final long serialVersionUID = 1L;
 
 	private static final Log LOG = LogFactory.getLog(BreadCrumbInterceptor.class);
 
-	private static final String TIMER_KEY = "BreadCrumbInterceptor::doIntercept";
+	private static final String TIMER_KEY = "BreadCrumbInterceptor::intercept";
 	
 	public static final String CRUMB_KEY = BreadCrumbInterceptor.class.getName() + ":CRUMBS";
 
+	static final Object	LOCK = new Object();
+	
 	/**
-	 * The maximum crumbs to keep in memory 
+	 * The default breadcrumb trail
 	 */
-	private int maxCrumbs = 4;
+	BreadCrumbTrail	trail = new BreadCrumbTrail();
 	
-	private boolean storeParams = false;
 	
+	public BreadCrumbTrail getTrail() {
+		return trail;
+	}
+
+//	public void setTrail(BreadCrumbTrail trail) {
+//		this.trail = trail;
+//	}
+		
 	/**
-	 *	The <code>default</code> <em>rewind mode</em> to use for actions that not explicitly set <em>rewind mode</em>    
-	 */
-	private RewindMode rewind = RewindMode.NEVER;
-	
-	/**
-	 * 	if set to true (the default) the interceptor will catch any RuntimeException raised by its internal methods.
+	 * if set to true (the default) the interceptor will catch any RuntimeException raised by its internal methods.
+	 * This is primarily intended for internal use. 
 	 * 
 	 */
 	private boolean	catchInternalException = true;
 	
+	
 	@Override
-	protected String doIntercept(ActionInvocation invocation) throws Exception 
+	public String intercept(ActionInvocation invocation) throws Exception 
 	{
 		UtilTimerStack.push(TIMER_KEY);			
 		try 
@@ -92,33 +97,56 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 		}
 	}
 	
-	protected Stack<Crumb> getCrumbs(ActionInvocation invocation)
-	{
-		ActionContext context = invocation.getInvocationContext();
-		// recupera le briciole dalla sessione
-		Stack<Crumb> crumbs = (Stack<Crumb>) context.getSession().get(CRUMB_KEY);
-		if ( crumbs == null) {
-			/*
-			 * make sure to initialize one single breadcrumb trail 
-			 */
-			synchronized (this) {
-				crumbs = new Stack<Crumb>();
-				context.getSession().put(CRUMB_KEY, crumbs);				
+	@SuppressWarnings("unchecked")
+	protected BreadCrumbTrail getBreadCrumbTrail(ActionInvocation invocation) 
+	{		
+		Map session = invocation.getInvocationContext().getSession();
+		BreadCrumbTrail bcTrail = (BreadCrumbTrail) session.get(CRUMB_KEY);
+		
+		/*
+		 * TODO make sure to put one breadcrumb trail only
+		 */
+		if ( bcTrail == null ) 
+		{			
+			synchronized (LOCK) 
+			{
+				bcTrail = new BreadCrumbTrail();
+				bcTrail.setName("$default");
+				bcTrail.setMaxCrumbs(trail.maxCrumbs);
+				bcTrail.setRewindMode(trail.rewindMode);
+				bcTrail.setComparator(trail.comparator);
+				// store trail in session
+				session.put(CRUMB_KEY, bcTrail);
+				LOG.debug("Stored new BreadCrumbTrail '" + bcTrail.name + "' with key: " + CRUMB_KEY);
 			}
 		}
 		
-		return crumbs;
+		return bcTrail;
 	}
 	
 	private	void beforeInvocation(ActionInvocation invocation) 
 	{
-		
-		// recupera le briciole 
-		Stack<Crumb> crumbs = getCrumbs(invocation);
-		
+				
 		Crumb current = processAnnotation(invocation);
 		
+		/*
+		 * overrides rewind mode of this invocation if needed 
+		 */
+		
 		if ( current != null ) {
+			// get the bread crumbs trail
+			BreadCrumbTrail	trail = getBreadCrumbTrail(invocation);
+
+			// then set initial condition			
+			RewindMode mode = trail.rewindMode;
+			int maxCrumbs = trail.maxCrumbs;
+			
+			// The comparator to use
+			Comparator<Crumb> comparator = trail.comparator;
+			
+			// then set initial condition the crumbs
+			Stack<Crumb> crumbs = trail.getCrumbs();
+			
 			/*
 			 * synchronized region is needed to prevent ConcurrentModificationException(s)
 			 * for concurrent request (operating on the same session) that would modify 
@@ -127,25 +155,30 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 			synchronized (crumbs) {
 				LOG.debug("aquired lock on crumbs trail");
 				
-				Crumb last = (crumbs.size() > 0) ? crumbs.lastElement() : null;
-				// confronta la richiesta corrente con l'ultima briciola
-				if ( !current.equals(last) ) {
-					
-					int	dupIdx = crumbs.indexOf(current);
+				Crumb last = (crumbs.size() == 0) ? null : crumbs.lastElement();
+				
+				/*
+				 *  compare current and last crumbs				
+				 */
+				if ( comparator.compare(current, last) != 0 ) 
+				{										
+					int	dupIdx = trail.indexOf(current, comparator);
 	
-					// rewind breadcrumb
-					if ( rewind == RewindMode.AUTO && dupIdx != -1 ) {
-						// riavvolge la breadcrumb alla prima briciola uguale a quella corrente
-						for (int i=dupIdx+1, size=crumbs.size(); i<size; i++) {
-							crumbs.remove(dupIdx+1);
-						}
-					} else {
-						crumbs.push(current);					
+					if ( mode == RewindMode.AUTO && dupIdx != -1 ) 
+					{
+						trail.rewindAt(dupIdx-1);
 					}
-						
+					
+					crumbs.push(current);					
+					
 					if ( crumbs.size() > maxCrumbs )
 						crumbs.remove(0);
 						
+				} else {
+					if ( crumbs.size() > 0) {
+						crumbs.remove(crumbs.size()-1);
+						crumbs.push(current);
+					}
 				}
 				LOG.debug("releasing lock on crumbs trail");
 			} // synchronized
@@ -153,9 +186,10 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 				
 	}
 	
-	private Crumb	processAnnotation(ActionInvocation invocation)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static Crumb	processAnnotation(ActionInvocation invocation)
 	{
-//		Map params = null;
+
 		Class aclass = invocation.getAction().getClass();
 		
 		String methodName = invocation.getProxy().getMethod();
@@ -163,40 +197,38 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 			methodName = "execute";
 		
 		
-		Method method = ReflectionUtils.findMethod(aclass, methodName);
+		Method method = Utils.findMethod(aclass, methodName);
 		BreadCrumb crumb = null;
+		
 		/*
 		 * Check if it is an annotated method 
 		 */
 		if ( method != null ) {
 			crumb = method.getAnnotation(BreadCrumb.class);
 		}
+		
 		/*
 		 * Check if we have an annotated class
 		 */
 		if (crumb == null) {
 			crumb = (BreadCrumb) aclass.getAnnotation(BreadCrumb.class);			
 		}
-		
+
 		/*
 		 * returns crumb or null 		
 		 */		
-		return crumb == null ? null : makeCrumb(invocation,crumb.value(),storeParams);
+		return crumb == null ? null : makeCrumb(invocation,crumb.value());
 	}
 	
-	private Crumb	makeCrumb(ActionInvocation invocation, String name, boolean storeParams)
+	private static Crumb	makeCrumb(ActionInvocation invocation, String name)
 	{
 		ActionProxy proxy = invocation.getProxy();
 		
 		Crumb c = new Crumb();
-		
+		c.timestamp = new Date();
 		c.namespace = proxy.getNamespace();
 		c.action = proxy.getActionName();
 		c.method = proxy.getMethod();
-		
-		if (name == null) {
-			name = c.getFullyQualifiedId();
-		}
 		
 		// evaluate name 
 		if ( name.startsWith("%{") && name.endsWith("}") ) {
@@ -206,40 +238,16 @@ public class BreadCrumbInterceptor extends MethodFilterInterceptor {
 		}
 		c.name = name;
 		
-		if (storeParams) {			
-			Map<String, Object> parameters = invocation.getInvocationContext().getParameters();
-			c.params = parameters;
-		}
+		// store request parameters
+		c.params = invocation.getInvocationContext().getParameters();
+		
+//		if (true) {			
+//			Map<String, Object> parameters = new HashMap<String, Object>();
+//			parameters.putAll( invocation.getInvocationContext().getParameters() );				
+//			c.params = parameters;
+//		}
 		return c;
 	}
 	
-	// Getters and Setters
-	//////////////////////////////////////////////////////////////////
-	
-	public int getMaxCrumbs() {
-		return maxCrumbs;
-	}
 
-	public void setMaxCrumbs(int maxCrumbs) {
-		if (maxCrumbs < 0) {
-			throw new IllegalArgumentException("maxCrumbs must be a non negative integer");
-		}
-//			LOG.warn("can not set maxCrumbs to "+ maxCrumbs +" it should be a positive number, using default value");
-		this.maxCrumbs = maxCrumbs;
-	}	
-	
-	public RewindMode getRewind() {
-		return rewind;
-	}
-
-	public void setRewind(RewindMode rewindMode) {
-		if ( rewindMode == RewindMode.DEFAULT ) {
-//			throw new IllegalArgumentException("rewind mode DEFAULT can not be used as a rewind mode for the BreadCrumbInterceptor. Using default value " + rewind.name() + "instead");
-			String msg = "rewind mode DEFAULT can not be used as a rewind mode for the BreadCrumbInterceptor. Using default value " + rewind.name() + "instead";
-			LOG.warn(msg);
-		}
-		this.rewind = rewindMode;
-	}
-
-	
 }
