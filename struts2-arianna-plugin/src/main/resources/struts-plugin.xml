@@ -7,8 +7,9 @@
 	<package name="breadcrumb" extends="struts-default" abstract="true">
 		<interceptors>
 			<interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
-				<param name="maxCrumbs">4</param>
-				<param name="rewind">NEVER</param>							
+				<param name="trail.maxCrumbs">5</param>
+				<param name="trail.rewindMode">NEVER</param>							
+				<param name="trail.comparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>							
 			</interceptor>
 		</interceptors>				
 	</package>

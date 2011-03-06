@@ -16,6 +16,7 @@
 package org.softwareforge.struts2.breadcrumb;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -25,7 +26,27 @@ import java.util.Map;
 
 public class Crumb implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
+	Date	timestamp;
+	
 	String name;
+	
+	String namespace;
+	
+	String method;
+	
+	Map	params;
+	
+	String action;
+	
+	public Date getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
+	}
 	
 	public String getName() {
 		return name;
@@ -34,8 +55,6 @@ public class Crumb implements Serializable
 	void setName(String name) {
 		this.name = name;
 	}
-
-	String action;
 
 	public String getAction() {
 		return action;
@@ -49,16 +68,20 @@ public class Crumb implements Serializable
 		return method;
 	}
 
-	String namespace;
 	
-	String method;
-	
-	Map	params;
-	
-	public String getFullyQualifiedId() {
-		return namespace + "/" + action + "!" + method + ":" + name;		
+	public Map getParams() {
+		return params;
 	}
 
+	public void setParams(Map params) {
+		this.params = params;
+	}
+
+//	public String getFullyQualifiedId() {
+//		return namespace + "/" + action + "!" + method + ":" + name;		
+//	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,37 +94,44 @@ public class Crumb implements Serializable
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Crumb other = (Crumb) obj;
-//		if (action == null) {
-//			if (other.action != null)
-//				return false;
-//		} else if (!action.equals(other.action))
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
 //			return false;
-//		if (method == null) {
-//			if (other.method != null)
-//				return false;
-//		} else if (!method.equals(other.method))
+//		if (getClass() != obj.getClass())
 //			return false;
-//		if (name == null) {
-//			if (other.name != null)
+//		Crumb other = (Crumb) obj;
+////		if (action == null) {
+////			if (other.action != null)
+////				return false;
+////		} else if (!action.equals(other.action))
+////			return false;
+////		if (method == null) {
+////			if (other.method != null)
+////				return false;
+////		} else if (!method.equals(other.method))
+////			return false;
+////		if (name == null) {
+////			if (other.name != null)
+////				return false;
+////		} else if (!name.equals(other.name))
+////			return false;
+////		if (namespace == null) {
+////			if (other.namespace != null)
+////				return false;
+////		} else if (!namespace.equals(other.namespace))
+////			return false;
+//		boolean sameId =  getFullyQualifiedId().equals(other.getFullyQualifiedId());
+//		if ( sameId ) {
+//			if (params == null) {
+//				if (other.params != null)
+//					return false;
+//			} else if ( !Utils.compareParametersMap(params,other.params) )
 //				return false;
-//		} else if (!name.equals(other.name))
-//			return false;
-//		if (namespace == null) {
-//			if (other.namespace != null)
-//				return false;
-//		} else if (!namespace.equals(other.namespace))
-//			return false;
-		return getFullyQualifiedId().equals(other.getFullyQualifiedId());
-	}
-	
-	
+//		}
+//		
+//		return sameId;
+//	}
 }

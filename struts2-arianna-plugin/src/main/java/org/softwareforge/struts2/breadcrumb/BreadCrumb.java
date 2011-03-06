@@ -36,5 +36,6 @@ public @interface BreadCrumb
 	public String 		value();
 	
 	public RewindMode	rewind() default RewindMode.DEFAULT;
-	
+
+//	public String		trail()	default "main";
 }
