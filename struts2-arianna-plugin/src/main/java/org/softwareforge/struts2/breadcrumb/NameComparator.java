@@ -15,6 +15,7 @@
  */ 
 package org.softwareforge.struts2.breadcrumb;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -22,7 +23,7 @@ import java.util.Comparator;
  *	@author Giovanni Tosto
  *	@version $Id$
  */
-public class NameComparator implements Comparator<Crumb> 
+public class NameComparator implements Comparator<Crumb>, Serializable
 {
 
 	public int compare(Crumb c1, Crumb c2) 
