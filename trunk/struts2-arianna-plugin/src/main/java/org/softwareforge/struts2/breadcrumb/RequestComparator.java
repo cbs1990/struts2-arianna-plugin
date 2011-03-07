@@ -16,6 +16,7 @@
 
 package org.softwareforge.struts2.breadcrumb;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -24,13 +25,13 @@ import java.util.Comparator;
  *	@author Giovanni Tosto
  *	@version $Id$
  */
-public class RequestComparator extends ActionComparator 
+public class RequestComparator extends ActionComparator
 {
 	public int compare(Crumb c1, Crumb c2) {
 		int same = super.compare(c1, c2);
 		
 		// compare request parameters
-		if ( same == 0) {
+		if ( same == 0 ) {
 			same = Utils.compareParametersMap(c1.getParams(), c2.getParams()) ? 0 : -1;
 		}
 		return same;
