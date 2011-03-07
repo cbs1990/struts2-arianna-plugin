@@ -3,7 +3,7 @@
 	
 	<groupId>com.softwareforge</groupId>
 	<artifactId>struts2-arianna-plugin</artifactId>
-	<version>0.3-SNAPSHOT</version>
+	<version>0.4</version>
 	<packaging>jar</packaging>
 	
 	<name>struts2-arianna-plugin</name>
@@ -33,13 +33,14 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
-		<struts2.version>2.2.1.1</struts2.version>
+		<!-- struts2.version>2.2.1.1</struts2.version -->
+		<struts2.version>2.0.14</struts2.version>
 	</properties>
 	
 	<scm>
 		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/trunk/strus2-arianna-plugin</url>
-		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk</connection>
-		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk</developerConnection>
+		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/strus2-arianna-plugin</connection>
+		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/strus2-arianna-plugin</developerConnection>
 	</scm>
 	
 	<build>		
@@ -100,13 +101,14 @@
 			<scope>test</scope>
 		</dependency>
 
+<!-- 
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-junit-plugin</artifactId>
 			<version>${struts2.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+ -->		
 		
 	</dependencies>
   	
