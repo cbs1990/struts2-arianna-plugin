@@ -127,22 +127,38 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	private	void beforeInvocation(ActionInvocation invocation) 
 	{
 				
-		Crumb current = processAnnotation(invocation);
+		BreadCrumb annotation = processAnnotation(invocation);
 		
+		/*
+		 * returns crumb or null 		
+		 */		
+//		return crumb == null ? null 
+
 		/*
 		 * overrides rewind mode of this invocation if needed 
 		 */
 		
-		if ( current != null ) {
+		if ( annotation != null ) {
+			
+			Crumb	current = makeCrumb(invocation,annotation.value());
+			
 			// get the bread crumbs trail
 			BreadCrumbTrail	trail = getBreadCrumbTrail(invocation);
 
-			// then set initial condition			
+			// set default configuration			
 			RewindMode mode = trail.rewindMode;
 			int maxCrumbs = trail.maxCrumbs;
+			Comparator<Crumb> comparator = trail.comparator;
+			
+			// TODO override configuration (if needed)
+			if ( annotation.rewind() != RewindMode.DEFAULT )
+				mode = annotation.rewind();
+			
+			if ( annotation.comparator() != BreadCrumb.NULL.class ) {
+				comparator = createComparator(annotation.comparator());
+			}
 			
 			// The comparator to use
-			Comparator<Crumb> comparator = trail.comparator;
 			
 			// then set initial condition the crumbs
 			Stack<Crumb> crumbs = trail.getCrumbs();
@@ -186,8 +202,21 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 				
 	}
 	
+	private Comparator<Crumb>	createComparator(Class clazz) {
+		try {
+			Comparator instance = (Comparator) clazz.newInstance();
+			return instance; 
+		} catch (InstantiationException e) {
+			LOG.error("Cannot create comparator of class " + clazz,e);
+		} catch (IllegalAccessException e) {
+			LOG.error("Cannot create comparator of class " + clazz,e);	
+		}
+		return null;
+		
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static Crumb	processAnnotation(ActionInvocation invocation)
+	private static BreadCrumb	processAnnotation(ActionInvocation invocation)
 	{
 
 		Class aclass = invocation.getAction().getClass();
@@ -214,10 +243,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 			crumb = (BreadCrumb) aclass.getAnnotation(BreadCrumb.class);			
 		}
 
-		/*
-		 * returns crumb or null 		
-		 */		
-		return crumb == null ? null : makeCrumb(invocation,crumb.value());
+		return crumb;
 	}
 	
 	private static Crumb	makeCrumb(ActionInvocation invocation, String name)
