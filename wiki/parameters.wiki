@@ -2,22 +2,23 @@
 
 == Interceptor's parameters ==
 
-|| *Parameter* || *Description* || *default* ||
-|| _`maxCrumbs`_ || The maximum number of crumbs to keep stored. || `4` ||
-|| _`rewind`_ || the default rewind mode. Valid values are `NEVER` and `AUTO` || `NEVER` ||
+|| *Parameter* || *Type* ||*Description* || *Default* ||
+|| _`trail.maxCrumbs`_ || number || The maximum number of crumbs to keep stored. || `6` ||
+|| _`trail.rewindMode`_ || String || The default rewind mode. Valid values are `NEVER` and `AUTO` || `AUTO` ||
+|| _`trail.comparator`_ || String || The default comparator to use when checking for crumb equality. || `org.softwareforge.struts2.breadcrumb.NameComparator` ||
 
 ==== Rewind mode ===
 
-The `rewind` parameter deals with duplicated crumbs.
+The `rewindMode` parameter deals with duplicated crumbs.
 
 ==== NEVER ====
-When the rewind mode is `NEVER` the plugin will _never_ rewind the breadcrumbs and it will allow the breadcrumbs' trail  to have duplicated crumbs.
+When the rewind mode is `NEVER` the plugin will _never_ rewind the _bread crumbs_ and it will allow the _bread crumbs trail_ to have duplicated crumbs.
 
 ==== AUTO ====
-When the rewind mode is `AUTO` duplicated crumbs are not allowed.
-If you invoke an action that would create a crumb already existing the plugin will _rewind_ the breadcrumb's trail to _that_ crumb.
+When the rewind mode is `AUTO` duplicated crumbs are not allowed. What _duplicated_ means depends by the comparator actually used (see below).
+If you invoke an action that would create a crumb already existing the plugin will _rewind_ the _bread crumbs trail_ to _that_ crumb.
 
-For example if the current breadcrumb is 
+For example if the current bread crumb is 
 {{{
 Action1 > Action2 > Action3 > Action4
 }}} 
