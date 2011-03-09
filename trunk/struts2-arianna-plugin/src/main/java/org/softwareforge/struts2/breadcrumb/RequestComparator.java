@@ -20,13 +20,16 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
- * A crumb comparator that check for equality of namespace, action and method fields.     
+ * A crumb comparator that behaves as an ActionComparator and besides 
+ * checks for equality of http request parameters (names,values) pairs.     
  * 
  *	@author Giovanni Tosto
  *	@version $Id$
  */
 public class RequestComparator extends ActionComparator
 {
+	private static final long serialVersionUID = 1L;
+
 	public int compare(Crumb c1, Crumb c2) {
 		int same = super.compare(c1, c2);
 		
