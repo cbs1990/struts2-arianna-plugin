@@ -18,13 +18,13 @@ At each iteration it push into the Value Stack _the crumb_ (a bean of type `Crum
 
 
 || *Property* || *Type* || *Description* ||
-|| name || String || the name of the crumb ||
-|| action || String ||the name of the action invoked ||
-|| method || String ||the name of the method invoked ||
-|| namespace || String || the namespace to which the invoked action belongs to ||
-|| parameters || Map || a map with request's parameters of the original invokation.  || `*` ||
+|| timestamp || `Date` || the time stamp of the crumb creation. ||
+|| name || `String` || the name of the crumb. ||
+|| action || `String` ||the name of the action invoked. ||
+|| method || `String` ||the name of the method invoked. ||
+|| namespace || `String` || the namespace to which the invoked action belongs to. ||
+|| params || `Map` || the `Map` containing the request's parameters of the original invocation.||
 
-`*` _Not actually used at this moment_
 
 == Examples ==
 
@@ -40,7 +40,34 @@ At each iteration it push into the Value Stack _the crumb_ (a bean of type `Crum
   }}}
 
   * render request parameters
-There is a well known limit when you need to build urls with arbitrary parameters (see [http://stackoverflow.com/questions/872375/struts2-adding-parameters-from-a-map-to-a-url-tag adding-parameters-from-a-map-to-a-url-tag] for a discussion)
-<wiki:comment>
-thus you can resort to JSTL or use a tag library available [http://www.objectify.be/wordpress/?p=64 here]
-</wiki:comment>
+There is a well known problem when you need to build urls with arbitrary parameters (see [http://stackoverflow.com/questions/872375/struts2-adding-parameters-from-a-map-to-a-url-tag adding-parameters-from-a-map-to-a-url-tag] for a discussion)
+The following code shows how to build urls using JSTL core tags.
+{{{
+	<%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
+	<!-- add the jstl core tag library -->
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+	...
+	
+	<bc:breadcrumbs var='c' status='s'>
+		<!-- use the usual way to build the url for a struts action -->
+		<s:url var="surl" action="%{action}" namespace="%{namespace}" includeContext="false"/>
+		
+		<!-- use the tags: url and param to effectively build the url -->    
+		<c:url var="url" value="${surl}">
+			<!-- iterate on parameter -->             
+	    	<c:forEach items="${c.params}" var="p">
+				<!-- iterate on parameter values -->             
+	    		<c:forEach var="v" items="${p.value}">${v}
+	        		<c:param name="${p.key}" value="${v}"/>
+	        	</c:forEach>
+			</c:forEach>
+		</c:url>
+
+		<!-- retrieve the url built and render an HTML anchor -->
+		<s:a href="%{#attr['url']}">${c.name}</s:a>
+	</bc:breadcrumbs>
+	
+	...
+}}}
+alternatively you can resort to the tag library available [http://www.objectify.be/wordpress/?p=64 here]
