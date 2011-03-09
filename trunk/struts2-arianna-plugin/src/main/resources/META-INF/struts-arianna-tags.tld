@@ -16,7 +16,7 @@
         <tag-class>org.softwareforge.struts2.breadcrumb.tag.BreadCrumbTag</tag-class>
         <body-content>JSP</body-content>		    
         <attribute>
-            <description><![CDATA[Deprecated, use var instead. The id attribute is provided just for uniformity with Struts 2.0 tags]]></description>
+            <description><![CDATA[Deprecated, use var instead. The id attribute is here provided just for uniformity with Struts 2.0 tags]]></description>
             <name>id</name>
             <required>false</required>
             <rtexprvalue>false</rtexprvalue>
