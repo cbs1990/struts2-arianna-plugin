@@ -40,32 +40,33 @@ public class CrumbComparatorConverter extends StrutsTypeConverter
 		if (values == null )
 			return null;
 		
-		if ( values.length != 1 ) {
-			throw new TypeConversionException("Unable to convert non scalar value " + values);			
+		if ( values.length != 1 ) 
+		{
+			throw new TypeConversionException("Cannot convert non scalar value " + values);			
 		}
 				
-		if ( !toClass.isAssignableFrom(Comparator.class) ) {
-			throw new TypeConversionException("class " + toClass + " is not assignable to Comparator.class");			
-		}
+//		if ( !toClass.isAssignableFrom(Comparator.class) ) {
+//			throw new TypeConversionException("class " + toClass + " is not assignable to Comparator.class");			
+//		}
 		
 		try {
 			Class clazz = ObjectFactory.getObjectFactory().getClassInstance(values[0]);
-			if ( Comparator.class.isAssignableFrom(clazz) ) {
-				Comparator instance = (Comparator) clazz.newInstance();
-				return instance;
+			
+			if ( !Comparator.class.isAssignableFrom(clazz) ) {
+				throw new TypeConversionException(clazz + " is not assignable to Comparator.class");
 			}
+			
+			Comparator instance = (Comparator) clazz.newInstance();
+			
+			if ( LOG.isDebugEnabled() ) {
+				String msg = String.format("{%s} Converted %s -> %s ", this, values[0], instance);
+				LOG.debug(msg);			
+			}			
+			
+			return instance;
 		} catch (Exception e) {
 			throw new TypeConversionException(e.getMessage(),e);
-		}
-		
-		Object obj = new NameComparator();
-		if ( LOG.isDebugEnabled() )
-		{
-			String msg = String.format("{%s} Converted %s -> %s ", values[0], obj,this);
-			LOG.debug(msg);			
-		}
-		
-		return obj;
+		}		
 	}
 
 	
