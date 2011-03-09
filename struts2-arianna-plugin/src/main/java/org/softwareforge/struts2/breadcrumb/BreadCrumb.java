@@ -22,6 +22,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+import java.util.Comparator;
 
 /**
  * @author Giovanni Tosto
@@ -32,10 +33,25 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target({TYPE,METHOD})
 public @interface BreadCrumb 
-{
+{	
+	// Tricky class to allow default <em>NULL</em> values;
+	static final class NULL implements CrumbComparator 
+	{
+		public int compare(Crumb o1, Crumb o2) {
+			throw new UnsupportedOperationException("This comparator cannot be used in this way");
+		}		
+	};
+
 	public String 		value();
 	
 	public RewindMode	rewind() default RewindMode.DEFAULT;
 
+	public Class<? extends Comparator>		comparator() default NULL.class;
+	
+//	public String		comparator() default "";
+	
+	
 //	public String		trail()	default "main";
+	
 }
+

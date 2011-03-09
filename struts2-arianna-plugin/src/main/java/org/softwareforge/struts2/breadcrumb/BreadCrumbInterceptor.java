@@ -23,6 +23,9 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Stack;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -95,6 +98,13 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 		} finally {
 			UtilTimerStack.pop(TIMER_KEY);			
 		}
+	}
+	
+	private Map	getSession(ActionInvocation invocation) {
+		HttpServletRequest request = (HttpServletRequest) invocation.getInvocationContext().get("com.opensymphony.xwork2.dispatcher.HttpServletRequest");
+		HttpSession session = request.getSession(false);
+//		return session.
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
