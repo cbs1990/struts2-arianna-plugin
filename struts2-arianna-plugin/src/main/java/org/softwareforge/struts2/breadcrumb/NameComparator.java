@@ -25,6 +25,7 @@ import java.util.Comparator;
  */
 public class NameComparator implements Comparator<Crumb>, Serializable
 {
+	private static final long serialVersionUID = 1L;
 
 	public int compare(Crumb c1, Crumb c2) 
 	{

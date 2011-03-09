@@ -27,6 +27,8 @@ import java.util.Comparator;
  */
 public class ActionComparator implements Comparator<Crumb>, Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	public int compare(Crumb c1, Crumb c2) {
 		if (c1 == c2 )
 			return 0;
