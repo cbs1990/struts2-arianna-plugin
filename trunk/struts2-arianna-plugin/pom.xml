@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.softwareforge</groupId>
+	<groupId>org.softwareforge</groupId>
 	<artifactId>struts2-arianna-plugin</artifactId>
-	<version>0.4</version>
+	<version>0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
 	<name>struts2-arianna-plugin</name>
@@ -33,8 +33,8 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
-		<!-- struts2.version>2.2.1.1</struts2.version -->
-		<struts2.version>2.0.14</struts2.version>
+		<struts2.version>2.2.1.1</struts2.version>
+		<!-- <struts2.version>2.0.14</struts2.version -->
 	</properties>
 	
 	<scm>
@@ -101,14 +101,12 @@
 			<scope>test</scope>
 		</dependency>
 
-<!-- 
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-junit-plugin</artifactId>
 			<version>${struts2.version}</version>
 			<scope>test</scope>
 		</dependency>
- -->		
 		
 	</dependencies>
   	
