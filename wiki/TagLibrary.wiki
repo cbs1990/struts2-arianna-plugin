@@ -53,9 +53,9 @@ The following code shows how to build urls using JSTL core tags.
 		
 		<!-- use the tags: url and param to effectively build the url -->    
 		<c:url var="url" value="${surl}">
-			<!-- iterate on parameter -->             
+		<!-- iterate on parameter -->             
 	    	<c:forEach items="${c.params}" var="p">
-				<!-- iterate on parameter values -->             
+			<!-- iterate on parameter values -->             
 	    		<c:forEach var="v" items="${p.value}">${v}
 	        		<c:param name="${p.key}" value="${v}"/>
 	        	</c:forEach>
