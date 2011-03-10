@@ -1,20 +1,19 @@
 #summary Arianna Tag Library Documentation
 
-At this momentthe library is composed by a tag only.
+At this moment the library is composed by a tag only.
 
 To use it add the following declaration to your JSP.
 {{{
 <%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
 }}}
 
-= Tag: `breadcrumbs` =
-
-The <bc:breadcrumbs> tag acts as in  <s:iterator> tag iterating over the breadcrumbs trail.
+= Tag: `<bc:breadcrumbs>` =
 
 || *Attribute* || *Required* || *Description* ||
 || `var` || no || the name used to reference the _crumb_ pushed into the Value Stack ||
 || `status` || no || If specified, an instanceof `IteratorStatus` will be pushed into stack upon each iteration ||
 
+This tag acts like an <s:iterator> tag iterating over the breadcrumbs trail.
 At each iteration it push into the Value Stack _the crumb_ (a bean of type `Crumb`) which has the following properties:
 
 
@@ -45,18 +44,14 @@ There is a well known problem when you need to build urls with arbitrary paramet
 The following code shows how to build urls using JSTL core tags.
 {{{	
 <!-- add the jstl core tag library -->
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                      ...
 <bc:breadcrumbs var='c' status='s'>
     <!-- use the usual way to build the url for a struts action -->
     <s:url var="surl" action="%{action}" namespace="%{namespace}" includeContext="false"/>
 		
-    <!-- use the tags: url and param to effectively build the url -->   
-    <c:url var="url" value="${surl}">
-
     <!-- use the tags: url and param to effectively build the url -->
     <c:url var="url" value="${surl}">
-
         <!-- iterate on parameter -->             
         <c:forEach items="${c.params}" var="p">
             <!-- iterate on parameter values -->             
