@@ -5,16 +5,16 @@
 || *Parameter* || *Type* ||*Description* || *Default* ||
 || _`trail.maxCrumbs`_ || number || The maximum number of crumbs to keep stored. || `6` ||
 || _`trail.rewindMode`_ || String || The default rewind mode. Valid values are `NEVER` and `AUTO` || `AUTO` ||
-|| _`trail.comparator`_ || String || The default comparator to use when checking for crumb equality. || `org.softwareforge.struts2.breadcrumb.NameComparator` ||
+|| _`trail.comparator`_ || String || The fully qualified class name of the default comparator to use when checking for crumb equality. || `org.softwareforge.struts2.breadcrumb.NameComparator` ||
 
-==== Rewind mode ===
+====Rewind mode====
 
 The `rewindMode` parameter deals with duplicated crumbs.
 
-==== NEVER ====
+=====NEVER=====
 When the rewind mode is `NEVER` the plugin will _never_ rewind the _bread crumbs_ and it will allow the _bread crumbs trail_ to have duplicated crumbs.
 
-==== AUTO ====
+=====AUTO=====
 When the rewind mode is `AUTO` duplicated crumbs are not allowed. What _duplicated_ means depends by the comparator actually used (see below).
 If you invoke an action that would create a crumb already existing the plugin will _rewind_ the _bread crumbs trail_ to _that_ crumb.
 
@@ -22,7 +22,20 @@ For example if the current bread crumb is
 {{{
 Action1 > Action2 > Action3 > Action4
 }}} 
-and the invoked action creates the crumb `Action2` the trail will be rewound to 
+and the next invoked action creates a crumb that is _equals_ to the `Action2` the trail will be rewound to 
 {{{
 Action1 > Action2
 }}}
+
+====Crumb Comparator====
+The plugin will (create and) use an instance of the class specified by this parameter to compare crumbs for equality.
+
+The arianna-plugin comes with 3 ready-to-use comparators
+
+  * `org.softwareforge.struts2.breadcrumb.NameComparator` That compares crumbs only checking its names.
+
+
+  * `org.softwareforge.struts2.breadcrumb.ActionComparator` This comparator will compare the namespace, action and method properties of two crumbs.
+
+
+  * `org.softwareforge.struts2.breadcrumb.RequestComparator`
