@@ -30,41 +30,45 @@ At each iteration it push into the Value Stack _the crumb_ (a bean of type `Crum
 == Examples ==
 
 === simple crumbs ===
-  {{{
-  <%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
-    ...
-  <bc:breadcrumbs var='c' status='s'>
+{{{
+<%@taglib prefix="bc" uri="/struts-arianna-tags" %>
+                     ...
+<bc:breadcrumbs var='c' status='s'>
     <s:url id='url' action="%{action}" namespace="%{namespace}" method="%{method}" />
     <s:a href='%{url}'><s:property value='name'/></s:a>
-  </bc:breadcrumbs>
-    ...
-  }}}
+</bc:breadcrumbs>
+                     ...
+}}}
 
 === rendering of parameters ===
 There is a well known problem when you need to build urls with arbitrary parameters (see [http://stackoverflow.com/questions/872375/struts2-adding-parameters-from-a-map-to-a-url-tag adding-parameters-from-a-map-to-a-url-tag] for a discussion and possible solutions)
 The following code shows how to build urls using JSTL core tags.
 {{{	
-	<!-- add the jstl core tag library -->
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	...	
-	<bc:breadcrumbs var='c' status='s'>
-		<!-- use the usual way to build the url for a struts action -->
-		<s:url var="surl" action="%{action}" namespace="%{namespace}" includeContext="false"/>
+<!-- add the jstl core tag library -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+                     ...
+<bc:breadcrumbs var='c' status='s'>
+    <!-- use the usual way to build the url for a struts action -->
+    <s:url var="surl" action="%{action}" namespace="%{namespace}" includeContext="false"/>
 		
-		<!-- use the tags: url and param to effectively build the url -->    
-		<c:url var="url" value="${surl}">
-		<!-- iterate on parameter -->             
-	    	<c:forEach items="${c.params}" var="p">
-			<!-- iterate on parameter values -->             
-	    		<c:forEach var="v" items="${p.value}">${v}
-	        		<c:param name="${p.key}" value="${v}"/>
-	        	</c:forEach>
-			</c:forEach>
-		</c:url>
+    <!-- use the tags: url and param to effectively build the url -->   
+    <c:url var="url" value="${surl}">
 
-		<!-- retrieve the url built and render an HTML anchor -->
-		<s:a href="%{#attr['url']}">${c.name}</s:a>
-	</bc:breadcrumbs>	
-	...
+    <!-- use the tags: url and param to effectively build the url -->
+    <c:url var="url" value="${surl}">
+
+        <!-- iterate on parameter -->             
+        <c:forEach items="${c.params}" var="p">
+            <!-- iterate on parameter values -->             
+            <c:forEach var="v" items="${p.value}">${v}
+                <c:param name="${p.key}" value="${v}"/>
+            </c:forEach>
+        </c:forEach>
+    </c:url>
+
+    <!-- retrieve the url built and render an HTML anchor -->
+    <s:a href="%{#attr['url']}">${c.name}</s:a>
+</bc:breadcrumbs>
+                     ...
 }}}
 alternatively, if you feel the code above too verbose, you can resort to a tag library available [http://www.objectify.be/wordpress/?p=64 here] specifically designed to add arbitrary parameters to a URL in struts^2^
