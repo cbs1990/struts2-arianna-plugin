@@ -43,3 +43,18 @@ The arianna-plugin comes with 3 ready-to-use comparators
 
 
   * `org.softwareforge.struts2.breadcrumb.RequestComparator`
+
+  * _*any user defined comparator*_ if any of the built-in comparator does not meet your needs you can also provide your own custom comparator. Just implement the `java.util.Comparator<Crumb>` interface.
+For example
+{{{
+public class MyComparator implements Comparator<Crumb>
+{
+    public int compare(Crumb c1, Crumb c2) {
+      // my custom comparing logic
+    }
+}
+}}}
+
+<wiki:comment>
+I'm very sorry for my English, so if someone wants to revise or rewrite these pages is welcome.
+</wiki:comment>
