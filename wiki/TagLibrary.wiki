@@ -1,7 +1,8 @@
 #summary Arianna Tag Library Documentation
 
-The library is actually composed by a tag only.
-To use it just add the following declaration to your JSP.
+At this momentthe library is composed by a tag only.
+
+To use it add the following declaration to your JSP.
 {{{
 <%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
 }}}
@@ -28,7 +29,7 @@ At each iteration it push into the Value Stack _the crumb_ (a bean of type `Crum
 
 == Examples ==
 
-  * build url(s) and render as as HTML anchors
+=== simple crumbs ===
   {{{
   <%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
     ...
@@ -39,16 +40,13 @@ At each iteration it push into the Value Stack _the crumb_ (a bean of type `Crum
     ...
   }}}
 
-  * render request parameters
-There is a well known problem when you need to build urls with arbitrary parameters (see [http://stackoverflow.com/questions/872375/struts2-adding-parameters-from-a-map-to-a-url-tag adding-parameters-from-a-map-to-a-url-tag] for a discussion)
+=== rendering of parameters ===
+There is a well known problem when you need to build urls with arbitrary parameters (see [http://stackoverflow.com/questions/872375/struts2-adding-parameters-from-a-map-to-a-url-tag adding-parameters-from-a-map-to-a-url-tag] for a discussion and possible solutions)
 The following code shows how to build urls using JSTL core tags.
-{{{
-	<%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
+{{{	
 	<!-- add the jstl core tag library -->
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-	...
-	
+	...	
 	<bc:breadcrumbs var='c' status='s'>
 		<!-- use the usual way to build the url for a struts action -->
 		<s:url var="surl" action="%{action}" namespace="%{namespace}" includeContext="false"/>
@@ -66,8 +64,7 @@ The following code shows how to build urls using JSTL core tags.
 
 		<!-- retrieve the url built and render an HTML anchor -->
 		<s:a href="%{#attr['url']}">${c.name}</s:a>
-	</bc:breadcrumbs>
-	
+	</bc:breadcrumbs>	
 	...
 }}}
-alternatively you can resort to the tag library available [http://www.objectify.be/wordpress/?p=64 here]
+alternatively, if you feel the code above too verbose, you can resort to a tag library available [http://www.objectify.be/wordpress/?p=64 here] specifically designed to add arbitrary parameters to a URL in struts^2^
