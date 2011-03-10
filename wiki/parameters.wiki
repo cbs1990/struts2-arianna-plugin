@@ -36,15 +36,15 @@ The plugin will (create and) use an instance of the class specified by this para
 
 The arianna-plugin comes with 3 ready-to-use comparators
 
-  * `org.softwareforge.struts2.breadcrumb.NameComparator` That compares crumbs only checking its names.
+  * *`org.softwareforge.struts2.breadcrumb.NameComparator`* That compares crumbs only checking its names.
 
 
-  * `org.softwareforge.struts2.breadcrumb.ActionComparator` This comparator will compare the namespace, action and method properties of two crumbs.
+  * *`org.softwareforge.struts2.breadcrumb.ActionComparator`* This comparator will compare the namespace, action and method properties of two crumbs.
 
 
-  * `org.softwareforge.struts2.breadcrumb.RequestComparator`
+  * *`org.softwareforge.struts2.breadcrumb.RequestComparator`*
 
-  * _*any user defined comparator*_ if any of the built-in comparator does not meet your needs you can also provide your own custom comparator. Just implement the `java.util.Comparator<Crumb>` interface.
+  * _*user defined comparators*_ if any of the built-in comparator does not meet your needs you can also provide your own custom comparator. Just implement the `java.util.Comparator<Crumb>` interface.
 For example
 {{{
 public class MyComparator implements Comparator<Crumb>
