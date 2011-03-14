@@ -1,0 +1,68 @@
+ 
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+	
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.i18n.reload" value="false" />
+	<constant name="struts.freemarker.templatesCache" value="false" /> 
+	
+	<constant name="struts.action.extension" value="do" />
+	
+	<constant name="struts.ui.theme" value="xhtml" />
+	
+
+	<!-- 
+	<constant name="struts.objectFactory" value="spring" />
+ 	-->
+ 	 	
+	<package name="test" namespace="/tests" extends="struts-default">
+		<interceptors>	
+			<interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
+				<param name="trail.maxCrumbs">10</param>
+				<param name="trail.rewindMode">NEVER</param>
+				<param name="trail.comparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>
+			</interceptor>
+			
+			<interceptor-stack name="testStack">
+				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="breadCrumbs" />
+		     </interceptor-stack>
+		</interceptors>
+					
+		<default-interceptor-ref name="testStack" />
+
+		<action name="home" class="org.softwareforge.struts2.breadcrumb.showcase.actions.HomeAction">
+			<result>home.jsp</result>
+		</action>
+		
+		<action name="pAction" class="org.softwareforge.struts2.breadcrumb.showcase.actions.ParameterizedAction">
+			<result>result.jsp</result>
+		</action>
+				
+		<action name="simple-*" class="org.softwareforge.struts2.breadcrumb.showcase.actions.SimpleActions" method="{1}">
+			<result>result.jsp</result>
+		</action>
+		
+		<action name="same-*" class="org.softwareforge.struts2.breadcrumb.showcase.actions.ActionsWithSameCrumbName" method="action_{1}">
+			<result>result.jsp</result>
+		</action>
+		
+		<action name="override-*" class="org.softwareforge.struts2.breadcrumb.showcase.actions.OverridingActions" method="use{1}">
+			<result>result.jsp</result>
+		</action>
+		
+		<action name="ognl-name" class="org.softwareforge.struts2.breadcrumb.showcase.actions.OgnlNameAction">
+			<result name="input">aaaa.jsp</result>
+			<result>result.jsp</result>
+		</action>
+		
+		<action name="control-*" class="org.softwareforge.struts2.breadcrumb.showcase.actions.Controls" method="{1}">
+			<result type='redirect'>home.do</result>
+		</action>
+				
+	</package>	
+</struts>
