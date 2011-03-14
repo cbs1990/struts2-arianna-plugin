@@ -1,0 +1,89 @@
+@CHARSET "ISO-8859-1";
+
+/*
+	font-family:"Lucida Grande","bitstream vera sans","trebuchet ms",sans-serif,verdana;
+
+body {
+	padding:1px 80px;
+	font-size: medium;
+	background-color: white;	
+	font-family: sans-serif;
+}
+*/
+
+body {
+	font: normal;
+	font-size: 10pt;
+}
+	
+/* get rid of those system borders being generated for A tags 
+*/
+a:active {
+  outline:none;
+}
+
+:focus {
+  -moz-outline-style:none;
+}
+
+a {
+	text-decoration: none;
+}
+
+/*********************************************************/
+
+/*
+	user input elements
+*/
+
+label {
+	font-size: 8pt;
+}
+
+/* breadcrumb styles 
+************************/
+
+.breadcrumb-trail {
+	background-color: #ffeeff;
+}
+
+span.crumb {
+	font-size: small;	
+}
+
+span.crumb a {
+	color: navy;
+}
+
+span.crumb .current {
+	font-weight: bold;
+}
+
+ul#stack {
+	list-style-type:square	
+}
+
+ul#stack li {
+	color: black;
+	background-color: silver;
+	padding: 2px 4px 2px 4px;
+	border: 1px solid gray;
+	margin-bottom: 0.7em;
+	font-family: arial,sans-serif;
+	border-left: 3px solid gray; 
+}
+/*********************************************************/
+/*
+
+pre.source {
+	height:300px; 
+	overflow:auto;
+	border-top: 1px dotted black;
+	border-bottom: 1px dotted black;
+	padding-left: 6;
+	padding-right: 6;
+}
+
+pre.source code {
+	margin-right: 0px
+}

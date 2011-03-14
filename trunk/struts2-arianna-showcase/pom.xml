@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.softwareforge</groupId>
+	<artifactId>struts2-breadcrumb-test</artifactId>
+	<version>0.5-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<struts2.version>2.1.2</struts2.version>
+		<struts2.jquery-plugin.version>2.5.3</struts2.jquery-plugin.version>
+	</properties>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.maven.ide.eclipse</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+				<version>0.9.9-SNAPSHOT</version>
+				<configuration><mappingId>customizable</mappingId><configurators></configurators><mojoExecutions><mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources</mojoExecution><mojoExecution runOnIncremental="false">org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile</mojoExecution><mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources</mojoExecution></mojoExecutions></configuration>
+			</plugin>
+		</plugins>
+	<!-- 
+		<plugins>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-java-sources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/java</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+-->
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.softwareforge</groupId>
+			<artifactId>struts2-arianna-plugin</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jgeppert.struts2.jquery</groupId>
+			<artifactId>struts2-jquery-plugin</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>${struts2.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+	</dependencies>
+</project>
