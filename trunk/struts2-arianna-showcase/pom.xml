@@ -9,6 +9,9 @@
 	<properties>
 		<struts2.version>2.1.2</struts2.version>
 		<struts2.jquery-plugin.version>2.5.3</struts2.jquery-plugin.version>
+		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
 	</properties>
 
 	<build>
@@ -19,36 +22,27 @@
 		</resources>
 		<plugins>
 			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+			</plugin>
+		<!-- 
+			<plugin>
 				<groupId>org.maven.ide.eclipse</groupId>
 				<artifactId>lifecycle-mapping</artifactId>
 				<version>0.9.9-SNAPSHOT</version>
-				<configuration><mappingId>customizable</mappingId><configurators></configurators><mojoExecutions><mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources</mojoExecution><mojoExecution runOnIncremental="false">org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile</mojoExecution><mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources</mojoExecution></mojoExecutions></configuration>
+				<configuration>
+					<mappingId>customizable</mappingId>
+					<configurators>
+					</configurators>
+					<mojoExecutions>
+						<mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources</mojoExecution>
+						<mojoExecution runOnIncremental="false">org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile</mojoExecution>
+						<mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources</mojoExecution>
+					</mojoExecutions>
+				</configuration>
 			</plugin>
+		 -->
 		</plugins>
-	<!-- 
-		<plugins>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>add-java-sources</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/classes</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/java</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
--->
 	</build>
 	<dependencies>
 		<dependency>
@@ -76,7 +70,7 @@
 		<dependency>
 			<groupId>com.jgeppert.struts2.jquery</groupId>
 			<artifactId>struts2-jquery-plugin</artifactId>
-			<version>2.5.3</version>
+			<version>${struts2.jquery-plugin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
