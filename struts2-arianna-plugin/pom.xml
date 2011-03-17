@@ -3,7 +3,7 @@
 	
 	<groupId>org.softwareforge</groupId>
 	<artifactId>struts2-arianna-plugin</artifactId>
-	<version>0.5-SNAPSHOT</version>
+	<version>0.4.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
 	<name>struts2-arianna-plugin</name>
@@ -43,7 +43,15 @@
 		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-plugin</developerConnection>
 	</scm>
 	
-	<build>		
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>		
 		<pluginManagement>
 			<plugins>
 				<plugin>
