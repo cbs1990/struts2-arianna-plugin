@@ -43,23 +43,5 @@
 				</span>
 			</s:if>
 		</span>
-		<%--
-		<div class='tooltip'>
-			<ul>
-				<li>timestamp = ${timestamp}</li> 
-				<li>action url = ${namespace}/${action}!${method}</li>
-				<li>
-					parameters
-					<ul>
-		               <c:forEach items="${c.params}" var="p">
-							<li>
-								${p.key} = <c:forEach var="v" items="${p.value}">${v}</c:forEach>
-							</li>
-						</c:forEach>																		
-					</ul>
-				</li> 
-			</ul>
-		</div>
-		 --%>
 	</bc:breadcrumbs>
 </div>
