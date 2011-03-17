@@ -77,9 +77,6 @@
 			</c:url>
 			<li>
 										
-			<s:set var='ttt' value='%{c.name == "Home" : "" : "action_result"'></s:set>				
-			
-
 			<div>
 				<span>Crumb #${crumbsSize - s.index}</span>	
 				<span style="text-align: right; float:right;">(time stamp: <fmt:formatDate value="${c.timestamp}" type="both" dateStyle="medium"/>)</span>
