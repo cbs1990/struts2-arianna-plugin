@@ -13,17 +13,15 @@
 <s:set var='trail' value="#session['org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor:CRUMBS']" />
 
 	<s:form id='config' action="control-reconfigure">
-		<s:push value="trail">
-			<s:textfield name='breadCrumbTrail.maxCrumbs' label="Max crumbs" value="%{maxCrumbs}" maxlength="3" size="3"/>
-			<s:radio name='breadCrumbTrail.rewindMode' 
-				list='{"NEVER", "AUTO"}'			
-				label="Rewind mode" value="%{rewindMode}"/>
-				
-			<s:select name="selectedComparator" value="#control.selectedComparator"
-				label="Crumb comparator" 
-				list="#control.allComparators" 
-				listKey="key" listValue="key" />
-		</s:push>
+		<s:textfield name='breadCrumbTrail.maxCrumbs' label="Max crumbs" value="%{#trail.maxCrumbs}" maxlength="3" size="3"/>
+		<s:radio name='breadCrumbTrail.rewindMode' 
+			list='{"NEVER", "AUTO"}'			
+			label="Rewind mode" value="%{#trail.rewindMode}"/>
+			
+		<s:select name="selectedComparator" value="%{#control.selectedComparator}"
+			label="Crumb comparator" 
+			list="#control.allComparators" 
+			listKey="key" listValue="key" />
 <%-- 		
 		<tr>
 			<td>clear trail</td>
@@ -36,8 +34,9 @@
 		<tr>
 			<td colspan="2"><hr/></td>
 		</tr>										
-		<sj:submit value='reconfigure'/>			
 	</s:form>
+	<sj:submit value='reconfigure' formIds="config"/>			
+	<sj:submit value='clear trail' formIds="config"/>			
 	
 	<s:a href="control-clearTrail.do">clear trail</s:a>
 	
