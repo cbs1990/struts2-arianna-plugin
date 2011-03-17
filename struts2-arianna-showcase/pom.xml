@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.softwareforge</groupId>
-	<artifactId>struts2-breadcrumb-test</artifactId>
+	<artifactId>struts2-arianna-showcase</artifactId>
 	<version>0.5-SNAPSHOT</version>
 	<packaging>war</packaging>
 
@@ -13,6 +13,25 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
 	</properties>
+	
+	<developers>
+		<developer>
+			<id>gtosto</id>
+			<name>Giovanni Tosto</name>
+			<timezone>+1</timezone>
+			<email>giovanni.tosto@gmail.com</email>
+			<roles>
+				<role>lead</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<scm>
+		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-showcase</url>
+		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-showcase</connection>
+		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-showcase</developerConnection>
+	</scm>
 
 	<build>
 		<resources>
@@ -20,27 +39,6 @@
 				<directory>src/main/java</directory>
 			</resource>
 		</resources>
-		<plugins>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.maven.ide.eclipse</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
-				<version>0.9.9-SNAPSHOT</version>
-				<configuration>
-					<mappingId>customizable</mappingId>
-					<configurators>
-					</configurators>
-					<mojoExecutions>
-						<mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources</mojoExecution>
-						<mojoExecution runOnIncremental="false">org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile</mojoExecution>
-						<mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources</mojoExecution>
-					</mojoExecutions>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
@@ -82,4 +80,33 @@
 			<version>1.1.2</version>
 		</dependency>
 	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>m2eclipse</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>2.1.1</version>
+					</plugin>
+					<plugin>
+						<groupId>org.maven.ide.eclipse</groupId>
+						<artifactId>lifecycle-mapping</artifactId>
+						<version>0.9.9-SNAPSHOT</version>
+						<configuration>
+							<mappingId>customizable</mappingId>
+							<configurators>
+							</configurators>
+							<mojoExecutions>
+								<mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources</mojoExecution>
+								<mojoExecution runOnIncremental="false">org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile</mojoExecution>
+								<mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources</mojoExecution>
+							</mojoExecutions>
+						</configuration>
+					</plugin>
+				</plugins>			
+			</build>
+		</profile>
+	</profiles>
 </project>
