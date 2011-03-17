@@ -60,7 +60,7 @@
 		<dependency>
 			<groupId>org.softwareforge</groupId>
 			<artifactId>struts2-arianna-plugin</artifactId>
-			<version>0.4</version>
+			<version>0.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jgeppert.struts2.jquery</groupId>
@@ -82,7 +82,7 @@
 	
 	<profiles>
 		<profile>
-			<id>m2eclipse</id>
+			<id>gundam</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -106,6 +106,14 @@
 					</plugin>
 				</plugins>			
 			</build>
+			
+  			<distributionManagement>
+  				<repository>
+  					<id>gundam</id>
+  					<url>file:///E:\repos\m2-gundam</url>
+  				</repository>
+  			</distributionManagement>
+			
 		</profile>
 	</profiles>
 </project>
