@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.softwareforge</groupId>
 	<artifactId>struts2-arianna-showcase</artifactId>
-	<version>0.5-SNAPSHOT</version>
+	<version>0.4-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>org.softwareforge</groupId>
 			<artifactId>struts2-arianna-plugin</artifactId>
-			<version>${project.version}</version>
+			<version>0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jgeppert.struts2.jquery</groupId>
