@@ -82,7 +82,7 @@
 	
 	<profiles>
 		<profile>
-			<id>gundam</id>
+			<id>eclipse</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -105,15 +105,26 @@
 						</configuration>
 					</plugin>
 				</plugins>			
-			</build>
-			
+			</build>			
+		</profile>
+  		<profile>
+  			<id>gundam</id>
+  			<repositories>
+				<repository>
+					<id>gundam</id>
+					<name>Gundam local release</name>
+					<url>file:///E:\repos\m2-gundam</url>
+					<layout>default</layout>
+				</repository>
+  			</repositories>
+  			
   			<distributionManagement>
   				<repository>
   					<id>gundam</id>
   					<url>file:///E:\repos\m2-gundam</url>
   				</repository>
   			</distributionManagement>
-			
-		</profile>
+  		</profile>
+		
 	</profiles>
 </project>
