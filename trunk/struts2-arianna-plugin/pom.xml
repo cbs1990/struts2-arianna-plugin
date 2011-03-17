@@ -109,5 +109,16 @@
 		</dependency>
 		
 	</dependencies>
-  	
+
+  	<profiles>
+  		<profile>
+  			<id>gundam</id>
+  			<distributionManagement>
+  				<repository>
+  					<id>gundam</id>
+  					<url>file:///E:\repos\m2-gundam</url>
+  				</repository>
+  			</distributionManagement>
+  		</profile>
+  	</profiles>
 </project>
