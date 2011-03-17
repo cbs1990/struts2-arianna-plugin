@@ -33,10 +33,10 @@
 --%>		
 		<tr>
 			<td colspan="2"><hr/></td>
-		</tr>										
+		</tr>
+		<sj:submit value='reconfigure' />			
+			<span style='float:right; padding: 2px 2px 2px 2px;'>
+				<s:a href="control-clearTrail.do">clear trail</s:a>
+			</span>
 	</s:form>
-	<sj:submit value='reconfigure' formIds="config"/>			
-	<sj:submit value='clear trail' formIds="config"/>			
-	
-	<s:a href="control-clearTrail.do">clear trail</s:a>
 	
