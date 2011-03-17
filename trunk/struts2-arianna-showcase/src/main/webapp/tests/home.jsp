@@ -26,26 +26,24 @@
 	<script src="http://yandex.st/highlightjs/5.16/highlight.min.js"></script>
 	<link rel="stylesheet" href="http://yandex.st/highlightjs/5.16/styles/school_book.min.css">	
 
+<!-- 
 	<script>
 	  hljs.tabReplace = '    ';
 	  hljs.initHighlightingOnLoad();
 	</script>
-
+ -->
 	
 	<link rel="stylesheet" type="text/css" href="/breadcrumb/res/css/site.css"/>
 	
 		
 	<sj:head debug="false" jqueryui="true" jquerytheme="start" loadAtOnce='true'/>
 		
-	<!-- include the Tools 
-	-->
+	<!-- include the Tools -->
 	<script src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
 	
 	<script type="text/javascript" >
-		$.subscribe('/success/effect', function(event,element) {
-			
+		$.subscribe('/success/effect', function(event,element) {			
 			$(element).effect("highlight", {}, 500);
-//			alert("Hello " + element.id);
 		});
 	</script>
 	
@@ -69,7 +67,6 @@
 	</script>
 	 
 	<style>
-		/* tooltip styling. by default the element to be styled is .tooltip  */
 		.tooltip {
 			display:none;
 			background-color: red;
@@ -95,6 +92,10 @@
 			font-size: 8pt;
 		}
 		
+		#controls {
+			font-size: 8pt;
+		}
+		
 		#arianna2 {
 			padding-top: 0.7em;
 			padding-bottom: 0.7em;
@@ -107,7 +108,7 @@
 <body>
 
 <div id="header">	
-	<h1>Struts<sup>2</sup>-arianna-plugin test cases</h1>
+	<h1>Struts<sup>2</sup>-arianna-plugin test cases</h1>	
 	<div id='arianna2'> 									
 		<sj:div href="arianna.jsp" onSuccessTopics="/success/effect" listenTopics="/arianna">arianna contents goes here</sj:div>
 	</div>	
@@ -143,8 +144,7 @@
 								Here you can invoke the same action with different parameters values.<br/> 
 							</p>  
 							<s:form action="pAction" theme='xhtml'>
-								with p =
-								<s:select name='p' list="{'pippo','pluto','paperino','topolino','minnie'}" label="p"/>
+								<s:select name='p' list="{'pippo','pluto','paperino','topolino','minnie'}" label="p parameter"/>
 								<sj:submit value="execute" onSuccessTopics="/arianna" targets="action_result"/>
 							</s:form>
 							<p>
@@ -189,6 +189,7 @@
 						
 						<h3><a href='#'>Breadcrumb's' name as OGNL expression</a></h3>
 						<div class='case'>
+							<p>
 							<p>
 								clicking <i>execute</i> invokes an action annotated with
 								<pre class='code'><code class='java'>@Breadcrumb("%{name}")</code></pre>
@@ -281,20 +282,20 @@
 							reacts.
 						</p>
 					</sj:div>
-					<hr/>
-	
 </div>
 
 <!-- === Column 3 (right)======================================================================================-->
 <div id="col3">
-	<div id='controls'>
+	<div id='controls' class='ui-widget ui-corner-all'>
+<%--		<h4 class='ui-state-default' style='margin:0 0 0 0; padding:0.3em 0.3em 0.3em 0.3em'><a>Breadcrumb trail configuration</a></h4>  --%>
+		<h4 class='ui-widget-header' style='margin-top: 1px; margin-bottom: 1px;'>Breadcrumb trail configuration</h4>
 		<div class='ui-widget-content'>					 				
-			<h4 class='ui-state-default'><a>Breadcrumb trail configuration</a></h4>
 			<c:import url="controls.jsp" />
 		</div>
 	</div>				
 </div>
 <div id="footer">
-</div>	
+	see the <a href='http://code.google.com/p/struts2-arianna-plugin/'><span>struts<sup>2</sup> arianna plugin</span></a> project hosted at google code for more info
+</div>
 </body>
 </html>

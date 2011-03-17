@@ -25,7 +25,6 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 			</plugin>
-		<!-- 
 			<plugin>
 				<groupId>org.maven.ide.eclipse</groupId>
 				<artifactId>lifecycle-mapping</artifactId>
@@ -41,7 +40,6 @@
 					</mojoExecutions>
 				</configuration>
 			</plugin>
-		 -->
 		</plugins>
 	</build>
 	<dependencies>

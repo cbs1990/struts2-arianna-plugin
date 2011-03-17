@@ -1,8 +1,5 @@
 #header
 {
-	/* height: 50px; 
-	background-color: #666;
-	*/
 	margin-bottom: 10px;
 }
 
@@ -39,6 +36,4 @@
 #footer
 {
 	clear: both;
-	height: 50px;
-	background-color: #666;
 }

@@ -30,38 +30,29 @@
 		});
 	});
 </script>
-
-<script>
-//	  hljs.tabReplace = '  ';
-//	  hljs.initHighlightingOnLoad();
-</script>
  
 <script>hljs.highlightBlock(document.getElementById('source'), '    ', false);</script>
  
 
-<hr/>									
-<h2>Action result</h2>					
 <div>
 	<s:actionmessage />
 	
 	<s:set var='invocation' value="actionInvocation" />
 	<s:set var='proxy' value="actionInvocation.proxy" />
 	<div>
-		you invoked the action: <span>${proxy.namespace}/${proxy.actionName}!${proxy.method}</span>
-	</div>
-	
-	<div>
+		You invoked the action
+		<h3><span>${proxy.namespace}/${proxy.actionName}!${proxy.method}</span></h3>
 		<h5 class='toggler'>
 			<span class="ui-icon ui-icon-triangle-1-e">
 			</span>
-			<a class='toggler2' href="#">action source code</a>
+			<a href="#">view action code</a>
 		</h5>
 		<pre id="source" class='source' style='display:none'>
 			<code class='java'><s:property value="source" escape="true"/></code>		
 		</pre>
 	</div>
 	
-	<h4>Trail stack</h4>
+	<h4>Current Trail Stack</h4>
 	<p>
 		Here you can see the details of the current bread crumb trail.
 		(last crumb is on the top of the stack)
@@ -85,22 +76,24 @@
 				</c:forEach>
 			</c:url>
 			<li>
-											
+										
 			<s:set var='ttt' value='%{c.name == "Home" : "" : "action_result"'></s:set>				
 			
 
-<div>	
-crumb #${crumbsSize - s.index}<span style="text-align: right; float:right;">(time stamp: <fmt:formatDate value="${c.timestamp}" type="both" dateStyle="medium"/>)</span>
-</div>
-<pre style="background: none;">
+			<div>
+				<span>Crumb #${crumbsSize - s.index}</span>	
+				<span style="text-align: right; float:right;">(time stamp: <fmt:formatDate value="${c.timestamp}" type="both" dateStyle="medium"/>)</span>
+				<br style='clear:both;'/>
+			</div>
+
+			<pre style="background: none;">
 <c:if test="${c.name == 'Home'}">crumb name  : <a href='home.do'>${c.name}</a></c:if>
-<c:if test="${c.name != 'Home'}">crumb name  : <sj:a href='%{#attr.url}' onSuccessTopics="/arianna" targets="%{ttt}" >${c.name}</sj:a></c:if>
-struts url  : ${url}
+<c:if test="${c.name != 'Home'}">crumb name  : <sj:a href='%{#attr.url}' onSuccessTopics="/arianna" targets="action_result" >${c.name}</sj:a></c:if>
 namespace   : ${c.namespace}
 action name : ${c.action}
 method      : ${c.method}
-</pre>
-				
+</pre>				
+<code style='clear:both; margin-top: 0.5em;'>struts url  : ${url}</code>
 			</li>
 		</c:forEach>
 	</ul>
