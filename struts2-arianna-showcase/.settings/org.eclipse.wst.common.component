@@ -4,9 +4,6 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/struts2-arianna-plugin/struts2-arianna-plugin">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="java-output-path" value="/struts2-breadcrumb-test/build/classes"/>
         <property name="context-root" value="breadcrumb"/>
     </wb-module>
