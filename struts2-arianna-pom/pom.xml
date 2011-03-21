@@ -9,12 +9,17 @@
 	<url>http://code.google.com/p/struts2-arianna-plugin/</url>
 	<inceptionYear>2011</inceptionYear>
 
+	<properties>
+		<struts2.version>2.2.1.1</struts2.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>		
+	</properties>
+
 	<scm>
 		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</url>
 		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</connection>
 		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</developerConnection>
 	</scm>
-
+	
 	<licenses>
 		<license>
 			<name>Apache License 2.0</name>
@@ -35,10 +40,30 @@
 		</developer>
 	</developers>
 
-	<properties>
-	</properties>
 
-	<dependencyManagement>	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.struts</groupId>
+				<artifactId>struts2-core</artifactId>
+				<version>${struts2.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.struts</groupId>
+				<artifactId>struts2-junit-plugin</artifactId>
+				<version>${struts2.version}</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>3.8.2</version>
+				<scope>test</scope>
+			</dependency>
+				
+		</dependencies>
 	</dependencyManagement>
 
   	<profiles>
