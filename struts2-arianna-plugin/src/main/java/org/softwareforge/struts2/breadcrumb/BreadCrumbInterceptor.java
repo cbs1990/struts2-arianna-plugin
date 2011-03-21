@@ -20,6 +20,7 @@ package org.softwareforge.struts2.breadcrumb;
 import java.lang.reflect.Method;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
@@ -32,6 +33,7 @@ import org.apache.commons.logging.LogFactory;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+import com.opensymphony.xwork2.interceptor.PreResultListener;
 import com.opensymphony.xwork2.util.ValueStack;
 import com.opensymphony.xwork2.util.profiling.UtilTimerStack;
 
@@ -61,15 +63,11 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	public BreadCrumbTrail getTrail() {
 		return trail;
 	}
-
-//	public void setTrail(BreadCrumbTrail trail) {
-//		this.trail = trail;
-//	}
 		
 	/**
 	 * if set to true (the default) the interceptor will catch any RuntimeException raised by its internal methods.
-	 * This is primarily intended for internal use. 
 	 * 
+	 * This is primarily intended for internal use. 
 	 */
 	private boolean	catchInternalException = true;
 	
@@ -77,36 +75,46 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception 
 	{
-		UtilTimerStack.push(TIMER_KEY);			
-		try 
-		{
-			beforeInvocation(invocation);
-		} 
-		catch (RuntimeException e) 
-		{
-			String msg = (new StringBuilder())
-					.append("Exception in BreadCrumbInterceptor.beforeInvocation : ")
-					.append(e.getMessage())
-					.toString();
-			LOG.error(msg, e);
-			if ( !catchInternalException) 
-				throw e;
-		} 
+		//UtilTimerStack.push(TIMER_KEY);
 		
-		try {
-			return invocation.invoke();			
-		} finally {
-			UtilTimerStack.pop(TIMER_KEY);			
-		}
+		/*
+		 * Register a pre-result listener
+		 */
+		invocation.addPreResultListener(new PreResultListener() {
+			
+			public void beforeResult(ActionInvocation invocation, String resultCode) {
+				try 
+				{
+					LOG.debug("processing invocation" + invocation + "(rc= " + resultCode +")");
+					beforeInvocation(invocation);
+				} 
+				catch (RuntimeException e) 
+				{
+					String msg = String.format("Exception in BreadCrumbInterceptor : ", e.getMessage());
+					LOG.error(msg, e);					
+				}				
+			}
+		});
+		
+		return invocation.invoke();
+		
+//		try 
+//		{
+//			beforeInvocation(invocation);
+//		} 
+//		catch (RuntimeException e) 
+//		{
+//			String msg = String.format("Exception in BreadCrumbInterceptor : ", e.getMessage());
+//			LOG.error(msg, e);
+//			if ( !catchInternalException) 
+//				throw e;
+//		} finally {
+//			UtilTimerStack.pop(TIMER_KEY);
+//		}
+//
+//		return code;
 	}
-	
-	private Map	getSession(ActionInvocation invocation) {
-		HttpServletRequest request = (HttpServletRequest) invocation.getInvocationContext().get("com.opensymphony.xwork2.dispatcher.HttpServletRequest");
-		HttpSession session = request.getSession(false);
-//		return session.
-		return null;
-	}
-	
+		
 	@SuppressWarnings("unchecked")
 	protected BreadCrumbTrail getBreadCrumbTrail(ActionInvocation invocation) 
 	{		
@@ -275,13 +283,9 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 		c.name = name;
 		
 		// store request parameters
+//		c.params = new HashMap<String, Object>(invocation.getInvocationContext().getParameters());
 		c.params = invocation.getInvocationContext().getParameters();
 		
-//		if (true) {			
-//			Map<String, Object> parameters = new HashMap<String, Object>();
-//			parameters.putAll( invocation.getInvocationContext().getParameters() );				
-//			c.params = parameters;
-//		}
 		return c;
 	}
 	
