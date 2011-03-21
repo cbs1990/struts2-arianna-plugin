@@ -110,7 +110,7 @@ public class ActionClass {
 }}}
 
 when using the `%{ ... }` syntax the plugin will evaluate the OGNL expression against the action's value stack to get the _crumb_ name, in this case, a crumb with name _Hello_ will be added to the application's breadcrumb.
-<div>
+<div style='background-color:#FCFCCA;'>
 <h5>NOTE</h5>
 Actually the expression evaluation take place *before* the action invokation. This behavior will probably change in future releases.     
 </div>
