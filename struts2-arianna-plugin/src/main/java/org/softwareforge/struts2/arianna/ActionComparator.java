@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package org.softwareforge.struts2.breadcrumb;
+package org.softwareforge.struts2.arianna;
 
 import java.io.Serializable;
 import java.util.Comparator;
