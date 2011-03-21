@@ -13,7 +13,7 @@ To use it add the following declaration to your JSP.
 || `var` || no || the name used to reference the _crumb_ pushed into the Value Stack ||
 || `status` || no || If specified, an instanceof `IteratorStatus` will be pushed into stack upon each iteration ||
 
-This tag acts like an <s:iterator> tag iterating over the breadcrumbs trail.
+This tag acts like an `<s:iterator>` tag iterating over the breadcrumbs trail.
 At each iteration it push into the Value Stack _the crumb_ (a bean of type `Crumb`) which has the following properties:
 
 
@@ -52,8 +52,8 @@ The following code shows how to build urls using JSTL core tags.
 		
     <!-- use the tags: url and param to effectively build the url -->
     <c:url var="url" value="${surl}">
-        <!-- iterate on parameter -->             
-        <c:forEach items="${c.params}" var="p">
+        <!-- iterate on parameters -->             
+        <c:forEach var="p" items="${c.params}">
             <!-- iterate on parameter values -->             
             <c:forEach var="v" items="${p.value}">${v}
                 <c:param name="${p.key}" value="${v}"/>

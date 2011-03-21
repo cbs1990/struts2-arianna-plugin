@@ -29,6 +29,8 @@ Action1 > Action2
 *NOTE*
 When the rewind mode is NEVER you could expext that a new Crumb is ALWAYS added to the trail. This is not true. If last crumb is equals to the current one it will replace the oldest with the newest.
 Without regards the rewind mode.
+
+Even if rewind mode is NEVER but the current Crumb is equals to the last one the plugin  
 </wiki:comment>
 
 ===Crumb Comparator===
