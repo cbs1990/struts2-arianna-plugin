@@ -13,7 +13,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */   
-package org.softwareforge.struts2.breadcrumb.tag;
+package org.softwareforge.struts2.arianna.tag;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,7 @@ import javax.servlet.jsp.JspException;
 import org.apache.struts2.components.Component;
 import org.apache.struts2.components.IteratorComponent;
 import org.apache.struts2.views.jsp.ComponentTagSupport;
-import org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor;
+import org.softwareforge.struts2.arianna.BreadCrumbInterceptor;
 
 import com.opensymphony.xwork2.util.ValueStack;
 
