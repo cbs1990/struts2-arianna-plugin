@@ -10,7 +10,7 @@
     </appender>
         
     <logger name="org.softwareforge.struts2.breadcrumb">
-        <level value="INFO"/>
+        <level value="DEBUG"/>
     </logger>
     
     <logger name="org.apache.struts2">
