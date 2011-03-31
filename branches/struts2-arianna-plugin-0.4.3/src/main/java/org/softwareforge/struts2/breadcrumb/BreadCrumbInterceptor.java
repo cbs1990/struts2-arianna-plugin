@@ -32,6 +32,7 @@ import org.apache.commons.logging.LogFactory;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+import com.opensymphony.xwork2.interceptor.PreResultListener;
 import com.opensymphony.xwork2.util.ValueStack;
 import com.opensymphony.xwork2.util.profiling.UtilTimerStack;
 
@@ -46,7 +47,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 
 	private static final Log LOG = LogFactory.getLog(BreadCrumbInterceptor.class);
 
-	private static final String TIMER_KEY = "BreadCrumbInterceptor::intercept";
+	private static final String TIMER_KEY = "BreadCrumbInterceptor::beforeResult";
 	
 	public static final String CRUMB_KEY = BreadCrumbInterceptor.class.getName() + ":CRUMBS";
 
@@ -61,51 +62,55 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	public BreadCrumbTrail getTrail() {
 		return trail;
 	}
-
-//	public void setTrail(BreadCrumbTrail trail) {
-//		this.trail = trail;
-//	}
 		
 	/**
 	 * if set to true (the default) the interceptor will catch any RuntimeException raised by its internal methods.
-	 * This is primarily intended for internal use. 
+	 * This is primarily intended for debugging purpose. 
 	 * 
 	 */
 	private boolean	catchInternalException = true;
-	
-	
+		
+	public boolean isCatchInternalException() {
+		return catchInternalException;
+	}
+
+	public void setCatchInternalException(boolean catchInternalException) {
+		this.catchInternalException = catchInternalException;
+	}
+
+
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception 
 	{
-		UtilTimerStack.push(TIMER_KEY);			
-		try 
-		{
-			beforeInvocation(invocation);
-		} 
-		catch (RuntimeException e) 
-		{
-			String msg = (new StringBuilder())
-					.append("Exception in BreadCrumbInterceptor.beforeInvocation : ")
-					.append(e.getMessage())
-					.toString();
-			LOG.error(msg, e);
-			if ( !catchInternalException) 
-				throw e;
-		} 
 		
-		try {
-			return invocation.invoke();			
-		} finally {
-			UtilTimerStack.pop(TIMER_KEY);			
-		}
+		/*
+		 * Register struts2 before result listener
+		 */
+		invocation.addPreResultListener(new PreResultListener() {
+			
+			public void beforeResult(ActionInvocation invocation, String resultCode) {
+				UtilTimerStack.push(TIMER_KEY);
+				try 
+				{
+					LOG.debug("processing invocation" + invocation + "(rc= " + resultCode +")");
+					beforeInvocation(invocation);
+				} 
+				catch (RuntimeException e) 
+				{
+					String msg = String.format("%s in BreadCrumbInterceptor : %s", e.getClass().getSimpleName(),e.getMessage());
+					LOG.error(msg, e);
+					if ( !catchInternalException) 
+						throw e;
+				} finally {
+					UtilTimerStack.pop(TIMER_KEY);			
+				} 
+			}
+		});
+		
+		return invocation.invoke();
+		
 	}
 	
-	private Map	getSession(ActionInvocation invocation) {
-		HttpServletRequest request = (HttpServletRequest) invocation.getInvocationContext().get("com.opensymphony.xwork2.dispatcher.HttpServletRequest");
-		HttpSession session = request.getSession(false);
-//		return session.
-		return null;
-	}
 	
 	@SuppressWarnings("unchecked")
 	protected BreadCrumbTrail getBreadCrumbTrail(ActionInvocation invocation) 
@@ -134,19 +139,11 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 		return bcTrail;
 	}
 	
+	
 	private	void beforeInvocation(ActionInvocation invocation) 
 	{
 				
 		BreadCrumb annotation = processAnnotation(invocation);
-		
-		/*
-		 * returns crumb or null 		
-		 */		
-//		return crumb == null ? null 
-
-		/*
-		 * overrides rewind mode of this invocation if needed 
-		 */
 		
 		if ( annotation != null ) {
 			
@@ -155,12 +152,14 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 			// get the bread crumbs trail
 			BreadCrumbTrail	trail = getBreadCrumbTrail(invocation);
 
-			// set default configuration			
+			// Retrieve default configuration from trail bean			
 			RewindMode mode = trail.rewindMode;
 			int maxCrumbs = trail.maxCrumbs;
 			Comparator<Crumb> comparator = trail.comparator;
 			
-			// TODO override configuration (if needed)
+			/*
+			 * override configuration (if needed)
+			 */
 			if ( annotation.rewind() != RewindMode.DEFAULT )
 				mode = annotation.rewind();
 			
@@ -170,7 +169,9 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 			
 			// The comparator to use
 			
-			// then set initial condition the crumbs
+			/*
+			 *  then retrieve stored crumbs
+			 */
 			Stack<Crumb> crumbs = trail.getCrumbs();
 			
 			/*
@@ -179,7 +180,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 			 * the bread crumbs trail.
 			 */
 			synchronized (crumbs) {
-				LOG.debug("aquired lock on crumbs trail");
+				LOG.debug("aquired lock on crumbs " + crumbs);
 				
 				Crumb last = (crumbs.size() == 0) ? null : crumbs.lastElement();
 				
@@ -206,7 +207,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 						crumbs.push(current);
 					}
 				}
-				LOG.debug("releasing lock on crumbs trail");
+				LOG.debug("releasing lock on crumbs");
 			} // synchronized
 		}
 				
