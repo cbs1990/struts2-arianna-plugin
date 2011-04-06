@@ -1,42 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <groupId>org.softwareforge</groupId>
+        <artifactId>struts2-arianna-pom</artifactId>
+        <version>0.4.3-SNAPSHOT</version>
+        <relativePath>../struts2-arianna-pom-0.4.3-SNAPSHOT/pom.xml</relativePath>
+	</parent>
 	
-	<groupId>org.softwareforge</groupId>
 	<artifactId>struts2-arianna-plugin</artifactId>
-	<version>0.4.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
 	<name>struts2-arianna-plugin</name>
 	<description>A simple bread crumbs plugin for Struts2</description>
-	<url>http://code.google.com/p/struts2-arianna-plugin/</url>	
-	<inceptionYear>2011</inceptionYear>
-	
-	<licenses>
-		<license>
-			<name>Apache License 2.0</name>
-			<url>http://www.apache.org/licenses/</url>
-		</license>
-	</licenses>
-	
-	<developers>
-		<developer>
-			<id>gtosto</id>
-			<name>Giovanni Tosto</name>
-			<timezone>+1</timezone>
-			<email>giovanni.tosto@gmail.com</email>
-			<roles>
-				<role>lead</role>
-				<role>developer</role>
-			</roles>
-		</developer>
-	</developers>
-	
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
-		<struts2.version>2.2.1.1</struts2.version>
-		<!-- <struts2.version>2.0.14</struts2.version -->
-	</properties>
-	
+		
 	<scm>
 		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/branches/0.4.3/struts2-arianna-plugin</url>
 		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.4.3/struts2-arianna-plugin</connection>
@@ -55,14 +31,8 @@
 				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
+		
 		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
@@ -74,14 +44,6 @@
 				</configuration>
 			</plugin>
 		</plugins>		
-		<pluginManagement>
-			<plugins>
-				<plugin>
- 					<artifactId>maven-release-plugin</artifactId>
-        			<version>2.1</version>				
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 	
 	
@@ -90,15 +52,11 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
-			<version>${struts2.version}</version>
-			<optional>true</optional>
 		</dependency>
 		
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-			<optional>true</optional>
 		</dependency>
 		
 		<!--  required by struts2 ? -->
@@ -147,77 +105,4 @@
 		</dependency>
 	</dependencies>
 
-  	<profiles>
-  		<profile>
-  			<id>gundam</id>
-  			<distributionManagement>
-  				<repository>
-  					<id>gundam</id>
-  					<url>file:///E:\repos\m2-gundam</url>
-  				</repository>
-  			</distributionManagement>
-  		</profile>
-  		<profile>
-  			<id>site</id>
-  			<activation><activeByDefault>true</activeByDefault></activation>
-<build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.0-beta-3</version>
-        <configuration>
-          <reportPlugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-project-info-reports-plugin</artifactId>
-              <version>2.2</version>
-              <configuration>
-                <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-                <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-              </configuration>              
-              <reports>
-				<report>dependencies</report>
-              	<report>issue-tracking</report>
-              	<report>license</report>
-              	<report>scm</report>
-              </reports>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <version>2.7</version>
-            </plugin>
-			<plugin>
-        		<artifactId>maven-jxr-plugin</artifactId>
-      		</plugin>
-
-			<plugin>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-			</plugin>
-			                  
-            <plugin>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<configuration>
-					<aggregate>true</aggregate>
-					<targetJdk>1.5</targetJdk>
-					<rulesets>
-					<!-- 					
-						<ruleset>/rulesets/internal/all-java.xml</ruleset>
-						<ruleset>/rulesets/optimizations.xml</ruleset>
-					-->
-						<ruleset>/rulesets/braces.xml</ruleset>
-						<ruleset>/rulesets/basic.xml</ruleset>
-						<ruleset>/rulesets/unusedcode.xml</ruleset>
-						<ruleset>/rulesets/naming.xml</ruleset>
-					</rulesets>
-       			</configuration>        	
-			</plugin>
-          </reportPlugins>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  		</profile>
-  	</profiles>
 </project>

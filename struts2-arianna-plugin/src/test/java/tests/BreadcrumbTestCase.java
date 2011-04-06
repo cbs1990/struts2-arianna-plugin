@@ -12,9 +12,10 @@ import org.softwareforge.struts2.breadcrumb.BreadCrumbTrail;
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.config.ConfigurationProvider;
 
-public class BreadcrumbTestCase extends StrutsTestCase {
+public abstract class BreadcrumbTestCase extends StrutsTestCase {
     
     protected Map<String,Object> sessionMap;
+    
     
     protected BreadCrumbTrail getBreadCrumbTrail(Map sessionMap) {
 	Object object = sessionMap.get(BreadCrumbInterceptor.CRUMB_KEY);

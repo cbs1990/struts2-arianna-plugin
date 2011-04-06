@@ -113,7 +113,12 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	    UtilTimerStack.pop(TIMER_KEY);
 	}
     }
-
+    /**
+     * Retrieve BreadCrumbTrail from session.
+     * 
+     * @param invocation
+     * @return
+     */
     @SuppressWarnings("unchecked")
     protected BreadCrumbTrail getBreadCrumbTrail(ActionInvocation invocation) {
 	
@@ -141,8 +146,6 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
     }
 
     private void doIntercept(ActionInvocation invocation, BreadCrumb annotation) {
-
-	// BreadCrumb annotation = processAnnotation(invocation);
 
 	if (annotation != null) {
 
