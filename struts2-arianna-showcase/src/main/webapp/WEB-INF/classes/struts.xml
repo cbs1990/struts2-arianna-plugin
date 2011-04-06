@@ -56,7 +56,12 @@
 		</action>
 		
 		<action name="ognl-name" class="org.softwareforge.struts2.breadcrumb.showcase.actions.OgnlNameAction">
-			<result name="input">aaaa.jsp</result>
+			<result name="input">input.jsp</result>
+			<result>result.jsp</result>
+		</action>
+		
+		<action name="ognl-reverse" class="org.softwareforge.struts2.breadcrumb.showcase.actions.OgnlAfterInvocationAction">
+			<result name="input">input.jsp</result>
 			<result>result.jsp</result>
 		</action>
 		
