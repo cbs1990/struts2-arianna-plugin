@@ -8,7 +8,8 @@ import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validation;
 
 
-public class OgnlNameAction extends ShowcaseAction {
+@Validation
+public class OgnlAfterInvocationAction extends ShowcaseAction {
 
 	private String name;
 	
@@ -24,7 +25,20 @@ public class OgnlNameAction extends ShowcaseAction {
 	@BreadCrumb("%{name}")	
 	public String execute()
 	{
-		return "success";
+		// do some funny work
+		reverseName();
+		
+		return SUCCESS;
 	}
 	
+	private void reverseName() {
+		char[] src = name.toCharArray();
+		char[] dest = new char[src.length];
+		
+		for (int i = 1; i <= src.length; i++) {
+			dest[src.length - i] = src[i-1];
+		}
+		
+		name = new String(dest);  
+	}
 }

@@ -9,6 +9,14 @@
         </layout>
     </appender>
         
+    <appender name="PROFILE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%5p %m%n"/>
+        </layout>
+    </appender>
+
+        
     <logger name="org.softwareforge.struts2.breadcrumb">
         <level value="DEBUG"/>
     </logger>
@@ -18,12 +26,15 @@
     </logger>
     
 	<logger name="com.opensymphony.xwork2.ognl.OgnlValueStack">
-		<!-- 
-			set to ERROR to avoid logging message of form [OgnlValueStack] Could not find property [xxx]
-		-->
+		<!-- set to ERROR to avoid logging message of form [OgnlValueStack] Could not find property [xxx] -->
         <level value="ERROR"/>
    	</logger>
-   	    
+   	
+	<logger name="com.opensymphony.xwork2.util.profiling.UtilTimerStack" additivity='false'>
+		<level value="INFO"/>
+		<appender-ref ref="PROFILE" /> 
+	</logger>
+	
     <root>
         <level value="INFO"/>
         <appender-ref ref="CONSOLE"/>
