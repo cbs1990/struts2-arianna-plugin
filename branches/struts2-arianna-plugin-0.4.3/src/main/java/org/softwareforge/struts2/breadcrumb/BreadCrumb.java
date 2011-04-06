@@ -48,6 +48,8 @@ public @interface BreadCrumb
 
 	public Class<? extends Comparator>		comparator() default NULL.class;
 	
+	public	boolean		afterInvocation() default false;
+	
 //	public String		comparator() default "";
 	
 	
