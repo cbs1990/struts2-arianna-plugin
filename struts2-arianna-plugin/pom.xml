@@ -38,9 +38,9 @@
 	</properties>
 	
 	<scm>
-		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-plugin-0.4.3</url>
-		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-plugin-0.4.3</connection>
-		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-plugin-0.4.3</developerConnection>
+		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/branches/0.4.3/struts2-arianna-plugin</url>
+		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.4.3/struts2-arianna-plugin</connection>
+		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.4.3/struts2-arianna-plugin</developerConnection>
 	</scm>
 	
 	<build>
