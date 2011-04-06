@@ -17,29 +17,28 @@ public class MultiThreadTests extends BreadcrumbTestCase {
 
 	static final Log	LOG = LogFactory.getLog(MultiThreadTests.class);
 	
-	static	AtomicInteger thread_counter = new AtomicInteger();
+	static	AtomicInteger thread_counter;
 	
-	public void testThread1Safety() throws Exception {
+	public void test_ThreadSafety_1() throws Exception {
 		
-		HashMap sessionMap = new HashMap();
+		sessionMap = new HashMap();
 		
-		ActionProxy proxyA = getActionProxy("/t-thread1.do");		
-		proxyA.getInvocation().getInvocationContext().setSession(sessionMap);
-		
+		ActionProxy proxyA = getActionProxy("/t-thread1.do");				
 		ActionProxy proxyB = getActionProxy("/t-thread1.do");		
-		proxyB.getInvocation().getInvocationContext().setSession(sessionMap);
 
-		// create two thread
+		// creates two threads
 		Thread t1 = createActionThread("t1",proxyA);
 		Thread t2 = createActionThread("t2",proxyB);
 		
-		LOG.info("starting threads ...");
+		thread_counter = new AtomicInteger(2);
+		
 		// then run concurrently
+		LOG.info("starting threads ...");
 		t1.start();
 		t2.start();
 		
 		LOG.info("waiting to rejoin ...");
-		while (thread_counter.get() != 2) {
+		while (thread_counter.get() > 0) {
 			Thread.sleep(2000);
 		}
 		LOG.info("rejoined");
@@ -51,6 +50,32 @@ public class MultiThreadTests extends BreadcrumbTestCase {
 //		System.out.printf("crumbs: %s", breadCrumbTrail.getCrumbs());
 	}
 
+	public void test_ThreadSafety_2() throws Exception {
+		
+		sessionMap = new HashMap();
+		
+		ActionProxy proxyA = getActionProxy("/t-thread1.do");				
+		ActionProxy proxyB = getActionProxy("/t-thread2.do");		
+		
+		// creates two threads
+		Thread t1 = createActionThread("t1",proxyA);
+		Thread t2 = createActionThread("t2",proxyB);
+		
+		thread_counter = new AtomicInteger(2);
+		
+		// then run concurrently
+		LOG.info("starting threads ...");
+		t1.start();
+		t2.start();
+		
+		LOG.info("waiting to rejoin ...");
+		while (thread_counter.get() > 0) {
+			Thread.sleep(2000);
+		}
+		LOG.info("rejoined");
+		
+	}
+	
 	protected Thread createActionThread(String name, final ActionProxy proxy) {
 		return new Thread(name) {
 			
@@ -63,7 +88,7 @@ public class MultiThreadTests extends BreadcrumbTestCase {
 				} catch (Exception e) {
 					fail("caught exception " + e.getMessage());
 				} finally {
-					thread_counter.getAndAdd(1);					
+					thread_counter.getAndDecrement();					
 				}
 				LOG.info("... done.");
 			}

@@ -15,16 +15,19 @@ public class BasicTests extends BreadcrumbTestCase {
 		
 	public void testSimpleAction() throws Exception {
 		
-		HashMap sessionMap = new HashMap();
+		sessionMap = new HashMap();
 		
 		ActionProxy proxy = getActionProxy("/c-SimpleAction.do");
 		
-		proxy.getInvocation().getInvocationContext().setSession(sessionMap);
-		
 		String rc = proxy.execute();
 		
-		assertTrue(sessionMap.size() > 0);
 		BreadCrumbTrail breadCrumbTrail = getBreadCrumbTrail(sessionMap);
+		
+		/*
+		 * assert that a breadcrumb trail has been stored 
+		 * and that it contains at least a crumb
+		 */
+		assertNotNull("No breadcrumb trail in session", breadCrumbTrail);
 		assertTrue(breadCrumbTrail.getCrumbs().size() > 0);
 		
 		System.out.printf("crumbs: %s", breadCrumbTrail.getCrumbs());
