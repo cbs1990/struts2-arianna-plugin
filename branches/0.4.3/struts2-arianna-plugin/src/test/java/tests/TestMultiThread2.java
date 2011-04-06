@@ -13,9 +13,9 @@ import org.softwareforge.struts2.breadcrumb.BreadCrumbTrail;
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.config.ConfigurationProvider;
 
-public class MultiThreadTests extends BreadcrumbTestCase {
+public class TestMultiThread2 extends BreadcrumbTestCase {
 
-	static final Log	LOG = LogFactory.getLog(MultiThreadTests.class);
+	static final Log	LOG = LogFactory.getLog(TestMultiThread2.class);
 	
 	static	AtomicInteger thread_counter;
 	

@@ -9,8 +9,17 @@ import org.softwareforge.struts2.breadcrumb.BreadCrumbTrail;
 
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.config.ConfigurationProvider;
+import com.opensymphony.xwork2.util.profiling.UtilTimerStack;
 
-public class BasicTests extends BreadcrumbTestCase {
+public class TestSimpleAction extends BreadcrumbTestCase {
+
+    @Override
+    protected void setUp() throws Exception {
+	UtilTimerStack.setActive(true);
+	System.setProperty("xwork.profile.activate", "true");
+	// TODO Auto-generated method stub
+	super.setUp();
+    }
 
 		
 	public void testSimpleAction() throws Exception {

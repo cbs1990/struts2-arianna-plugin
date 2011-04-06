@@ -9,14 +9,12 @@
         </layout>
     </appender>
         
-    <!-- 
     <appender name="PROFILE" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
                 value="%5p %m%n"/>
         </layout>
     </appender>
-	 -->
         
     <logger name="org.softwareforge.struts2.breadcrumb">
         <level value="DEBUG"/>
@@ -31,12 +29,10 @@
         <level value="ERROR"/>
    	</logger>
    	
-   	<!-- 
-	<logger name="com.opensymphony.xwork2.util.profiling.UtilTimerStack" additivity='false'>
-		<level value="INFO"/>
+	<logger name="com.opensymphony.xwork2.util.profiling.UtilTimerStack" additivity='true'>
+		<level value="DEBUG"/>
 		<appender-ref ref="PROFILE" /> 
 	</logger>
-	 -->
 	 
     <root>
         <level value="DEBUG"/>
