@@ -18,7 +18,10 @@
 		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</connection> 
 		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</developerConnection> 
 		</scm> -->
-
+	<scm>	   
+        <developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.4.3/struts2-arianna-pom</developerConnection>        
+    </scm>
+    
 	<licenses>
 		<license>
 			<name>Apache License 2.0</name>
@@ -89,6 +92,12 @@
 					<version>2.1</version>
 				</plugin>
 
+                <!--  === version 2.1.1 fixes double web.xml ============== --> 
+	            <plugin>
+	                <artifactId>maven-war-plugin</artifactId>
+	                <version>2.1.1</version>
+	            </plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -96,12 +105,23 @@
 	<profiles>
 		<profile>
 			<id>gundam</id>
+			
+            <repositories>
+                <repository>
+                    <id>gundam</id>
+                    <name>Gundam local release</name>
+                    <url>file:///E:\repos\m2-gundam</url>
+                    <layout>default</layout>
+                </repository>
+            </repositories>
+			
 			<distributionManagement>
 				<repository>
 					<id>gundam</id>
 					<url>file:///E:\repos\m2-gundam</url>
 				</repository>
 			</distributionManagement>
+			
 		</profile>
 
 		<profile>
