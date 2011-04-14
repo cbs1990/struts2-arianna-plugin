@@ -22,7 +22,7 @@ public class OgnlAfterInvocationAction extends ShowcaseAction {
 		this.name = name;
 	}
 
-	@BreadCrumb("%{name}")	
+	@BreadCrumb(value="%{name}", afterInvocation=true)	
 	public String execute()
 	{
 		// do some funny work
