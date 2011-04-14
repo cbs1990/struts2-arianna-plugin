@@ -4,7 +4,9 @@
         <groupId>org.softwareforge</groupId>
         <artifactId>struts2-arianna-pom</artifactId>
         <version>0.4.3-SNAPSHOT</version>
+        <!-- 
         <relativePath>../struts2-arianna-pom-0.4.3-SNAPSHOT/pom.xml</relativePath>
+         -->
 	</parent>
 	
 	<artifactId>struts2-arianna-plugin</artifactId>
