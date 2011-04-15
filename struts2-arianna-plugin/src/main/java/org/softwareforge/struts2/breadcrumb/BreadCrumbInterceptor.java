@@ -48,7 +48,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
     private static final Log LOG = LogFactory
 	    .getLog(BreadCrumbInterceptor.class);
 
-    private static final String TIMER_KEY = "BreadCrumbInterceptor::beforeResult";
+    private static final String TIMER_KEY = "BreadCrumbInterceptor: ";
 
     public static final String CRUMB_KEY = BreadCrumbInterceptor.class
 	    .getName() + ":CRUMBS";
@@ -83,7 +83,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
     @Override
     public String intercept(ActionInvocation invocation) throws Exception {
 	
-	UtilTimerStack.push(TIMER_KEY);
+//	UtilTimerStack.push(TIMER_KEY);
 	final BreadCrumb annotation = processAnnotation(invocation);
 
 	if (annotation != null) {
@@ -110,7 +110,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	try {
 	    return invocation.invoke();
 	} finally {
-	    UtilTimerStack.pop(TIMER_KEY);
+//	    UtilTimerStack.pop(TIMER_KEY);
 	}
     }
     /**
@@ -146,6 +146,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
     }
 
     private void doIntercept(ActionInvocation invocation, BreadCrumb annotation) {
+	UtilTimerStack.push(TIMER_KEY + "doIntercept");
 
 	if (annotation != null) {
 
@@ -180,7 +181,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	    Stack<Crumb> crumbs = trail.getCrumbs();
 
 	    synchronized (crumbs) {
-		LOG.debug("aquired lock on crumbs " + crumbs);
+		LOG.trace("aquired lock on crumbs " + crumbs);
 
 		Crumb last = (crumbs.size() == 0) ? null : crumbs.lastElement();
 
@@ -205,10 +206,10 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 			crumbs.push(current);
 		    }
 		}
-		LOG.debug("releasing lock on crumbs");
+		LOG.trace("releasing lock on crumbs");
 	    } // synchronized
 	}
-
+	UtilTimerStack.pop(TIMER_KEY + "doIntercept");
     }
 
     private Comparator<Crumb> createComparator(Class clazz) {
@@ -226,6 +227,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private static BreadCrumb processAnnotation(ActionInvocation invocation) {
+	UtilTimerStack.push(TIMER_KEY + "processAnnotation");
 
 	Class aclass = invocation.getAction().getClass();
 
@@ -249,6 +251,8 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	if (crumb == null) {
 	    crumb = (BreadCrumb) aclass.getAnnotation(BreadCrumb.class);
 	}
+	
+	UtilTimerStack.pop(TIMER_KEY + "processAnnotation");
 
 	return crumb;
     }
