@@ -36,15 +36,15 @@ public class BreadCrumbTrail {
 	 */
 	int	maxCrumbs;
 
-	/**
-	 * the rewind mode the trail will use if not specified otherwise 
-	 */
-	RewindMode	rewindMode;
-
-	/**
-	 * The comparator the trail will use if not specified otherwise.
-	 */
-	Comparator<Crumb>	comparator;
+//	/**
+//	 * the rewind mode the trail will use if not specified otherwise 
+//	 */
+//	RewindMode	rewindMode;
+//
+//	/**
+//	 * The comparator the trail will use if not specified otherwise.
+//	 */
+//	Comparator<Crumb>	comparator;
 	
 	/**
 	 * the actual crumbs kept by the trail.
@@ -65,10 +65,10 @@ public class BreadCrumbTrail {
 		}		
 	}
 
-	public	int	indexOf(Crumb crumb)
-	{
-		return indexOf(crumb, comparator);
-	}
+//	public	int	indexOf(Crumb crumb)
+//	{
+//		return indexOf(crumb, comparator);
+//	}
 
 	/**
 	 * Find the index of the first crumb that is equals to the given crumb: <var>crumb</var>.
@@ -91,9 +91,9 @@ public class BreadCrumbTrail {
 		return -1;
 	}
 	
-	public int lastIndexOf(Crumb crumb) {
-		return lastIndexOf(crumb, comparator);
-	}
+//	public int lastIndexOf(Crumb crumb) {
+//		return lastIndexOf(crumb, comparator);
+//	}
 	
 	public int lastIndexOf(Crumb crumb, Comparator<Crumb> comparator)
 	{
@@ -119,21 +119,7 @@ public class BreadCrumbTrail {
 	public void setMaxCrumbs(int maxCrumbs) {
 		this.maxCrumbs = maxCrumbs;
 	}
-	
-	public void setRewindMode(RewindMode mode) 
-	{
-		if ( mode == RewindMode.DEFAULT ) {
-			String msg = "rewindMode DEFAULT can not be used as a the default mode for the BreadCrumbInterceptor. Use NEVER or AUTO instead";
-			throw new IllegalArgumentException(msg);
-		}
 		
-		this.rewindMode = mode;
-	}
-	
-	public void setComparator(Comparator<Crumb> comparator) {
-		this.comparator = comparator;
-	}
-	
 	// properties getters
 	///////////////////////////////////////////
 	
@@ -145,13 +131,6 @@ public class BreadCrumbTrail {
 		return maxCrumbs;
 	}
 	
-	public RewindMode getRewindMode() {
-		return rewindMode;
-	}
-		
-	public Comparator<Crumb> getComparator() {		
-		return comparator;
-	}
 
 	public	Stack<Crumb>	getCrumbs() {
 		if ( crumbs == null) {

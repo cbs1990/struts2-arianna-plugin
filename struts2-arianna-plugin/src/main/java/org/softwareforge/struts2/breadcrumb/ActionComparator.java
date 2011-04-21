@@ -20,33 +20,35 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
- * A crumb comparator that check for equality of namespace, action and method fields.
+ * A crumb comparator that check for equality of namespace, action and method
+ * fields.
  * 
- *	@author Giovanni Tosto
- *	@version $Id$
+ * This comparator does not check for crumb name equality, use NameComparator for that.
+ * 
+ * @author Giovanni Tosto
+ * @version $Id$
  */
-public class ActionComparator implements Comparator<Crumb>, Serializable
-{
-	private static final long serialVersionUID = 1L;
+public class ActionComparator implements Comparator<Crumb>, Serializable {
+    private static final long serialVersionUID = 1L;
 
-	public int compare(Crumb c1, Crumb c2) {
-		if (c1 == c2 )
-			return 0;
-		if ( c1 == null && c2 != null)
-			return +1;
-		if ( c1 != null && c2 == null)
-			return -1;
-		
-//		if (c1 == null || c2 == null)
-//			throw new IllegalArgumentException("both crumbs must be not null");
-		
-		String h1 = hash(c1);
-		String h2 = hash(c2);
-		
-		return h1.compareTo(h2); 
-	}
+    public int compare(Crumb c1, Crumb c2) {
+	if (c1 == c2)
+	    return 0;
+	if (c1 == null && c2 != null)
+	    return +1;
+	if (c1 != null && c2 == null)
+	    return -1;
 
-	final String hash(Crumb c) {
-		return c.namespace + "/" + c.action + "!" + c.method; 
-	}
+	// if (c1 == null || c2 == null)
+	// throw new IllegalArgumentException("both crumbs must be not null");
+
+	String h1 = hash(c1);
+	String h2 = hash(c2);
+
+	return h1.compareTo(h2);
+    }
+
+    final String hash(Crumb c) {
+	return c.namespace + "/" + c.action + "!" + c.method;
+    }
 }
