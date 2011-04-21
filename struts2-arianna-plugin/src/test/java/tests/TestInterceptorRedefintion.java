@@ -2,6 +2,7 @@ package tests;
 
 import java.util.HashMap;
 
+import org.apache.log4j.MDC;
 import org.softwareforge.struts2.breadcrumb.BreadCrumbTrail;
 
 import com.opensymphony.xwork2.ActionProxy;
@@ -9,6 +10,7 @@ import com.opensymphony.xwork2.ActionProxy;
 public class TestInterceptorRedefintion extends BreadcrumbTestCase {
 
     public void testSimpleAction() throws Exception {
+	MDC.put("TEST", "testSimpleAction");
 	sessionMap = new HashMap();
 		
 	ActionProxy ap1 = getActionProxy("/R/inspect1.do");		
@@ -19,6 +21,7 @@ public class TestInterceptorRedefintion extends BreadcrumbTestCase {
     }
 
     public void testActionRedefinition() throws Exception {
+	MDC.put("TEST", "testActionRedefinition");
 	sessionMap = new HashMap();
 		
 	ActionProxy ap1 = getActionProxy("/R/inspect1.do");		

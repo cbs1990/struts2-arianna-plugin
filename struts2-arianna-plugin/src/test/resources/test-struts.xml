@@ -58,7 +58,10 @@
         </interceptors>
 
         <default-interceptor-ref name="testStack" />
-
+ <!-- 
+        <action name="inspect0" class='actions.InspectingAction'>
+        </action>
+ -->        
         <action name="inspect1" class='actions.InspectingAction'>
             <interceptor-ref name="breadCrumbs">
                 <param name="trail.rewindMode">AUTO</param>
@@ -67,10 +70,11 @@
         
         <action name="inspect2" class='actions.InspectingAction'>
             <interceptor-ref name="breadCrumbs">
-                <param name="trail.rewindMode">NEVER</param>
+                <param name="trail.rewindMode">NEVER</param>            
             </interceptor-ref>
         </action>
-                
+              
+         
     </package>
 	
 	

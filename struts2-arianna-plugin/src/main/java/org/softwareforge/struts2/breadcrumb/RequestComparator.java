@@ -28,7 +28,7 @@ import java.util.Comparator;
  */
 public class RequestComparator extends ActionComparator
 {
-	private static final long serialVersionUID = 1L;
+    	private static final long serialVersionUID = 1L;
 
 	public int compare(Crumb c1, Crumb c2) {
 		int same = super.compare(c1, c2);

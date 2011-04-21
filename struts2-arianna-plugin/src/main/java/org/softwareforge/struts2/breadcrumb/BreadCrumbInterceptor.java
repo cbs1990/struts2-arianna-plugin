@@ -26,9 +26,11 @@ import java.util.Stack;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.softwareforge.struts2.arianna.AriannaPlugin;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionProxy;
+import com.opensymphony.xwork2.inject.Inject;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.opensymphony.xwork2.interceptor.PreResultListener;
 import com.opensymphony.xwork2.util.ValueStack;
@@ -55,13 +57,35 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 
     static final Object LOCK = new Object();
 
-    /**
-     * The default breadcrumb trail
-     */
-    BreadCrumbTrail trail = new BreadCrumbTrail();
+    
+    @Override
+    public void init() {
+	LOG.debug("Initializing " + this);
+    }
 
-    public BreadCrumbTrail getTrail() {
-	return trail;
+    RewindMode	defaultMode = RewindMode.AUTO;
+    
+    Comparator<Crumb>	defaultComparator = new NameComparator();
+    
+    @Inject("plugin")
+    AriannaPlugin	plugin;
+    
+    
+//    /**
+//     * The default breadcrumb trail
+//     */
+//    BreadCrumbTrail trail = new BreadCrumbTrail();
+
+    public BCLegacy getTrail() {
+	return new BCLegacy() {	    
+	    public void setRewindMode(RewindMode mode) {
+		defaultMode = mode;
+	    }
+	    
+	    public void setComparator(Comparator<Crumb> comparator) {
+		defaultComparator = comparator;
+	    }
+	};
     }
 
     /**
@@ -88,7 +112,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 
 	if (annotation != null) {
 	    
-	    if (!annotation.afterInvocation()) {
+	    if (!annotation.afterAction()) {
 		/*
 		 * Execute logic now
 		 */
@@ -124,17 +148,17 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	
 	Map session = invocation.getInvocationContext().getSession();
 	BreadCrumbTrail bcTrail = (BreadCrumbTrail) session.get(CRUMB_KEY);
-
+	
 	/*
 	 * TODO make sure to put one breadcrumb trail only
 	 */
 	if (bcTrail == null) {
 	    synchronized (LOCK) {
 		bcTrail = new BreadCrumbTrail();
-		bcTrail.setName("$default");
-		bcTrail.setMaxCrumbs(trail.maxCrumbs);
-		bcTrail.setRewindMode(trail.rewindMode);
-		bcTrail.setComparator(trail.comparator);
+		bcTrail.setName("$arianna");
+		bcTrail.setMaxCrumbs(plugin.maxCrumbs);
+//		bcTrail.setRewindMode(trail.rewindMode);
+//		bcTrail.setComparator(trail.comparator);
 		// store trail in session
 		session.put(CRUMB_KEY, bcTrail);
 		LOG.debug("Stored new BreadCrumbTrail '" + bcTrail.name
@@ -155,19 +179,19 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	    // get the bread crumbs trail
 	    BreadCrumbTrail trail = getBreadCrumbTrail(invocation);
 
-	    // Retrieve default configuration from trail bean
-	    RewindMode mode = trail.rewindMode;
+	    // Retrieve default configuration
+	    RewindMode mode = defaultMode;
+	    Comparator<Crumb> comparator = defaultComparator;
 	    int maxCrumbs = trail.maxCrumbs;
-	    Comparator<Crumb> comparator = trail.comparator;
 
 	    /*
-	     * override behavior if required
+	     * override defaults (if required)
 	     */
 	    if (annotation.rewind() != RewindMode.DEFAULT)
 		mode = annotation.rewind();
 
 	    if (annotation.comparator() != BreadCrumb.NULL.class) {
-		comparator = createComparator(annotation.comparator());
+		comparator = lookupComparator(annotation.comparator());
 	    }
 
 	    /*
@@ -212,7 +236,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	UtilTimerStack.pop(TIMER_KEY + "doIntercept");
     }
 
-    private Comparator<Crumb> createComparator(Class clazz) {
+    private Comparator<Crumb> lookupComparator(Class clazz) {
 	try {
 	    Comparator instance = (Comparator) clazz.newInstance();
 	    return instance;
@@ -281,4 +305,10 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	return c;
     }
 
+    public static interface BCLegacy {
+	public void setRewindMode(RewindMode mode);
+	public void setComparator(Comparator<Crumb> comparator);
+    }
 }
+
+
