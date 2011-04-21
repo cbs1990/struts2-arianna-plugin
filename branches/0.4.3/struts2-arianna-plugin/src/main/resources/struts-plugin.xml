@@ -8,13 +8,17 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="breadcrumb" extends="struts-default" abstract="true">
+    <bean name="plugin" class="org.softwareforge.struts2.arianna.AriannaPlugin"></bean>
+    
+    <constant name="org.softwareforge.struts2.breadcrumb:maxCrumbs" value="6"></constant>
+    
+	<package name="breadcrumb" abstract="true">
 		<interceptors>
 			<interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
 				<param name="trail.maxCrumbs">6</param>
 				<param name="trail.rewindMode">AUTO</param>							
 				<param name="trail.comparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>							
 			</interceptor>
-		</interceptors>				
+		</interceptors>		
 	</package>
 </struts>

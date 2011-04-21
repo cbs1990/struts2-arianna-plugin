@@ -5,7 +5,7 @@
     <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
-                value="%6r %5p [%t] %35C{1} | %m%n"/>
+                value="%6r %5p [%t] [%-25X{TEST}] %35C{1} | %m%n"/>
         </layout>
     </appender>
         

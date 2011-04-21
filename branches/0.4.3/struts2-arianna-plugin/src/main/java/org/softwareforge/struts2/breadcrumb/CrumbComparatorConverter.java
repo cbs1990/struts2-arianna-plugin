@@ -12,7 +12,7 @@
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- */   
+ */
 package org.softwareforge.struts2.breadcrumb;
 
 import java.util.Comparator;
@@ -27,51 +27,47 @@ import com.opensymphony.xwork2.conversion.TypeConversionException;
 
 /**
  * 
- *	@author Giovanni Tosto
- *	@version $Id$
+ * @author Giovanni Tosto
+ * @version $Id: CrumbComparatorConverter.java 63 2011-03-09 19:53:13Z
+ *          giovanni.tosto $
  */
 @SuppressWarnings("rawtypes")
-public class CrumbComparatorConverter extends StrutsTypeConverter
-{
-	private final Log LOG = LogFactory.getLog(CrumbComparatorConverter.class);
-	
-	public Object convertFromString(Map context, String[] values, Class toClass) 
-	{
-		if (values == null )
-			return null;
-		
-		if ( values.length != 1 ) 
-		{
-			throw new TypeConversionException("Cannot convert non scalar value " + values);			
-		}
-				
-//		if ( !toClass.isAssignableFrom(Comparator.class) ) {
-//			throw new TypeConversionException("class " + toClass + " is not assignable to Comparator.class");			
-//		}
-		
-		try {
-			Class clazz = ObjectFactory.getObjectFactory().getClassInstance(values[0]);
-			
-			if ( !Comparator.class.isAssignableFrom(clazz) ) {
-				throw new TypeConversionException(clazz + " is not assignable to Comparator.class");
-			}
-			
-			Comparator instance = (Comparator) clazz.newInstance();
-			
-			if ( LOG.isDebugEnabled() ) {
-				String msg = String.format("{%s} Converted %s -> %s ", this, values[0], instance);
-				LOG.debug(msg);			
-			}			
-			
-			return instance;
-		} catch (Exception e) {
-			throw new TypeConversionException(e.getMessage(),e);
-		}		
+public class CrumbComparatorConverter extends StrutsTypeConverter {
+    private final Log LOG = LogFactory.getLog(CrumbComparatorConverter.class);
+
+    public Object convertFromString(Map context, String[] values, Class toClass) {
+	if (values == null)
+	    return null;
+
+	if (values.length != 1) {
+	    throw new TypeConversionException(
+		    "Cannot convert non scalar value " + values);
 	}
 
-	
-	public String convertToString(Map context, Object o) 
-	{
-		return o == null ? null : o.getClass().getName();
+	try {
+	    Class clazz = ObjectFactory.getObjectFactory().getClassInstance(
+		    values[0]);
+
+	    if (!Comparator.class.isAssignableFrom(clazz)) {
+		throw new TypeConversionException(clazz
+			+ " is not assignable to Comparator.class");
+	    }
+
+	    Comparator instance = (Comparator) clazz.newInstance();
+
+	    if (LOG.isDebugEnabled()) {
+		String msg = String.format("{%s} Converted %s -> %s ", this,
+			values[0], instance);
+		LOG.debug(msg);
+	    }
+
+	    return instance;
+	} catch (Exception e) {
+	    throw new TypeConversionException(e.getMessage(), e);
 	}
+    }
+
+    public String convertToString(Map context, Object o) {
+	return o == null ? null : o.getClass().getName();
+    }
 }

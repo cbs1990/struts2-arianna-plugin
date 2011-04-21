@@ -12,7 +12,7 @@ public class ThreadJoinAction {
 		return null;
 	}
 	
-	@BreadCrumb(value="thread2", afterInvocation=true)
+	@BreadCrumb(value="thread2", afterAction=true)
 	public String thread2() throws Exception 
 	{
 		System.out.printf("\nexecuting action: %s\n", ThreadJoinAction.class.getName());
