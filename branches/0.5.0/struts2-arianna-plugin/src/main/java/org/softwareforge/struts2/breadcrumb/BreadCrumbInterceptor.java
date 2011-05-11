@@ -26,7 +26,6 @@ import java.util.Stack;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.softwareforge.struts2.arianna.AriannaPlugin;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionProxy;
@@ -63,11 +62,28 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	LOG.debug("Initializing " + this);
     }
 
-    RewindMode	defaultMode = RewindMode.AUTO;
+    RewindMode	defaultRewindMode = RewindMode.AUTO;
     
     Comparator<Crumb>	defaultComparator = new NameComparator();
     
-    @Inject("plugin")
+    public RewindMode getDefaultRewindMode() {
+        return defaultRewindMode;
+    }
+
+    public void setDefaultRewindMode(RewindMode defaultMode) {
+        this.defaultRewindMode = defaultMode;
+    }
+
+    public Comparator<Crumb> getDefaultComparator() {
+        return defaultComparator;
+    }
+
+    public void setDefaultComparator(Comparator<Crumb> comparator) {
+//	Comparator<Crumb> comparator = plugin.lookupComparatorByClass(classname);	
+        this.defaultComparator = comparator;
+    }
+
+    @Inject("arianna")
     AriannaPlugin	plugin;
     
     
@@ -76,14 +92,20 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 //     */
 //    BreadCrumbTrail trail = new BreadCrumbTrail();
 
+    @Deprecated
     public BCLegacy getTrail() {
 	return new BCLegacy() {	    
 	    public void setRewindMode(RewindMode mode) {
-		defaultMode = mode;
+		defaultRewindMode = mode;
 	    }
 	    
-	    public void setComparator(Comparator<Crumb> comparator) {
+	    public void setComparator(String classname) {
+		Comparator<Crumb> comparator = plugin.lookupComparatorByClass(classname);
 		defaultComparator = comparator;
+	    }
+
+	    public void setMaxCrumbs(int max) {
+		LOG.warn("IGNORING maxCrumbs parameter");
 	    }
 	};
     }
@@ -180,7 +202,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	    BreadCrumbTrail trail = getBreadCrumbTrail(invocation);
 
 	    // Retrieve default configuration
-	    RewindMode mode = defaultMode;
+	    RewindMode mode = defaultRewindMode;
 	    Comparator<Crumb> comparator = defaultComparator;
 	    int maxCrumbs = trail.maxCrumbs;
 
@@ -305,9 +327,14 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	return c;
     }
 
+    /** Interface to allow interceptor configuration using the legacy syntax
+     * 
+     * @author Giovanni Tosto
+     */
     public static interface BCLegacy {
 	public void setRewindMode(RewindMode mode);
-	public void setComparator(Comparator<Crumb> comparator);
+	public void setComparator(String classname);
+	public void setMaxCrumbs(int max);
     }
 }
 

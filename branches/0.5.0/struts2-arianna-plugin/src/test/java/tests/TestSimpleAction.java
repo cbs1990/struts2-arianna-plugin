@@ -42,4 +42,7 @@ public class TestSimpleAction extends BreadcrumbTestCase {
 		System.out.printf("crumbs: %s", breadCrumbTrail.getCrumbs());
 	}
 	
+	public void testConfiguration() throws Exception {
+	    
+	}
 }
