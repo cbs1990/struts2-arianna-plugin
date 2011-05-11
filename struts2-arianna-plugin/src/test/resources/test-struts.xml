@@ -12,12 +12,13 @@
 	
 	<constant name="struts.action.extension" value="do" />
 	
+    <constant name="arianna:maxCrumbs" value="4" />
+	
 	<package name="test" extends="struts-default" namespace="/">
 		<interceptors>	
 			<interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
-				<param name="trail.maxCrumbs">10</param>
-				<param name="trail.rewindMode">NEVER</param>
-				<param name="trail.comparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>
+				<param name="defaultRewindMode">NEVER</param>
+				<param name="defaultComparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>
 			</interceptor>
 			
 			<interceptor-stack name="testStack">
@@ -46,9 +47,8 @@
     <package name="redefintions" extends="struts-default" namespace="/R">
         <interceptors>  
             <interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
-                <param name="trail.maxCrumbs">10</param>
-                <param name="trail.rewindMode">NEVER</param>
-                <param name="trail.comparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>
+                <param name="defaultRewindMode">NEVER</param>
+                <param name="defaultComparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>
             </interceptor>
             
             <interceptor-stack name="testStack">
@@ -64,13 +64,13 @@
  -->        
         <action name="inspect1" class='actions.InspectingAction'>
             <interceptor-ref name="breadCrumbs">
-                <param name="trail.rewindMode">AUTO</param>
+                <param name="defaultRewindMode">AUTO</param>
             </interceptor-ref>
         </action>
         
         <action name="inspect2" class='actions.InspectingAction'>
             <interceptor-ref name="breadCrumbs">
-                <param name="trail.rewindMode">NEVER</param>            
+                <param name="defaultRewindMode">NEVER</param>            
             </interceptor-ref>
         </action>
               
