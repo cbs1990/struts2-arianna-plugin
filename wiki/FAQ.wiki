@@ -2,9 +2,14 @@
 
 == How can I reset the bread crumb trail ? ==
 
-Just implement the SessionAware interface in your action then retrieve the BreadCrumbTrail from the session and rewind the trail to the position *-1*.
+Just implement the `SessionAware` interface in your action then retrieve the `BreadCrumbTrail` from the session and rewind the trail to the position *-1*.
 For example:
 {{{
+
+import org.apache.struts2.interceptor.SessionAware;
+import org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor;
+import org.softwareforge.struts2.breadcrumb.BreadCrumbTrail;
+
 public class RewindAction implements SessionAware {
     private Map<String, Object> session;
 
