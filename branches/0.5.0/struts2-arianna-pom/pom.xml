@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.softwareforge</groupId>
 	<artifactId>struts2-arianna-pom</artifactId>
-	<version>0.5.0</version>
+	<version>0.5.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<url>http://code.google.com/p/struts2-arianna-plugin/</url>
@@ -18,7 +18,7 @@
 		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</developerConnection> 
 		</scm> -->
 	<scm>	   
-        <developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/tags/0.5.0</developerConnection>        
+        <developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-pom</developerConnection>        
     </scm>
     
 	<licenses>
