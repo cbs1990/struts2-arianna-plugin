@@ -14,14 +14,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<!-- <scm> <url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</url> 
-		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</connection> 
-		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</developerConnection> 
-		</scm> -->
-	<scm>	   
-        <developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-pom</developerConnection>        
-    </scm>
-    
+<!-- 
+	<scm>
+        <url>http://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-pom</url>
+		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-pom</developerConnection>
+	</scm>
+ -->
 	<licenses>
 		<license>
 			<name>Apache License 2.0</name>
@@ -58,12 +56,12 @@
 				<scope>test</scope>
 			</dependency>
 
-	        <dependency>
-	            <groupId>commons-logging</groupId>
-	            <artifactId>commons-logging</artifactId>
-	            <version>1.1.1</version>
-	            <optional>true</optional>
-	        </dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>1.1.1</version>
+				<optional>true</optional>
+			</dependency>
 
 			<dependency>
 				<groupId>junit</groupId>
@@ -92,11 +90,11 @@
 					<version>2.1</version>
 				</plugin>
 
-                <!--  === version 2.1.1 fixes double web.xml ============== --> 
-	            <plugin>
-	                <artifactId>maven-war-plugin</artifactId>
-	                <version>2.1.1</version>
-	            </plugin>
+				<!-- === version 2.1.1 fixes double web.xml ============== -->
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.1.1</version>
+				</plugin>
 
 			</plugins>
 		</pluginManagement>
@@ -110,7 +108,7 @@
 					<id>gundam</id>
 					<url>file:///E:\repos\m3\gundam</url>
 				</repository>
-			</distributionManagement>			
+			</distributionManagement>
 		</profile>
 
 		<profile>
@@ -149,11 +147,7 @@
 								<plugin>
 									<artifactId>maven-jxr-plugin</artifactId>
 								</plugin>
-                                <!--                             
-								<plugin>
-									<artifactId>maven-checkstyle-plugin</artifactId>
-								</plugin>
-                                -->
+								<!-- <plugin> <artifactId>maven-checkstyle-plugin</artifactId> </plugin> -->
 								<plugin>
 									<artifactId>maven-pmd-plugin</artifactId>
 									<configuration>
