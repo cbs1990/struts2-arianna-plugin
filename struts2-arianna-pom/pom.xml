@@ -14,13 +14,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-<!-- 
 	<scm>
         <url>http://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-pom</url>
 		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-pom</developerConnection>
 	</scm>
- -->
-	<licenses>
+	
+ 	<licenses>
 		<license>
 			<name>Apache License 2.0</name>
 			<url>http://www.apache.org/licenses/</url>
