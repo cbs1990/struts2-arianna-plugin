@@ -44,9 +44,10 @@ The arianna-plugin comes with 3 ready-to-use comparators
   * *`org.softwareforge.struts2.breadcrumb.ActionComparator`* This comparator will compare the namespace, action and method properties of two crumbs.
 
 
-  * *`org.softwareforge.struts2.breadcrumb.RequestComparator`*
+  * *`org.softwareforge.struts2.breadcrumb.RequestComparator`* This comparator will compare the _action identity_ like the ActionComparator does, but besides will also check request parameter (name and values) for equalities.
 
-  * _*user defined comparators*_ if any of the built-in comparator does not meet your needs you can also provide your own custom comparator. Just implement the `java.util.Comparator<Crumb>` interface.
+==== User Defined Comparators ====
+if none of the built-in comparator meets your needs, you can also write your own custom comparator. Just implement the `java.util.Comparator<Crumb>` interface and write the desired logic.
 For example
 {{{
 public class MyComparator implements Comparator<Crumb>
