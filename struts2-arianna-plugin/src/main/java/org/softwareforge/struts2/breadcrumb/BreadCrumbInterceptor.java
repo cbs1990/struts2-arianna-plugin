@@ -105,7 +105,11 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	    }
 
 	    public void setMaxCrumbs(int max) {
-		LOG.warn("IGNORING maxCrumbs parameter");
+		LOG.warn("!!! Setting maxCrumbs via legacy parameter, maxCrumb" +
+			" is now a global parameter setting it via" +
+			" interceptors lead to issues.\n" +
+			" Yuo should use arianna:maxCrumbs instead.");
+		plugin.setMaxCrumbs("" + max);
 	    }
 	};
     }

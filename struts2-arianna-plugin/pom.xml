@@ -4,19 +4,18 @@
         <groupId>org.softwareforge</groupId>
         <artifactId>struts2-arianna-pom</artifactId>
         <version>0.5.0-SNAPSHOT</version>
-        <!-- 
-        <relativePath>../struts2-arianna-pom-0.4.3-SNAPSHOT/pom.xml</relativePath>
-         -->
+        <relativePath>../struts2-arianna-pom-0.5.0/pom.xml</relativePath>
 	</parent>
 	
 	<artifactId>struts2-arianna-plugin</artifactId>
+	
 	<packaging>jar</packaging>
 	
 	<name>struts2-arianna-plugin</name>
 	<description>A simple bread crumbs plugin for Struts2</description>
 		
 	<scm>
-		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-plugin</url>
+		<url>http://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-plugin</url>
 		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-plugin</connection>
 		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-plugin</developerConnection>
 	</scm>
@@ -40,6 +39,7 @@
 				<configuration>
 					<archive>
 						<manifest>
+                            <mainClass>org.softwareforge.struts2.breadcrumb.AriannaPlugin</mainClass>						
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 						</manifest>
 					</archive>
@@ -106,5 +106,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+    
 </project>

@@ -12,7 +12,7 @@
     
     <constant name="arianna:maxCrumbs" value="6"></constant>
     
-	<package name="breadcrumb" abstract="true">
+	<package name="arianna-pkg" abstract="true">
 		<interceptors>
 			<interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
 				<param name="defaultRewindMode">AUTO</param>							
