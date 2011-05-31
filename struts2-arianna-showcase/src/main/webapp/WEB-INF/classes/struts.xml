@@ -14,13 +14,13 @@
 	
 	<constant name="struts.ui.theme" value="xhtml" />
 	
+    <constant name="arianna:maxCrumbs" value="6"></constant>
  	
-	<package name="test" namespace="/tests" extends="struts-default">
+	<package name="tests" namespace="/tests" extends="struts-default">
 		<interceptors>	
 			<interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
-				<param name="trail.maxCrumbs">8</param>
-				<param name="trail.rewindMode">AUTO</param>
-				<param name="trail.comparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>
+				<param name="defaultRewindMode">AUTO</param>
+				<param name="defaultComparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>
 			</interceptor>
 			
 			<interceptor-stack name="testStack">
