@@ -27,7 +27,7 @@ public class AriannaPlugin {
     
     private static final Log LOG = LogFactory.getLog(BreadCrumbInterceptor.class);
     
-    int maxCrumbs = 0;
+    int maxCrumbs = 6;
     
     public AriannaPlugin() {
 	LOG.info("Initializing Arianna Plugin : " + this);
@@ -78,5 +78,12 @@ public class AriannaPlugin {
 	    LOG.error("Cannot create comparator of class " + className, e);
 	    return null;
 	}
+    }
+    
+    public static void main(String[] args) {
+	System.out.println("This is the Struts2 Arianna Plugin");
+	AriannaPlugin plugin = new AriannaPlugin();
+	String version = plugin.getVersion();
+	System.out.println("Version: " + version);
     }
 }
