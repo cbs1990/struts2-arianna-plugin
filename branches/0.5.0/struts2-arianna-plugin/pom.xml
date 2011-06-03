@@ -39,7 +39,6 @@
 				<configuration>
 					<archive>
 						<manifest>
-                            <mainClass>org.softwareforge.struts2.breadcrumb.AriannaPlugin</mainClass>						
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 						</manifest>
 					</archive>

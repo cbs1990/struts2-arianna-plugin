@@ -13,7 +13,24 @@
 	<constant name="struts.action.extension" value="do" />
 	
     <constant name="arianna:maxCrumbs" value="4" />
-	
+
+    <package name="advanced_tests" extends="struts-default" namespace="/AT">
+        <interceptors>
+            <interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
+                <param name="defaultRewindMode">NEVER</param>
+                <param name="defaultComparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>
+            </interceptor>
+            
+            <interceptor-stack name="testStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="breadCrumbs" />
+             </interceptor-stack>
+        </interceptors>
+                    
+        <default-interceptor-ref name="testStack" />
+                
+    </package>
+    	
 	<package name="test" extends="struts-default" namespace="/">
 		<interceptors>	
 			<interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
