@@ -1,0 +1,36 @@
+#summary Explains the @BreadCrumb annotation
+
+= Introduction =
+The Arianna Plugin use `@BreadCrumb` annotations to detect actions and/or methods that needs to be stored in a breadcrumb trail.
+
+The `@BreadCrumb` annotation can be used both at class or method level, and it can have the following attributes:
+
+|| element    || type         || required || description ||
+|| *value*    || `String`     || *yes*    || crumb name  ||
+|| comparator || `Class<? extends Comparator>` || no || comparator to use ||
+|| rewind     || `RewindMode` || no       || rewind mode to use ||
+|| afterAction|| `boolean`    || no       || true if annotation should be processed _after_ the action invocation ||
+
+To declare an action as one to track, by the plugin, you annotate the class as follows 
+{{{
+@BreadCrumb("My Crumb Name")
+public class MyAction {
+
+  public String execute() {
+    // action's code
+    ...
+  }
+}}}
+
+or you can annotate the method that struts will call (by default the execute method)
+{{{
+public class MyAction {
+
+  @BreadCrumb("My Crumb Name")
+  public String execute() {
+    // action's code
+    ...
+  }
+}}}
+
+when struts^2^ invokes MyAction a crumb with name "My Crumb Name" is created and appended the application's breadcrumb bar. 
