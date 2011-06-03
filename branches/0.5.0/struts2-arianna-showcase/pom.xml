@@ -36,6 +36,7 @@
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
+			<optional>false</optional>
 		</dependency>
 		<dependency>
 			<groupId>taglibs</groupId>
@@ -85,28 +86,6 @@
 	</dependencies>
 	
 	<profiles>
-		<profile>
-			<id>eclipse</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.maven.ide.eclipse</groupId>
-						<artifactId>lifecycle-mapping</artifactId>
-						<version>0.9.9-SNAPSHOT</version>
-						<configuration>
-							<mappingId>customizable</mappingId>
-							<configurators>
-							</configurators>
-							<mojoExecutions>
-								<mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources</mojoExecution>
-								<mojoExecution runOnIncremental="false">org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile</mojoExecution>
-								<mojoExecution runOnIncremental="true">org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources</mojoExecution>
-							</mojoExecutions>
-						</configuration>
-					</plugin>
-				</plugins>			
-			</build>			
-		</profile>
   		<profile>
   			<id>gundam</id>
   			

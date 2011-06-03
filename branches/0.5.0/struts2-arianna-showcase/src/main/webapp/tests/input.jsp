@@ -8,7 +8,9 @@
 <%@ taglib prefix="bc" uri="/struts-arianna-tags" %>
 
 <div>
-	<h1>something is gone wrong !!!</h1>
+	<h1>Something is gone wrong !!!</h1>
+	<hr/>
 	<s:actionmessage />
 	<s:actionerror />
+	<s:fielderror />
 </div>
