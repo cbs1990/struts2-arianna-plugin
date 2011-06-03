@@ -31,10 +31,7 @@
 					
 		<default-interceptor-ref name="testStack" />
 
-		<action name="start" class="org.softwareforge.struts2.breadcrumb.showcase.actions.HomeAction" method="start">
-			<result>home.jsp</result>
-		</action>
-		
+
 		<action name="home" class="org.softwareforge.struts2.breadcrumb.showcase.actions.HomeAction">
 			<result>home.jsp</result>
 		</action>

@@ -99,8 +99,11 @@
 <div id="header">	
 	<h1>Struts<sup>2</sup>-arianna-plugin test cases</h1>
 	<span>
-		version: <s:property value="@org.softwareforge.struts2.breadcrumb.Version@getVersion()"/>
-	</span>	
+	<!-- 
+	   <s:action name="home" var="h" />
+		version: <s:property value="#h.pluginInfo"/>
+	 -->
+	</span>
 	<div id='arianna2'>			
 		<sj:div href="arianna.jsp" onSuccessTopics="/success/effect" listenTopics="/arianna">arianna contents goes here</sj:div>
 	</div>	
