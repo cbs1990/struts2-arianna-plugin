@@ -8,6 +8,7 @@
     </parent>
 	
 	<artifactId>struts2-arianna-showcase</artifactId>
+  <version>0.5.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -15,9 +16,9 @@
 	</properties>
 	
 	<scm>
-		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-showcase-0.5.0</url>
-		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-showcase-0.5.0</connection>
-		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-showcase-0.5.0</developerConnection>
+		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-showcase</url>
+		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-showcase</connection>
+		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-showcase</developerConnection>
 	</scm>
 
 	<build>
