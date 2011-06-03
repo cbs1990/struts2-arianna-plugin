@@ -5,11 +5,11 @@ The Arianna Plugin use `@BreadCrumb` annotations to detect actions and/or method
 
 The `@BreadCrumb` annotation can be used both at class or method level, and it can have the following attributes:
 
-|| element    || type         || required || description ||
-|| *value*    || `String`     || *yes*    || crumb name  ||
-|| comparator || `Class<? extends Comparator>` || no || comparator to use ||
-|| rewind     || `RewindMode` || no       || rewind mode to use ||
-|| afterAction|| `boolean`    || no       || true if annotation should be processed _after_ the action invocation ||
+|| *Element*  || *Type*       || *Required* || *Description* || *Default* ||
+|| *value*    || `String`     || *yes*    || crumb name  || ||
+|| comparator || `Class<? extends Comparator>` || no || comparator to use || _interceptor default_ ||
+|| rewind     || `RewindMode` || no       || rewind mode to use || _interceptor default_ ||
+|| afterAction|| `boolean`    || no       || set to `true` if annotation should be processed _after_ the action invocation || false ||
 
 To declare an action as one to track, by the plugin, you annotate the class as follows 
 {{{
