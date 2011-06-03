@@ -36,7 +36,7 @@ Even if rewind mode is NEVER but the current Crumb is equals to the last one the
 ===Crumb Comparator===
 The plugin will (create and) use an instance of the class specified by this parameter to compare crumbs for equality.
 
-The arianna-plugin comes with 3 ready-to-use comparators
+The arianna-plugin provides 3 ready-to-use comparators
 
   * *`org.softwareforge.struts2.breadcrumb.NameComparator`* That compares crumbs only checking its names.
 
