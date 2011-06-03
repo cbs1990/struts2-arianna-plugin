@@ -33,4 +33,24 @@ public class MyAction {
   }
 }}}
 
-when struts^2^ invokes MyAction a crumb with name "My Crumb Name" is created and appended the application's breadcrumb bar. 
+when struts^2^ invokes `MyAction` a crumb with name "My Crumb Name" is created and appended the application's breadcrumb bar.
+
+If your actions are mapped to different methods of the same class they  can also be individually marked with different annotations
+{{{
+public class ActionClass {
+
+  public String notTrackedMethod() {
+    ...
+  }
+
+  @BreadCrumb("Action A")
+  public String methodA() {
+    ...
+  }
+        
+  @BreadCrumb("Action B")
+  public String methodB() {
+    ...
+  }
+}}}
+when the actions mapped to `methodA` or `methodB` are called a crumb with name "Action A" or "Action B" (respectively) will be added to the breadcrumb.
