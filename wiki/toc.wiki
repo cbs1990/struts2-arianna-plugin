@@ -1,2 +1,7 @@
 #summary table of content
-* [overview Overview]
+
+  * [overview Overview]
+
+= FAQ(s) =
+
+  * [faq Frequently Asked Questions]
