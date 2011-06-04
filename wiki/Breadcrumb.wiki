@@ -1,6 +1,5 @@
 #summary Explains the @BreadCrumb annotation
 
-= Introduction =
 The Arianna Plugin use `@BreadCrumb` annotations to detect actions and/or methods that needs to be stored in a breadcrumb trail.
 
 The `@BreadCrumb` annotation can be used both at class or method level, and it can have the following attributes:
