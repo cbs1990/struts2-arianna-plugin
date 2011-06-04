@@ -1,7 +1,9 @@
 #summary table of content
 
   * [overview Overview]
+  * [Configuration]  
+  * [TagLibrary Tag Library]
 
-=== `----` ===
+----
 
   * [FAQ Frequently Asked Questions]
