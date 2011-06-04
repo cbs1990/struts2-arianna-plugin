@@ -2,6 +2,6 @@
 
   * [overview Overview]
 
-= FAQ(s) =
+=== `----` ===
 
-  * [faq Frequently Asked Questions]
+  * [FAQ Frequently Asked Questions]
