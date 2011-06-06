@@ -1,7 +1,8 @@
-#summary table of content
+#summary Table Of Content
 
   * [overview Overview]
-  * [Configuration]  
+  * [plugin-setup Plugin Setup]
+
   * [TagLibrary Tag Library]
 
 ----
