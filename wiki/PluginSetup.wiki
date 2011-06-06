@@ -23,7 +23,7 @@ and add it to your interceptor stack, i.e.
 
 <div>
   <h3>Note</h3>
- You could have very different (strange) behaviour depending on where the `BreadCrumbInterceptor` is placed, however putting it after all standard interceptor is the best choice for almost all cases.
+  You could have very different (strange) behaviour depending on where the `BreadCrumbInterceptor` is placed, however putting it after all standard interceptor is the best choice for almost all cases.
 </div>
 
 Once the interceptor is part of your interceptor's stack, you can just annotate with `@BreadCrumb` the actions and/or methods that you want to be tracked.
