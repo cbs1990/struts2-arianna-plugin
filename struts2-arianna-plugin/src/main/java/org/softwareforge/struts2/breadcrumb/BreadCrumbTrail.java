@@ -15,6 +15,7 @@
  */   
 package org.softwareforge.struts2.breadcrumb;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.ListIterator;
 import java.util.Stack;
@@ -24,7 +25,7 @@ import java.util.Stack;
  * @author Giovanni Tosto 
  * @version $Id$
  */
-public class BreadCrumbTrail {
+public class BreadCrumbTrail implements Serializable {
 	
 	/** 
 	 * The name of this trail. (Not actually used)
