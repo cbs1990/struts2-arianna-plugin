@@ -32,7 +32,7 @@ public class MyAction {
   }
 }}}
 
-when struts^2^ invokes `MyAction` a crumb with name "My Crumb Name" is created and appended the application's breadcrumb bar.
+when struts^2^ invokes `MyAction` a crumb with name "My Crumb Name" is created and appended to the application's breadcrumb bar.
 
 If your actions are mapped to different methods of the same class they  can also be individually marked with different annotations
 {{{
@@ -53,3 +53,41 @@ public class ActionClass {
   }
 }}}
 when the actions mapped to `methodA` or `methodB` are called a crumb with name "Action A" or "Action B" (respectively) will be added to the breadcrumb.
+
+=== Dynamic crumb names ===
+
+Bread crumbs names can also be OGNL expressions, just use the `%{ ... }` syntax to denote expressions.
+{{{
+@BreadCrumb("%{crumbName}")
+public class MyAction {
+
+  public String getCrumbName() {
+    return "Hello";
+  }
+
+  public String execute() {
+    ...
+  }
+
+}}}
+the plugin will then evaluate the OGNL expression against the action's value stack to get the actual crumb name (i.e a crumb named `Hello` will be added to the application's breadcrumb).
+
+Sometimes you would give a name that is know only after the action execution, in this case setting the _afterAction_ atribute to `true` defer the expression evaluation to the end of the action execution (but before the view rendering).
+
+{{{
+@BreadCrumb(value="%{deferredName}", afterAction=true)
+public class MyAction {
+
+  private String deferredName;
+
+  public String getDeferredName() {
+    return deferredName;
+  }
+
+  public String execute() {
+    // action logic
+    ...
+    // set/update dynamic name
+    deferredName = "a name depending from the action logic"
+  }
+}}}
