@@ -1,0 +1,37 @@
+#summary explains how to install and setup the arianna plugin
+#sidebar TOC
+
+To begin to use the arianna plugin just download the plugin (available here) and put the jar into your application */WEB-INF/lib directory*.
+
+The plugin core functionalties are provided by an interceptor which needs to be added to your interceptor stack.
+
+Define the interceptor into your struts^2^ package
+{{{
+<interceptor name="breadcrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
+  <param name="defaultRewindMode">NEVER</param>
+  <param name="defaultComparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>
+</interceptor>
+}}}
+
+and add it to your interceptor stack, i.e.
+{{{
+<interceptor-stack name="myStack">
+  <interceptor-ref name="defaultStack"/>
+  <interceptor-ref name="breadCrumbs"/>
+</interceptor-stack>
+}}}
+
+<div>
+  <h3>Note</h3>
+
+ You could have very different (strange) behaviour depending on where the `BreadCrumbInterceptor` is placed, however putting it after all standard interceptor is the best choice for almost all cases.
+</div>
+
+Once the interceptor is part of your interceptor's stack, you can just annotate with `@BreadCrumb` the actions and/or methods that you want to be tracked.
+
+You can have several interceptor instance for different package each on with its own defaults, and they will be applied to all actions intercepted by that instance. However interceptor parameters are just defaults, so they can be overrided on an per-action basis using the [BreadCrumb @BreadCrumb] annotation.
+
+<div>
+  <h3>Note</h3>
+  Avoid to set more than one `BreadCrumbInterceptor` instance on a single stack as this could lead to unpredicatble behaviour.
+</div>
