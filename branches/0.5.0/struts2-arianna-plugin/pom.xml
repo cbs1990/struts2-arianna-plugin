@@ -8,7 +8,7 @@
 	</parent>
 	
 	<artifactId>struts2-arianna-plugin</artifactId>
-  <version>0.5.1b2</version>
+  <version>0.5.1b3-SNAPSHOT</version>
 	
 	<packaging>jar</packaging>
 	
@@ -16,9 +16,9 @@
 	<description>A simple bread crumbs plugin for Struts2</description>
 		
 	<scm>
-		<url>http://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-plugin-0.5.1b2</url>
-		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-plugin-0.5.1b2</connection>
-		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-plugin-0.5.1b2</developerConnection>
+		<url>http://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-plugin</url>
+		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-plugin</connection>
+		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/branches/0.5.0/struts2-arianna-plugin</developerConnection>
 	</scm>
 	
 	<build>
