@@ -1,5 +1,5 @@
 #summary explains how to install and setup the arianna plugin
-#sidebar TOC
+#sidebar toc
 
 To begin to use the arianna plugin just download the plugin (available here) and put the jar into your application */WEB-INF/lib directory*.
 
@@ -29,7 +29,7 @@ and add it to your interceptor stack, i.e.
 
 Once the interceptor is part of your interceptor's stack, you can just annotate with `@BreadCrumb` the actions and/or methods that you want to be tracked.
 
-You can have several interceptor instance for different package each on with its own defaults, and they will be applied to all actions intercepted by that instance. However interceptor parameters are just defaults, so they can be overrided on an per-action basis using the [BreadCrumb @BreadCrumb] annotation.
+You can have several interceptor instance for different package each on with its own defaults, and they will be applied to all actions intercepted by that instance. However interceptor parameters are just defaults, so they can be overrided on an per-action basis using the [Breadcrumb @BreadCrumb] annotation.
 
 <div>
   <h3>Note</h3>
