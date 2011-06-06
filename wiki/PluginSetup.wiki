@@ -23,7 +23,6 @@ and add it to your interceptor stack, i.e.
 
 <div>
   <h3>Note</h3>
-
  You could have very different (strange) behaviour depending on where the `BreadCrumbInterceptor` is placed, however putting it after all standard interceptor is the best choice for almost all cases.
 </div>
 
