@@ -35,3 +35,10 @@ You can have several interceptor instance for different package each on with its
   <h3>Note</h3>
   Avoid to set more than one `BreadCrumbInterceptor` instance on a single stack as this could lead to unpredicatble behaviour.
 </div>
+
+To declare the maximum number of bread crumbs the plugin should store you need to set a global constant in *struts.xml* file
+{{{
+<constant name="arianna:maxCrumbs" value="6"></constant>
+}}}
+
+that value is shared across all interceptors' instances.
