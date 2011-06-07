@@ -25,8 +25,8 @@ Action1 > Action2
 ==Crumb Comparator==
 As we have seen above the plugin use a given comparator to check for Crumbs equality.
 
-While you can write your own
-The arianna plugin is delivered with 3 ready-to-use comparators:
+Even if you can write your own custom comparator,
+the arianna plugin is delivered with 3 ready-to-use comparators:
 
 <dl>
   <dt>*Name Comparator*</dt>
