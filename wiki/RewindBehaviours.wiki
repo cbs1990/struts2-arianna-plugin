@@ -1,0 +1,48 @@
+#summary Explains the breadcrumb bar rewind behaviours
+
+The rewind behaviour is controlled by two parameters: the _*RewindMode*_ and the used _*CrumbComparator*_.
+
+
+==Rewind mode==
+
+The _rewind mode_ instructs the plugin on how deal _duplicated_ crumbs.
+What _duplicated_ means depends by the comparator actually used (see below).
+
+When the rewind mode is set to *NEVER* the plugin will never^(1)^ rewind the bread crumbs and it will allow the bread crumbs trail to have duplicated crumbs.
+
+When the rewind mode is set to *AUTO* duplicated crumbs are not allowed.
+If you invoke an action that would create a crumb that yields an already existing crumb, the plugin will rewind the crumbs trail to that crumb replacing the old crumb with the newest one.
+
+For example if the current bread crumb is 
+{{{
+Action1 > Action2 > Action3 > Action4
+}}} 
+and the next invoked action creates a crumb that is _equals_ (in the sense defined by the comparator) to the `Action2` then the trail will be rewound to be
+{{{
+Action1 > Action2
+}}}
+
+==Crumb Comparator==
+As we have seen above the plugin use a given comparator to check for Crumbs equality.
+
+While you can write your own
+The arianna plugin is delivered with 3 ready-to-use comparators:
+
+<dl>
+  <dt>*Name Comparator*</dt>
+  <dt>`org.softwareforge.struts2.breadcrumb.NameComparator`</dt>
+  <dd>
+  A comparator that surprisingly just check crumb's name for equality.
+  </dd>
+
+  <dt>*Action Comparator*</dt>
+  <dt>`org.softwareforge.struts2.breadcrumb.ActionComparator`</dt>
+  <dd>
+  This comparator checks the _action identity_, From its viewpoint a crumb is equals to another if they have the same namespace, action name and method name only. It does't care about crumb name.
+  </dd>
+
+  <dt>*Request Comparator*</dt>
+  <dt>`org.softwareforge.struts2.breadcrumb.RequestComparator`</dt>
+  <dd>
+  This comparator besides to check for _action identity_ (like the Action Comparator does) will also check request parameter equalities.
+  </dd>
