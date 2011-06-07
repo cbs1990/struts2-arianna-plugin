@@ -1,4 +1,5 @@
 #summary Explains the breadcrumb bar rewind behaviours
+#sidebar toc
 
 The rewind behaviour is controlled by two parameters: the _*RewindMode*_ and the used _*CrumbComparator*_.
 
@@ -46,3 +47,6 @@ the arianna plugin is delivered with 3 ready-to-use comparators:
   <dd>
   This comparator besides to check for _action identity_ (like the Action Comparator does) will also check request parameter equalities.
   </dd>
+
+=== User Defined Comparators ===
+_TBD_
