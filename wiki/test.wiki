@@ -1,0 +1,2 @@
+== Test ==
+<wiki:gadget url="http://struts2-arianna-plugin.googlecode.com/svn/wiki/test/test.gg" width="540" height="400" />
