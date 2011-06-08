@@ -1,0 +1,5 @@
+Struts2 arianna plugin
+Copyright 2011 Giovanni Tosto
+
+This product includes software developed by
+The Apache Software Foundation (http://www.apache.org/).
