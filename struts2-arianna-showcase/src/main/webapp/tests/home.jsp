@@ -97,8 +97,9 @@
 <body>
 
 <div id="header">	
-	<h1>Struts<sup>2</sup>-arianna-plugin test cases</h1>	
-	<div id='arianna2'> 									
+	<h1>Struts<sup>2</sup>-arianna-plugin test cases</h1>
+	<span></span>
+	<div id='arianna2'>			
 		<sj:div href="arianna.jsp" onSuccessTopics="/success/effect" listenTopics="/arianna">arianna contents goes here</sj:div>
 	</div>	
 </div>
