@@ -24,7 +24,7 @@ Action1 > Action2
 }}}
 
 ==Crumb Comparator==
-As we have seen above the plugin use a given comparator to check for Crumbs equality.
+As we have seen above the plugin use a given comparator to check for [Crumb]s equality.
 
 Even if you can write your own custom comparator,
 the arianna plugin is delivered with 3 ready-to-use comparators:
@@ -50,7 +50,8 @@ the arianna plugin is delivered with 3 ready-to-use comparators:
 
 === User Defined Comparators ===
 
-if none of the built-in comparator meets your needs, you can also write your own custom comparator. Just implement the `java.util.Comparator<Crumb>` interface and write the desired logic.
+If none of the built-in comparator meets your needs, you can also write your own custom comparator. Just implement the `java.util.Comparator<Crumb>` interface and write the desired logic.
+
 For example
 {{{
 public class MyComparator implements Comparator<Crumb>
