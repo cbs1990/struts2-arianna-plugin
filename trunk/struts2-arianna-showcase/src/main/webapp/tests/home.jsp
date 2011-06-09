@@ -98,7 +98,12 @@
 
 <div id="header">	
 	<h1>Struts<sup>2</sup>-arianna-plugin test cases</h1>
-	<span></span>
+	<span>
+	<!-- 
+	   <s:action name="home" var="h" />
+		version: <s:property value="#h.pluginInfo"/>
+	 -->
+	</span>
 	<div id='arianna2'>			
 		<sj:div href="arianna.jsp" onSuccessTopics="/success/effect" listenTopics="/arianna">arianna contents goes here</sj:div>
 	</div>	
@@ -178,18 +183,31 @@
 						</div>
 						
 						<h3><a href='#'>Breadcrumb's' name as OGNL expression</a></h3>
-						<div class='case'>
-							<p>
+						<div class='case'>							
 							<p>
 								clicking <i>execute</i> invokes an action annotated with
 								<pre class='code'><code class='java'>@Breadcrumb("%{name}")</code></pre>
 								as a result the typed text will be used as the bread crumb name.  
 							</p>
-							<s:form action="ognl-name">
+							<s:form id='ognl1' action="ognl-name">
 								<s:textfield name='name' label="name" required="true"></s:textfield>
-								<sj:submit value="execute" onSuccessTopics="/arianna" targets="action_result"/>
+								<sj:submit value="execute" onSuccessTopics="/arianna" targets="action_result" formIds="ognl1"/>
 							</s:form>
+							<hr/>
+                            <p>
+                                clicking <i>execute</i> invokes an action annotated with
+                                <pre class='code'><code class='java'>@BreadCrumb(value="%{name}",afterAction=true)</code></pre>
+                                as a result the %{name} expression will be evaluated <u>after</u> the action's execution, giving 
+                                it a chance to compute the expression.<br/>
+                                In this example the action just reverse the typed text.  
+                            </p>
+							<s:form id='ognl2' action="ognl-reverse">
+								<s:textfield name='name' label="name" required="true" value="hello"></s:textfield>
+								<sj:submit value="execute" onSuccessTopics="/arianna" targets="action_result" formIds="ognl2"/>
+							</s:form>
+							
 						</div>
+						
 						<h3><a href='#'>Actions overriding the default behaviour</a></h3>
 						<div class='case'>
 							<p>Whathever the breadcrumb trail configuration is, it can be overriden 

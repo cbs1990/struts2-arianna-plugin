@@ -8,7 +8,7 @@
     </parent>
 	
 	<artifactId>struts2-arianna-showcase</artifactId>
-  <version>0.5.1-SNAPSHOT</version>
+    <version>0.5.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>

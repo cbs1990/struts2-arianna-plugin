@@ -10,6 +10,7 @@ public class OgnlNameAction extends ShowcaseAction {
 
 	private String name;
 	
+	@RequiredStringValidator(message = "a name is required")
 	@RequiredFieldValidator(message="a crumb name is required !")
 	public String getName() {
 		return name;
