@@ -1,56 +1,122 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.softwareforge</groupId>
-	<artifactId>struts2-arianna-pom</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.softwareforge</groupId>
+    <artifactId>struts2-arianna-pom</artifactId>
+    <version>0.5.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-	<url>http://code.google.com/p/struts2-arianna-plugin/</url>
-	<inceptionYear>2011</inceptionYear>
+    <url>http://code.google.com/p/struts2-arianna-plugin/</url>
+    <inceptionYear>2011</inceptionYear>
 
-	<scm>
-		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</url>
-		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</connection>
-		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</developerConnection>
-	</scm>
+    <properties>
+        <struts2.version>2.2.1.1</struts2.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <scm>
+        <url>http://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</url>
+        <developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-pom</developerConnection>
+    </scm>
+    
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/</url>
+        </license>
+    </licenses>
 
-	<licenses>
-		<license>
-			<name>Apache License 2.0</name>
-			<url>http://www.apache.org/licenses/</url>
-		</license>
-	</licenses>
+    <developers>
+        <developer>
+            <id>gtosto</id>
+            <name>Giovanni Tosto</name>
+            <timezone>+1</timezone>
+            <email>giovanni.tosto@gmail.com</email>
+            <roles>
+                <role>lead</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
 
-	<developers>
-		<developer>
-			<id>gtosto</id>
-			<name>Giovanni Tosto</name>
-			<timezone>+1</timezone>
-			<email>giovanni.tosto@gmail.com</email>
-			<roles>
-				<role>lead</role>
-				<role>developer</role>
-			</roles>
-		</developer>
-	</developers>
 
-	<properties>
-	</properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-core</artifactId>
+                <version>${struts2.version}</version>
+            </dependency>
 
-	<dependencyManagement>	
-	</dependencyManagement>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1.1</version>
+            </dependency>
 
-  	<profiles>
-  		<profile>
-  			<id>gundam</id>
-  			<distributionManagement>
-  				<repository>
-  					<id>gundam</id>
-  					<url>file:///E:\repos\m2-gundam</url>
-  				</repository>
-  			</distributionManagement>
-  		</profile>
-  	</profiles>
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-junit-plugin</artifactId>
+                <version>${struts2.version}</version>
+                <scope>test</scope>
+            </dependency>
+            
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>3.8.2</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.5</source>
+                        <target>1.5</target>
+                    </configuration>
+                </plugin>
+
+                <!-- ======== Known to work well with Maven 3 ============= -->
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.1</version>
+                </plugin>
+
+                <!-- === version 2.1.1 fixes double web.xml ============== -->
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.1.1</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>gundam</id>
+            <repositories>
+                <repository>
+                    <id>gundam</id>
+                    <url>file:///E:\repos\m3\gundam</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </releases>
+                </repository>
+            </repositories>
+            <distributionManagement>
+                <repository>
+                    <id>gundam</id>
+                    <url>file:///E:\repos\m3\gundam</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 
 </project>
