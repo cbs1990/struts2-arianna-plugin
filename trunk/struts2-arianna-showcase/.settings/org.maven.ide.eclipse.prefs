@@ -1,7 +1,7 @@
-#Thu Mar 17 21:18:20 CET 2011
 activeProfiles=gundam
 eclipse.preferences.version=1
 fullBuildGoals=process-test-resources
+includeModules=false
 resolveWorkspaceProjects=true
 resourceFilterGoals=process-resources resources\:testResources
 skipCompilerPlugin=true
