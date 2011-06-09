@@ -49,4 +49,14 @@ the arianna plugin is delivered with 3 ready-to-use comparators:
   </dd>
 
 === User Defined Comparators ===
-_TBD_
+
+if none of the built-in comparator meets your needs, you can also write your own custom comparator. Just implement the `java.util.Comparator<Crumb>` interface and write the desired logic.
+For example
+{{{
+public class MyComparator implements Comparator<Crumb>
+{
+    public int compare(Crumb c1, Crumb c2) {
+      // my custom comparing logic
+    }
+}
+}}}
