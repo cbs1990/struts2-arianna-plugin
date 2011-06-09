@@ -3,8 +3,7 @@
 	<parent>
         <groupId>org.softwareforge</groupId>
         <artifactId>struts2-arianna-pom</artifactId>
-        <version>0.5.0</version>
-        <relativePath>../struts2-arianna-pom-0.5.0/pom.xml</relativePath>
+        <version>0.5.1-SNAPSHOT</version>
 	</parent>
 	
 	<artifactId>struts2-arianna-plugin</artifactId>
