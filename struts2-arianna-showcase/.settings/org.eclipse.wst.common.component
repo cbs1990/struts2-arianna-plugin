@@ -4,7 +4,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-        <property name="java-output-path" value="/struts2-breadcrumb-test/build/classes"/>
+        <property name="java-output-path" value="/struts2-arianna-showcase/build/classes"/>
         <property name="context-root" value="struts2-arianna-showcase"/>
     </wb-module>
 </project-modules>
