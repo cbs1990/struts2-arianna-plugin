@@ -1,1 +1,0 @@
-<wiki:gadget url="http://code.google.com/p/struts2-arianna-plugin/w/test/test.gg" width="540" height="400" />
