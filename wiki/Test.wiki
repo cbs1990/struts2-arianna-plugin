@@ -1,0 +1,5 @@
+#labels Restrict-View-CoreTeam
+----
+blog gadget
+<wiki:gadget url="http://google-code-feed-gadget.googlecode.com/svn/trunk/gadget.xml" up_feeds="http://arianna-plugin.blogspot.com/atom.xml"  width="800" height="180" border="0"/>
+----
