@@ -38,6 +38,7 @@ import com.opensymphony.xwork2.util.profiling.UtilTimerStack;
  * 
  * 
  * @author Giovanni Tosto
+ * @version $Id$
  */
 public class BreadCrumbInterceptor extends AbstractInterceptor {
 
