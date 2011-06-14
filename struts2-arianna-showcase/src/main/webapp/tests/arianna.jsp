@@ -14,7 +14,7 @@
 	</script>
  --%>	
 <div class='breadcrumb-trail'>
-	<span>Breadcrumb : </span> 
+	<span>Bread crumbs : </span> 
 	<bc:breadcrumbs var='c' status='s'>
 		<s:if test='not #s.first'>
 			<span class="separator">&raquo;</span>

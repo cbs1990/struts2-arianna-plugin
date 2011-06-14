@@ -86,26 +86,34 @@
 		}
 		
 		#arianna2 {
-			padding-top: 0.7em;
-			padding-bottom: 0.7em;
+			padding-top: 1px;
+			padding-bottom: 1px;
 			border-bottom: 1px solid silver;
 			border-top: 1px solid silver;
 		}
 	</style>
 	
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11437334-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	
 </head>
 <body>
 
 <div id="header">	
-	<h1>Struts<sup>2</sup>-arianna-plugin test cases</h1>
-	<span>
-	<!-- 
-	   <s:action name="home" var="h" />
-		version: <s:property value="#h.pluginInfo"/>
-	 -->
-	</span>
+	<h1>Struts<sup>2</sup>-Arianna-Plugin Show Case</h1>
+	<div style="margin-top:-1.5em; font-style: italic;">plugin version: 0.5.1</div>
+	<br/>
 	<div id='arianna2'>			
-		<sj:div href="arianna.jsp" onSuccessTopics="/success/effect" listenTopics="/arianna">arianna contents goes here</sj:div>
+		<sj:div href="arianna.jsp" onSuccessTopics="/success/effect" listenTopics="/arianna" effect="highlight">arianna contents goes here</sj:div>
 	</div>	
 </div>
 
@@ -118,7 +126,7 @@
 						<h3><a href='#'>Simple Actions</a></h3>
 						<div class='case'>
 							<p>
-								five simple actions annotated with five differents annotations like .
+								five simple actions marked with annotation like:
 								<pre class='code'><code class='java'>@BreadCrumb("Simple <i>...</i>")</code></pre>								
 							</p>
 							<ul>
@@ -140,7 +148,7 @@
 							</p>  
 							<s:form action="pAction" theme='xhtml'>
 								<s:select name='p' list="{'pippo','pluto','paperino','topolino','minnie'}" label="p parameter"/>
-								<sj:submit value="execute" onSuccessTopics="/arianna" targets="action_result"/>
+								<sj:submit value="execute" onSuccessTopics="/arianna" targets="action_result" effect="highlight"/>
 							</s:form>
 							<p>
 								If you you are using the <code>RequestComparator</code> it will compares values and recognize 
@@ -160,7 +168,8 @@
 									<li>
 										invoke 
 										<sj:a href="same-%{a}.do"
-											onSuccessTopics="/arianna" 
+											onSuccessTopics="/arianna"
+											effect="highlight" 
 											targets="action_result">
 											Action-${a}
 										</sj:a> 
@@ -174,6 +183,7 @@
 										invoke 
 										<sj:a href="same-%{b}.do"
 											onSuccessTopics="/arianna" 
+                                            effect="highlight" 
 											targets="action_result">
 											Action-${b}
 										</sj:a> 
@@ -191,7 +201,7 @@
 							</p>
 							<s:form id='ognl1' action="ognl-name">
 								<s:textfield name='name' label="name" required="true"></s:textfield>
-								<sj:submit value="execute" onSuccessTopics="/arianna" targets="action_result" formIds="ognl1"/>
+								<sj:submit value="execute" onSuccessTopics="/arianna" targets="action_result" effect="highlight" formIds="ognl1"/>
 							</s:form>
 							<hr/>
                             <p>
@@ -203,7 +213,7 @@
                             </p>
 							<s:form id='ognl2' action="ognl-reverse">
 								<s:textfield name='name' label="name" required="true" value="hello"></s:textfield>
-								<sj:submit value="execute" onSuccessTopics="/arianna" targets="action_result" formIds="ognl2"/>
+								<sj:submit value="execute" onSuccessTopics="/arianna" targets="action_result" effect="highlight"  formIds="ognl2"/>
 							</s:form>
 							
 						</div>
@@ -281,7 +291,7 @@
 						</p>
 						<p>    
 							Use the test cases availables on the left to see how the 					
-							<span>struts<sup>2</sup> arianna plugin</span> reacts to different action annotation. 
+							<a href='http://code.google.com/p/struts2-arianna-plugin/'><span>struts<sup>2</sup> arianna plugin</span></a> reacts to different action annotation. 
 						</p>
 						
 						<p>
@@ -296,7 +306,7 @@
 <div id="col3">
 	<div id='controls' class='ui-widget ui-corner-all'>
 <%--		<h4 class='ui-state-default' style='margin:0 0 0 0; padding:0.3em 0.3em 0.3em 0.3em'><a>Breadcrumb trail configuration</a></h4>  --%>
-		<h4 class='ui-widget-header' style='margin-top: 1px; margin-bottom: 1px;'>Breadcrumb trail configuration</h4>
+		<h4 class='ui-widget-header' style='margin-top: 1px; margin-bottom: 1px;'>Behaviour configuration</h4>
 		<div class='ui-widget-content'>					 				
 			<c:import url="controls.jsp" />
 		</div>

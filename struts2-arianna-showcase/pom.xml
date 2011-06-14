@@ -52,7 +52,7 @@
 		<dependency>
 			<groupId>org.softwareforge</groupId>
 			<artifactId>struts2-arianna-plugin</artifactId>
-			<version>0.5.0</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jgeppert.struts2.jquery</groupId>
