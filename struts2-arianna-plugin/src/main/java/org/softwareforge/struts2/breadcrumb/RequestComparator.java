@@ -16,9 +16,6 @@
 
 package org.softwareforge.struts2.breadcrumb;
 
-import java.io.Serializable;
-import java.util.Comparator;
-
 /**
  * A crumb comparator that behaves as an ActionComparator and besides checks for
  * equality of http request parameters (names,values) pairs.

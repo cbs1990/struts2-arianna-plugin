@@ -2,35 +2,30 @@ package tests;
 
 import java.util.HashMap;
 
-import org.apache.struts2.StrutsTestCase;
-import org.apache.struts2.config.StrutsXmlConfigurationProvider;
-import org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor;
 import org.softwareforge.struts2.breadcrumb.BreadCrumbTrail;
 
 import com.opensymphony.xwork2.ActionProxy;
-import com.opensymphony.xwork2.config.ConfigurationProvider;
 
 public class BasicTests extends BreadcrumbTestCase {
 
-		
 	public void testSimpleAction() throws Exception {
-		
+
 		sessionMap = new HashMap();
-		
+
 		ActionProxy proxy = getActionProxy("/c-SimpleAction.do");
-		
+
 		String rc = proxy.execute();
-		
+
 		BreadCrumbTrail breadCrumbTrail = getBreadCrumbTrail(sessionMap);
-		
+
 		/*
-		 * assert that a breadcrumb trail has been stored 
-		 * and that it contains at least a crumb
+		 * assert that a breadcrumb trail has been stored and that it contains
+		 * at least a crumb
 		 */
 		assertNotNull("No breadcrumb trail in session", breadCrumbTrail);
 		assertTrue(breadCrumbTrail.getCrumbs().size() > 0);
-		
+
 		System.out.printf("crumbs: %s", breadCrumbTrail.getCrumbs());
 	}
-	
+
 }

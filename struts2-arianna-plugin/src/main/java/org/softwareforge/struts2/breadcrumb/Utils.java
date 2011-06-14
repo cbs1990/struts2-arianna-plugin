@@ -52,6 +52,7 @@ public class Utils {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static boolean compareParametersMap(Map m1, Map m2) {
 		if (m1.size() != m2.size())
 			return false;
