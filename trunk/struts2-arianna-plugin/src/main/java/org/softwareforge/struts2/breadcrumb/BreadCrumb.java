@@ -12,7 +12,7 @@
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- */   
+ */
 package org.softwareforge.struts2.breadcrumb;
 
 import static java.lang.annotation.ElementType.TYPE;
@@ -26,36 +26,33 @@ import java.util.Comparator;
 
 /**
  * A java annotation used to mark actions and methods that need to be tracked.
- *   
+ * 
  * @author Giovanni Tosto
  * @version $Id$
  */
 
 @Documented
 @Retention(RUNTIME)
-@Target({TYPE,METHOD})
-public @interface BreadCrumb 
-{	
-	// Tricky class to allow default <em>NULL</em> values;
-	static final class NULL implements CrumbComparator 
-	{
-		public int compare(Crumb o1, Crumb o2) {
-			throw new UnsupportedOperationException("This comparator cannot be used in this way");
-		}		
-	};
+@Target({ TYPE, METHOD })
+public @interface BreadCrumb {
+    // Tricky class to allow default <em>NULL</em> values;
+    static final class NULL implements CrumbComparator {
+	public int compare(Crumb o1, Crumb o2) {
+	    throw new UnsupportedOperationException(
+		    "This comparator cannot be used in this way");
+	}
+    };
 
-	public String 		value();
-	
-	public RewindMode	rewind() default RewindMode.DEFAULT;
+    public String value();
 
-	public Class<? extends Comparator>		comparator() default NULL.class;
-	
-	public	boolean		afterAction() default false;
-	
-//	public String		comparator() default "";
-	
-	
-//	public String		trail()	default "main";
-	
+    public RewindMode rewind() default RewindMode.DEFAULT;
+
+    public Class<? extends Comparator> comparator() default NULL.class;
+
+    public boolean afterAction() default false;
+
+    // public String comparator() default "";
+
+    // public String trail() default "main";
+
 }
-
