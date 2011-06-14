@@ -25,6 +25,8 @@ import java.lang.annotation.Target;
 import java.util.Comparator;
 
 /**
+ * A java annotation used to mark actions and methods that need to be tracked.
+ *   
  * @author Giovanni Tosto
  * @version $Id$
  */

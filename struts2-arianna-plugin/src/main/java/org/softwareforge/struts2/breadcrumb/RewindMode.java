@@ -16,10 +16,10 @@
 package org.softwareforge.struts2.breadcrumb;
 
 /**
- * Bread crumbs trail rewind behavior
+ * Bread crumbs trail rewind enumeration.
  * 
- *	@author GiovanniTosto
- *  @version $Id$
+ * @author GiovanniTosto
+ * @version $Id$
  */
 public enum RewindMode {
 	DEFAULT,

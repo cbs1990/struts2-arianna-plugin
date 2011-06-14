@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
+ * A simple crumb comparator that just check crumbs' names.
  * 
  * @author Giovanni Tosto
  * @version $Id$
