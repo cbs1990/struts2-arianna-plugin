@@ -11,6 +11,7 @@ import java.util.Stack;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.interceptor.SessionAware;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.softwareforge.struts2.breadcrumb.ActionComparator;
 import org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor;
 import org.softwareforge.struts2.breadcrumb.BreadCrumbTrail;
@@ -24,6 +25,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.config.entities.ActionConfig;
 import com.opensymphony.xwork2.config.entities.InterceptorMapping;
 import com.opensymphony.xwork2.interceptor.Interceptor;
+import com.opensymphony.xwork2.validator.annotations.ExpressionValidator;
 
 public class Controls extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
@@ -43,6 +45,8 @@ public class Controls extends ActionSupport implements SessionAware {
     
     RewindMode	rewindMode;
              
+    Integer	maxCrumbs;
+    
     //
     public String reconfigure() {
 
@@ -50,9 +54,11 @@ public class Controls extends ActionSupport implements SessionAware {
 	if ( interceptor != null ) {
             BreadCrumbTrail breadCrumbTrail = getBreadCrumbTrail();
             LOG.info("reconfiguring trail " + breadCrumbTrail.getName());
-		
+            
+            LOG.info("maxcrumbs = " + breadCrumbTrail.getMaxCrumbs());
+            
             // update maxcrumbs
-            breadCrumbTrail.setMaxCrumbs(breadCrumbTrail.getMaxCrumbs());
+            breadCrumbTrail.setMaxCrumbs(maxCrumbs);
             
             // update default comparator
             Comparator<Crumb> comparator = getAllComparators().get(comparatorKey);            
@@ -61,24 +67,43 @@ public class Controls extends ActionSupport implements SessionAware {
 	    // update default rewindMode
 	    interceptor.setDefaultRewindMode(rewindMode);
 	    
-	    if (clear == Boolean.TRUE) {
-		breadCrumbTrail.getCrumbs().clear();
+	    if (clear == true) {
+		breadCrumbTrail.rewindAt(-1);
+		LOG.info("breadcrumb trial cleared, size: " + breadCrumbTrail.getCrumbs().size());		
 	    }
 	    
             addActionMessage("Breadcrumb has been reconfigured");
+            
+            /*
+             * Fix some some strange replication issue when running on 
+             * google GAE infrastructure.
+             */
+            session.put(BreadCrumbInterceptor.CRUMB_KEY, breadCrumbTrail);
+            
+            LOG.info("stored trail in session" + breadCrumbTrail);		            
+            
             return SUCCESS;
 	}
 	
 	return ERROR;
     }
     
+    @SkipValidation
     public String clearTrail() {
 	// rewinding at -1 is equivalent to a clear
-	getBreadCrumbTrail().rewindAt(-1);
+	BreadCrumbTrail trail = getBreadCrumbTrail();
+	trail.rewindAt(-1);
+	
+        /*
+         * Fix some some strange replication issue when running on 
+         * google GAE infrastructure.
+         */	
+        session.put(BreadCrumbInterceptor.CRUMB_KEY, trail);
+	
 	return SUCCESS;
     }
 
-    
+    @SkipValidation
     public String init() {
 	Map<String, Comparator<Crumb>> allComparators = (Map<String, Comparator<Crumb>>) session
 		.get("allComparators");
@@ -153,8 +178,7 @@ public class Controls extends ActionSupport implements SessionAware {
     public void setComparatorKey(String comparatorKey) {
         this.comparatorKey = comparatorKey;        
     }
-    
-    
+        
     public RewindMode getRewindMode() {
         return rewindMode;
     }
@@ -171,4 +195,13 @@ public class Controls extends ActionSupport implements SessionAware {
 	this.clear = clear;
     }
 
+    @ExpressionValidator(expression = "maxCrumbs > 0 and maxCrumbs < 20", message="Sorry, in this application, maxCrumbs must be between 1 and 20")
+    public Integer getMaxCrumbs() {
+        return maxCrumbs;
+    }
+
+    public void setMaxCrumbs(Integer maxCrumbs) {
+        this.maxCrumbs = maxCrumbs;
+    }
+    
 }
