@@ -71,6 +71,7 @@ public class AriannaPlugin {
 	 *         reuse / pool comparator instances. Using the struts2
 	 *         ObjectFactory could be helps.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected Comparator<Crumb> lookupComparatorByClass(Class clazz) {
 
 		try {

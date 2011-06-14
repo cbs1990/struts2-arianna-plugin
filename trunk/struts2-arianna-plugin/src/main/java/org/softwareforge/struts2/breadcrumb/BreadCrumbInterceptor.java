@@ -201,7 +201,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 				mode = annotation.rewind();
 
 			if (annotation.comparator() != BreadCrumb.NULL.class) {
-				comparator = lookupComparator(annotation.comparator());
+				comparator = plugin.lookupComparatorByClass(annotation.comparator());
 			}
 
 			/*
@@ -246,18 +246,18 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 		UtilTimerStack.pop(TIMER_KEY + "doIntercept");
 	}
 
-	private Comparator<Crumb> lookupComparator(Class clazz) {
-		try {
-			Comparator instance = (Comparator) clazz.newInstance();
-			return instance;
-		} catch (InstantiationException e) {
-			LOG.error("Cannot create comparator of class " + clazz, e);
-		} catch (IllegalAccessException e) {
-			LOG.error("Cannot create comparator of class " + clazz, e);
-		}
-		return null;
-
-	}
+//	private Comparator<Crumb> lookupComparator(Class clazz) {
+//		try {
+//			Comparator instance = (Comparator) clazz.newInstance();
+//			return instance;
+//		} catch (InstantiationException e) {
+//			LOG.error("Cannot create comparator of class " + clazz, e);
+//		} catch (IllegalAccessException e) {
+//			LOG.error("Cannot create comparator of class " + clazz, e);
+//		}
+//		return null;
+//
+//	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static BreadCrumb processAnnotation(ActionInvocation invocation) {
