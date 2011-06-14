@@ -33,23 +33,21 @@ import com.opensymphony.xwork2.util.ValueStack;
 import com.opensymphony.xwork2.util.profiling.UtilTimerStack;
 
 /**
- * The interceptor that detects if we are executing an annotated action.
+ * This is the interceptor that detects if we are executing an annotated action.
+ * 
+ * 
  * 
  * @author Giovanni Tosto
- * @version $Id: BreadCrumbInterceptor.java 153 2011-03-31 20:41:34Z
- *          giovanni.tosto $
  */
 public class BreadCrumbInterceptor extends AbstractInterceptor {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Log LOG = LogFactory
-	    .getLog(BreadCrumbInterceptor.class);
+    private static final Log LOG = LogFactory.getLog(BreadCrumbInterceptor.class);
 
     private static final String TIMER_KEY = "BreadCrumbInterceptor: ";
 
-    public static final String CRUMB_KEY = BreadCrumbInterceptor.class
-	    .getName() + ":CRUMBS";
+    public static final String CRUMB_KEY = BreadCrumbInterceptor.class.getName() + ":CRUMBS";
 
     static final Object LOCK = new Object();
 
@@ -96,10 +94,10 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 	    }
 
 	    public void setMaxCrumbs(int max) {
-		LOG.warn("!!! Setting maxCrumbs via legacy parameter, maxCrumb" +
-			" is now a global parameter setting it via" +
-			" interceptors lead to issues.\n" +
-			" Yuo should use arianna:maxCrumbs instead.");
+		LOG.warn("!!! Setting maxCrumbs via legacy parameter !!!"
+			+ " You should use arianna:maxCrumbs instead."
+			+ "\n maxCrumb is now a global parameter. Setting it at"
+			+ " interceptors level may lead to issues.");
 		plugin.setMaxCrumbs("" + max);
 	    }
 	};
@@ -140,8 +138,7 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 		 */
 		LOG.debug("registering PreResultListener");
 		invocation.addPreResultListener(new PreResultListener() {
-		    public void beforeResult(ActionInvocation invocation,
-			    String resultCode) {
+		    public void beforeResult(ActionInvocation invocation, String resultCode) {
 			doIntercept(invocation, annotation);
 		    }
 		});
@@ -174,8 +171,6 @@ public class BreadCrumbInterceptor extends AbstractInterceptor {
 		bcTrail = new BreadCrumbTrail();
 		bcTrail.setName("$arianna");
 		bcTrail.setMaxCrumbs(plugin.maxCrumbs);
-//		bcTrail.setRewindMode(trail.rewindMode);
-//		bcTrail.setComparator(trail.comparator);
 		// store trail in session
 		session.put(CRUMB_KEY, bcTrail);
 		LOG.debug("Stored new BreadCrumbTrail '" + bcTrail.name
