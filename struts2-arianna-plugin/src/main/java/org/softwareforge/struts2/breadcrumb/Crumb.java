@@ -12,7 +12,7 @@
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- */   
+ */
 package org.softwareforge.struts2.breadcrumb;
 
 import java.io.Serializable;
@@ -20,118 +20,74 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- *  @author Giovanni Tosto
- *  @version $Id$
+ * @author Giovanni Tosto
+ * @version $Id$
  */
 
-public class Crumb implements Serializable
-{
-	private static final long serialVersionUID = 1L;
+public class Crumb implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-	Date	timestamp;
-	
-	String name;
-	
-	String namespace;
-	
-	String method;
-	
-	Map	params;
-	
-	String action;
-	
-	public Date getTimestamp() {
-		return timestamp;
-	}
+    Date timestamp;
 
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
-	}
-	
-	public String getName() {
-		return name;
-	}
+    String name;
 
-	void setName(String name) {
-		this.name = name;
-	}
+    String namespace;
 
-	public String getAction() {
-		return action;
-	}
+    String method;
 
-	public String getNamespace() {
-		return namespace;
-	}
+    Map params;
 
-	public String getMethod() {
-		return method;
-	}
+    String action;
 
-	
-	public Map getParams() {
-		return params;
-	}
+    public Date getTimestamp() {
+	return timestamp;
+    }
 
-	public void setParams(Map params) {
-		this.params = params;
-	}
+    public void setTimestamp(Date timestamp) {
+	this.timestamp = timestamp;
+    }
 
-//	public String getFullyQualifiedId() {
-//		return namespace + "/" + action + "!" + method + ":" + name;		
-//	}
+    public String getName() {
+	return name;
+    }
 
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((action == null) ? 0 : action.hashCode());
-		result = prime * result + ((method == null) ? 0 : method.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((namespace == null) ? 0 : namespace.hashCode());
-		return result;
-	}
+    void setName(String name) {
+	this.name = name;
+    }
 
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Crumb other = (Crumb) obj;
-////		if (action == null) {
-////			if (other.action != null)
-////				return false;
-////		} else if (!action.equals(other.action))
-////			return false;
-////		if (method == null) {
-////			if (other.method != null)
-////				return false;
-////		} else if (!method.equals(other.method))
-////			return false;
-////		if (name == null) {
-////			if (other.name != null)
-////				return false;
-////		} else if (!name.equals(other.name))
-////			return false;
-////		if (namespace == null) {
-////			if (other.namespace != null)
-////				return false;
-////		} else if (!namespace.equals(other.namespace))
-////			return false;
-//		boolean sameId =  getFullyQualifiedId().equals(other.getFullyQualifiedId());
-//		if ( sameId ) {
-//			if (params == null) {
-//				if (other.params != null)
-//					return false;
-//			} else if ( !Utils.compareParametersMap(params,other.params) )
-//				return false;
-//		}
-//		
-//		return sameId;
-//	}
+    public String getAction() {
+	return action;
+    }
+
+    public String getNamespace() {
+	return namespace;
+    }
+
+    public String getMethod() {
+	return method;
+    }
+
+    public Map getParams() {
+	return params;
+    }
+
+    public void setParams(Map params) {
+	this.params = params;
+    }
+
+    // public String getFullyQualifiedId() {
+    // return namespace + "/" + action + "!" + method + ":" + name;
+    // }
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((action == null) ? 0 : action.hashCode());
+	result = prime * result + ((method == null) ? 0 : method.hashCode());
+	result = prime * result + ((name == null) ? 0 : name.hashCode());
+	result = prime * result
+		+ ((namespace == null) ? 0 : namespace.hashCode());
+	return result;
+    }
 }

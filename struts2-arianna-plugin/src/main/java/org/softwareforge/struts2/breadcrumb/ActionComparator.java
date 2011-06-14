@@ -23,32 +23,33 @@ import java.util.Comparator;
  * A crumb comparator that check for equality of namespace, action and method
  * fields.
  * 
- * This comparator does not check for crumb name equality, use NameComparator for that.
+ * This comparator does not check for crumb name equality, use NameComparator
+ * for that.
  * 
  * @author Giovanni Tosto
  * @version $Id$
  */
 public class ActionComparator implements Comparator<Crumb>, Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public int compare(Crumb c1, Crumb c2) {
-	if (c1 == c2)
-	    return 0;
-	if (c1 == null && c2 != null)
-	    return +1;
-	if (c1 != null && c2 == null)
-	    return -1;
+	public int compare(Crumb c1, Crumb c2) {
+		if (c1 == c2)
+			return 0;
+		if (c1 == null && c2 != null)
+			return +1;
+		if (c1 != null && c2 == null)
+			return -1;
 
-	// if (c1 == null || c2 == null)
-	// throw new IllegalArgumentException("both crumbs must be not null");
+		// if (c1 == null || c2 == null)
+		// throw new IllegalArgumentException("both crumbs must be not null");
 
-	String h1 = hash(c1);
-	String h2 = hash(c2);
+		String h1 = hash(c1);
+		String h2 = hash(c2);
 
-	return h1.compareTo(h2);
-    }
+		return h1.compareTo(h2);
+	}
 
-    final String hash(Crumb c) {
-	return c.namespace + "/" + c.action + "!" + c.method;
-    }
+	final String hash(Crumb c) {
+		return c.namespace + "/" + c.action + "!" + c.method;
+	}
 }

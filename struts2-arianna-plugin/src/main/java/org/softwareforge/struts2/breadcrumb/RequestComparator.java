@@ -24,20 +24,20 @@ import java.util.Comparator;
  * equality of http request parameters (names,values) pairs.
  * 
  * @author Giovanni Tosto
- * @version $Id$
+ * @version $Id: RequestComparator.java 289 2011-06-14 19:41:01Z giovanni.tosto$
  */
 public class RequestComparator extends ActionComparator {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public int compare(Crumb c1, Crumb c2) {
-	int same = super.compare(c1, c2);
+	public int compare(Crumb c1, Crumb c2) {
+		int same = super.compare(c1, c2);
 
-	// compare request parameters
-	if (same == 0) {
-	    same = Utils.compareParametersMap(c1.getParams(), c2.getParams()) ? 0 : -1;
+		// compare request parameters
+		if (same == 0) {
+			same = Utils.compareParametersMap(c1.getParams(), c2.getParams()) ? 0 : -1;
+		}
+
+		return same;
 	}
-
-	return same;
-    }
 
 }
