@@ -15,7 +15,9 @@ body {
 
 #col1 {
 	border-left: 2px dotted silver;
+    border-right: 2px dotted silver;
 	padding-left: 1em;
+    padding-right: 1em;
 }
 
 #header, #footer {
@@ -56,6 +58,7 @@ label {
 .breadcrumb-trail {
 	background-color: #ffeeff;
 	font-family: arial,sans-serif;
+	padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
 span.crumb {

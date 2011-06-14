@@ -5,16 +5,15 @@
 <struts>
     
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-    <constant name="struts.devMode" value="true" />
-    <constant name="struts.configuration.xml.reload" value="true" />
-    <constant name="struts.i18n.reload" value="false" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.configuration.xml.reload" value="false" />
     <constant name="struts.freemarker.templatesCache" value="false" /> 
     
     <constant name="struts.action.extension" value="do" />
     
     <constant name="struts.ui.theme" value="xhtml" />
     
-    <constant name="arianna:maxCrumbs" value="6"></constant>
+    <constant name="arianna:maxCrumbs" value="4"></constant>
     
     <package name="tests" namespace="/tests" extends="struts-default">
         <interceptors>  
@@ -58,11 +57,12 @@
         </action>
         
         <action name="ognl-reverse" class="org.softwareforge.struts2.breadcrumb.showcase.actions.OgnlAfterInvocationAction">
-            <result name="input">input.jsp</result>
+            <result name="input">home.jsp</result>
             <result>result.jsp</result>
         </action>
         
         <action name="control-*" class="org.softwareforge.struts2.breadcrumb.showcase.actions.Controls" method="{1}">
+            <result name="input">home.jsp</result>
             <result type='redirect'>home.do</result>
         </action>
                 
