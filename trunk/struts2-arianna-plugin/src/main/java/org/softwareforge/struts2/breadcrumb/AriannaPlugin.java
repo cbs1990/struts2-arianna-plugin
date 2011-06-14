@@ -23,6 +23,11 @@ import org.apache.commons.logging.LogFactory;
 
 import com.opensymphony.xwork2.inject.Inject;
 
+/**
+ * The Arianna plugin struts2 bean.
+ * 
+ * @author Giovanni Tosto
+ */
 public class AriannaPlugin {
     
     private static final Log LOG = LogFactory.getLog(BreadCrumbInterceptor.class);
@@ -52,6 +57,21 @@ public class AriannaPlugin {
 	return maxCrumbs;
     }
 
+    /**
+     * Returns an instance of a comparatator of the required <var>class</var>.
+     * 
+     * Despite its name this method does not perform any lookup, it instead will
+     * try to create a new instance using the clazz.newInstance().
+     * 
+     * 
+     * @param	clazz
+     * @return	an instance of the desired Crumb Comparator or null if a such 
+     * 		comparator cannot be created.
+     * 
+     * TODO	garbage collector is very fairy but we really need a way to 
+     * 		reuse / pool comparator instances.
+     * 		Using the struts2 ObjectFactory could be helps. 
+     */
     protected Comparator<Crumb> lookupComparatorByClass(Class clazz) {
 	
 	try {

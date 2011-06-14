@@ -18,8 +18,12 @@ package org.softwareforge.struts2.breadcrumb;
 import java.util.Comparator;
 
 /**
- *  @author Giovanni Tosto
- *  @version $Id$
+ * <b>Not Actually used</b>
+ * 
+ * Just a marker interface. 
+ * 
+ * @author Giovanni Tosto
+ * @version $Id$
  */
 public interface CrumbComparator extends Comparator<Crumb> {
 

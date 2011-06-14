@@ -20,24 +20,24 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
- * A crumb comparator that behaves as an ActionComparator and besides 
- * checks for equality of http request parameters (names,values) pairs.     
+ * A crumb comparator that behaves as an ActionComparator and besides checks for
+ * equality of http request parameters (names,values) pairs.
  * 
- *	@author Giovanni Tosto
- *	@version $Id$
+ * @author Giovanni Tosto
+ * @version $Id$
  */
-public class RequestComparator extends ActionComparator
-{
-    	private static final long serialVersionUID = 1L;
+public class RequestComparator extends ActionComparator {
+    private static final long serialVersionUID = 1L;
 
-	public int compare(Crumb c1, Crumb c2) {
-		int same = super.compare(c1, c2);
-		
-		// compare request parameters
-		if ( same == 0 ) {
-			same = Utils.compareParametersMap(c1.getParams(), c2.getParams()) ? 0 : -1;
-		}
-		return same;
+    public int compare(Crumb c1, Crumb c2) {
+	int same = super.compare(c1, c2);
+
+	// compare request parameters
+	if (same == 0) {
+	    same = Utils.compareParametersMap(c1.getParams(), c2.getParams()) ? 0 : -1;
 	}
-	
+
+	return same;
+    }
+
 }

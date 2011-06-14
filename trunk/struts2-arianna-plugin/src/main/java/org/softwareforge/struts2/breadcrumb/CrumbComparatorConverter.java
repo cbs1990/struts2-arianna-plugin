@@ -27,10 +27,13 @@ import com.opensymphony.xwork2.conversion.TypeConversionException;
 import com.opensymphony.xwork2.inject.Inject;
 
 /**
+ * An utility class used to convert a <em>fully qualified class name<em> to comparator instances.
+ * 
+ * This converter is used mainly by the struts framework to convert <acronym>fqcn<acronym> when 
+ * initializing interceptors instances. 
  * 
  * @author Giovanni Tosto
- * @version $Id: CrumbComparatorConverter.java 63 2011-03-09 19:53:13Z
- *          giovanni.tosto $
+ * @version $Id$
  */
 @SuppressWarnings("rawtypes")
 public class CrumbComparatorConverter extends StrutsTypeConverter {    
