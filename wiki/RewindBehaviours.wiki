@@ -61,3 +61,7 @@ public class MyComparator implements Comparator<Crumb>
     }
 }
 }}}
+<blockquote>
+<b>Note</b>
+Any crumb comparator implementation must provide a public no-args constructor.
+</blockquote>
