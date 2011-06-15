@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+	<description><![CDATA["Struts2 BreadCrumbs Tags."]]></description>
+	<display-name>"Struts2 BreadCrumbs Tags"</display-name>
+	<tlib-version>2.1</tlib-version>
+	<short-name>bc</short-name>
+	<uri>/struts-arianna-tags</uri>
+	<tag>
+		<description>
+			<![CDATA[
+			Breadcrumb's Iterator Tag.
+			The tag iterates over the stored trail pushing the crumb into to OGNL value stack.     
+			]]>
+		</description>
+		<name>breadcrumbs</name>
+		<tag-class>org.softwareforge.struts2.breadcrumb.tag.BreadCrumbTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description><![CDATA[Deprecated, use var instead. The id attribute is here provided just for uniformity with Struts 2.0 tags]]></description>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description><![CDATA[the crumb]]></description>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description><![CDATA[the status var]]></description>
+			<name>status</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>
