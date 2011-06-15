@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.softwareforge</groupId>
 		<artifactId>struts2-arianna-pom</artifactId>
-		<version>0.5.1-SNAPSHOT</version>
+		<version>0.5.1</version>
 	</parent>
 
 	<artifactId>struts2-arianna-plugin</artifactId>
@@ -15,9 +14,9 @@
 	<description>A simple bread crumbs plugin for Struts2</description>
 
 	<scm>
-		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-plugin</url>
-		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-plugin</connection>
-		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/trunk/struts2-arianna-plugin</developerConnection>
+		<url>scm:svn:http://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-plugin-0.5.1</url>
+		<connection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-plugin-0.5.1</connection>
+		<developerConnection>scm:svn:https://struts2-arianna-plugin.googlecode.com/svn/tags/struts2-arianna-plugin-0.5.1</developerConnection>
 	</scm>
 
 	<build>
