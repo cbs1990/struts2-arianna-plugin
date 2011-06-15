@@ -1,2 +1,0 @@
-This directoty should contains java sources intended to implements GAE specifics
-workaround and implementations.  
