@@ -97,23 +97,20 @@
         </pluginManagement>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>arianna-repo</id>
+            <url>http://struts2-arianna-plugin.googlecode.com/svn/m2repo</url>
+        </repository>
+    </distributionManagement>
+
     <profiles>
         <profile>
-            <id>gundam</id>
-            <repositories>
+            <id>arianna</id>
+            <distributionManagement>            
                 <repository>
-                    <id>gundam</id>
-                    <url>file:///E:\repos\m3\gundam</url>
-                    <releases>
-                        <enabled>true</enabled>
-                        <updatePolicy>always</updatePolicy>
-                    </releases>
-                </repository>
-            </repositories>
-            <distributionManagement>
-                <repository>
-                    <id>gundam</id>
-                    <url>file:///E:\repos\m3\gundam</url>
+                    <id>arianna-repo</id>
+                    <url>file:///E:/repos/m3/arianna</url>
                 </repository>
             </distributionManagement>
         </profile>
