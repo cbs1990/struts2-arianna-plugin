@@ -1,4 +1,5 @@
 #summary Explains the @BreadCrumb annotation
+#sidebar toc
 
 The Arianna Plugin use `@BreadCrumb` annotations to detect actions and/or methods that needs to be stored in a breadcrumb trail.
 
