@@ -1,4 +1,4 @@
-#summary description of a crumb
+#summary anatomy of a crumb
 #sidebar toc
 
 The arianna plugin records the action invocation in beans of type `org.softwareforge.struts2.breadcrumb.Crumb`.
