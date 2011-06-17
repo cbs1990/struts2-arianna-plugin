@@ -22,7 +22,7 @@ and add it to your interceptor stack, i.e.
 
 <div>
   <h3>Note</h3>
-  You could have very different (strange) behaviour depending on where the `BreadCrumbInterceptor` is placed, however putting it after all standard interceptor is the best choice for almost all cases.
+  You could have very different (strange) behavior depending on where the `BreadCrumbInterceptor` is placed, however putting it after all standard interceptor is the best choice for almost all cases.
 </div>
 
 Once the interceptor is part of your interceptor's stack, you can just annotate with `@BreadCrumb` the actions and/or methods that you want to be tracked.
@@ -34,7 +34,7 @@ You can have several interceptor instance for different package each on with its
   Avoid to set more than one `BreadCrumbInterceptor` instance on a single stack as this could lead to unpredictable behaviour (see also Issue 1).
 </div>
 
-To declare the maximum number of bread crumbs the plugin should store you need to set a global constant in *struts.xml* file
+To set the maximum number of bread crumbs the plugin should store, you have to set a global constant in *struts.xml* file
 {{{
 <constant name="arianna:maxCrumbs" value="6"></constant>
 }}}

@@ -1,5 +1,9 @@
 #summary Frequently Asked Questions
 #labels Featured
+#sidebar toc
+
+Frequently Asked Questions
+<wiki:toc max_depth="2" />
 
 == How can I reset the bread crumb trail ? ==
 
@@ -30,3 +34,7 @@ public class RewindAction implements SessionAware {
     }
 }
 }}}
+
+== Can I change breadcrumb maximum crumbs at runtime ? ==
+
+*Yes*, get the `BreadCrumTrail` from the session and call the `setMaxCrumbs` method. 
