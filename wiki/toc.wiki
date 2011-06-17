@@ -3,8 +3,9 @@
   * [PluginOverview Overview]
   * [PluginSetup Plugin Setup]
   * [RewindBehaviours Rewind Behaviours]
-  * Annotations
-    * [Breadcrumb @BreadCrumb]
+  * [Breadcrumb @BreadCrumb annotation]
+    * [Breadcrumb#Dynamic_crumb_names Dynamic crumb names]
+    * [Breadcrumb#Overriding_Default_Behaviour Overriding Interceptor Defaults]
   * [TagLibrary Tag Library]
 
 ----
