@@ -1,4 +1,5 @@
-#summary parameters explanation
+#summary parameters explanation (outdated, this was for 0.4.x releases)
+#labels Deprecated
 
 == Interceptor's parameters ==
 
