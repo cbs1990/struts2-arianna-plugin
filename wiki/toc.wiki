@@ -6,6 +6,7 @@
   * [Breadcrumb @BreadCrumb annotation]
     * [Breadcrumb#Dynamic_crumb_names Dynamic crumb names]
     * [Breadcrumb#Overriding_Default_Behaviour Overriding Interceptor Defaults]
+  * [Crumb The Crumbs]
   * [TagLibrary Tag Library]
 
 ----
