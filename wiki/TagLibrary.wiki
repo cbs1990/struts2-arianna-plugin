@@ -1,4 +1,5 @@
 #summary Arianna Tag Library Documentation
+#sidebar toc
 
 At this moment the library is composed by a tag only.
 
@@ -13,18 +14,7 @@ To use it add the following declaration to your JSP.
 || `var` || no || the name used to reference the _crumb_ pushed into the Value Stack ||
 || `status` || no || If specified, an instanceof `IteratorStatus` will be pushed into stack upon each iteration ||
 
-This tag acts like an `<s:iterator>` tag iterating over the breadcrumbs trail.
-At each iteration it push into the Value Stack _the crumb_ (a bean of type `Crumb`) which has the following properties:
-
-
-|| *Property* || *Type* || *Description* ||
-|| timestamp || `Date` || the time stamp of the crumb creation. ||
-|| name || `String` || the name of the crumb. ||
-|| action || `String` ||the name of the action invoked. ||
-|| method || `String` ||the name of the method invoked. ||
-|| namespace || `String` || the namespace to which the invoked action belongs to. ||
-|| params || `Map` || the `Map` containing the request's parameters of the original invocation.||
-
+This tag just acts like an `<s:iterator>` tag iterating over the breadcrumbs trail. At each iteration it will push into the Value Stack the [Crumb].
 
 == Examples ==
 
@@ -40,8 +30,11 @@ At each iteration it push into the Value Stack _the crumb_ (a bean of type `Crum
 }}}
 
 === rendering of parameters ===
-There is a well known problem when you need to build urls with arbitrary parameters (see [http://stackoverflow.com/questions/872375/struts2-adding-parameters-from-a-map-to-a-url-tag adding-parameters-from-a-map-to-a-url-tag] for a discussion and possible solutions)
-The following code shows how to build urls using JSTL core tags.
+More often you need to render links together with original request parameters.
+
+Unfortunately there is a well known problem when you need to build urls with arbitrary parameters (see [http://stackoverflow.com/questions/872375/struts2-adding-parameters-from-a-map-to-a-url-tag adding-parameters-from-a-map-to-a-url-tag] for a discussion and possible solutions).
+
+The following code, however, shows how to build urls using JSTL core tags.
 {{{	
 <!-- add the jstl core tag library -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -66,4 +59,4 @@ The following code shows how to build urls using JSTL core tags.
 </bc:breadcrumbs>
                      ...
 }}}
-alternatively, if you feel the code above too verbose, you can resort to a tag library available [http://www.objectify.be/wordpress/?p=64 here] specifically designed to add arbitrary parameters to a URL in struts^2^
+if you feel the code above too verbose, you can also resort to a tag library available [http://www.objectify.be/wordpress/?p=64 here] specifically designed to add arbitrary parameters to a URL in struts^2^
