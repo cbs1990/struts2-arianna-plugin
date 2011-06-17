@@ -1,4 +1,5 @@
 #summary explains how to install and setup the arianna plugin (release 0.5.x only)
+#labels Featured
 #sidebar toc
 
 To begin to use the arianna plugin just download the plugin (available here) and put the jar into your application */WEB-INF/lib directory*.
