@@ -92,3 +92,17 @@ public class MyAction {
     deferredName = "a name depending from the action logic"
   }
 }}}
+
+=== Overriding Default Behaviour ===
+
+If not specified otherwise, each tracked action will use the rewind mode (and comparator class) defined by the breadcrumb interceptor, however both `rewind mode` and comparator can be overrided by any single annotation.
+To _force_ an action to have a particular behavior you can use the `rewind` and `comparator` attributes.
+{{{
+@BreadCrumb(value="Rewind to my last call", rewind=RewindMode.AUTO, comparator=ActionComparator.class)
+public class MyAction {
+
+  public String execute() {
+     ...
+  }
+
+}}}
