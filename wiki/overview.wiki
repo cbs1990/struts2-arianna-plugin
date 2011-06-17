@@ -1,5 +1,4 @@
 #summary Getting Started
-#labels Featured
 = Overview =
 
 The *struts^2^-arianna-plugin* is a simple but quite flexible plugin to render and manage a simple breadcrumb navigational bar.
