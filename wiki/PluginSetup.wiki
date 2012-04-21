@@ -7,7 +7,7 @@ To begin to use the arianna plugin just download the plugin ([http://code.google
 The plugin core functionalties are provided by an interceptor which needs to be added to your interceptor stack.
 Define the interceptor into your struts^2^ package
 {{{
-<interceptor name="breadcrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
+<interceptor name="breadCrumbs" class="org.softwareforge.struts2.breadcrumb.BreadCrumbInterceptor">
   <param name="defaultRewindMode">NEVER</param>
   <param name="defaultComparator">org.softwareforge.struts2.breadcrumb.NameComparator</param>
 </interceptor>
